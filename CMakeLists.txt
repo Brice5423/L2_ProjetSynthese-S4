@@ -4,4 +4,4 @@ project(Projet_ProjetSynthese_S4 C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(Projet_ProjetSynthese_S4
-        main.c)
+        src/main.c)
