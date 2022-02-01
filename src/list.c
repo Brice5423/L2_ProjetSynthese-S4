@@ -9,31 +9,34 @@
  ********************************************************************/
 
 LNode * newLNode(void* data) {
-	// TODO
+    struct ListNode *L = (struct ListNode *)calloc(1, sizeof(struct ListNode));
+    assert(data);
+    L->data = data;
+    return L;
 }
 
 void* getLNodeData(const LNode* node) {
-	// TODO
+    return node->data;
 }
 
 LNode* Successor(const LNode* node) {
-	// TODO
+	return node->succ;
 }
 
 LNode* Predecessor(const LNode* node) {
-	// TODO
+    return node->pred;
 }
 
 void setLNodeData(LNode* node, void* newData) {
-	// TODO
+	node->data = newData;
 }
 
 void setSuccessor(LNode* node, LNode* newSucc) {
-	// TODO
+	node->succ = newSucc->succ;
 }
 
 void setPredecessor(LNode* node, LNode* newPred) {
-	// TODO
+	node->pred = newPred->pred;
 }
 
 /********************************************************************
