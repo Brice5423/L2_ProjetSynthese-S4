@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
-#include "tree.h"
-#include "util.h"
+#include "../include/tree.h"
+#include "../include/util.h"
 
 /********************************************************************
  * TNode

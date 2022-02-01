@@ -1,7 +1,7 @@
 #include <stdlib.h>
-#include "tree.h"
-#include "heap.h"
-#include "sort.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
 
 void ArrayHeapSort(void** A, int N,
 					int (*preceed)(const void*, const void*),

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "util.h"
+#include "../include/util.h"
 
 void ShowMessage(char * msg, int interrupt) {
 	fprintf(stderr, "%s\n", msg);

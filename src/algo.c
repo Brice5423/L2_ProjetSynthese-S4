@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "algo.h"
-#include "geometry.h"
-#include "list.h"
-#include "tree.h"
-#include "util.h"
-#include "heap.h"
-#include "sort.h"
+#include "../include/algo.h"
+#include "../include/geometry.h"
+#include "../include/list.h"
+#include "../include/tree.h"
+#include "../include/util.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
 
 /**
  * @brief Réalise la lecture d'un ensemble des points à partir du fichier

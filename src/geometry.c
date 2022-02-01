@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "geometry.h"
-#include "util.h"
+#include "../include/geometry.h"
+#include "../include/util.h"
 
 Point* newPoint(long long int x, long long int y) {
 	// TODO

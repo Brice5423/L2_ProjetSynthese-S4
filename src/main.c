@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "util.h"
-#include "list.h"
-#include "tree.h"
-#include "heap.h"
-#include "sort.h"
-#include "geometry.h"
-#include "algo.h"
+#include "../include/util.h"
+#include "../include/list.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
+#include "../include/geometry.h"
+#include "../include/algo.h"
 
 int main() {
 

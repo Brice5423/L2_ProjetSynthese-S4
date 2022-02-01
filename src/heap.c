@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
-#include "tree.h"
-#include "heap.h"
-#include "util.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/util.h"
 
 /**********************************************************************************
  * ARRAY HEAP
