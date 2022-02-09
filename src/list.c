@@ -46,14 +46,14 @@ void setPredecessor(LNode* node, LNode* newPred) {
 List * newList(void (*viewData)(const void*), void (*freeData)(void*)) {
     //A vérifier, pas sur de sa validité
     struct List *Lst = calloc(1, sizeof(struct List));
+    //faire des vérifs si la liste est bien initialisé
+    //Initialisé les pointeurs de fonctions
     assert(viewData);
     assert(freeData);
     return Lst;
 }
 
 int listIsEmpty(List* L) {
-    //J'ai mit "assert(L);" en commentaire car je ne suis pas sur de son utilité
-    //assert(L);
     if (L->numelm == 0){
         return 1;
     }
@@ -90,12 +90,10 @@ void resetListSize(List* L) {
 }
 
 void setHead(List* L, LNode* newHead) {
-    //La nouvelle tête de la liste est le prédecesseur de l'élément courant
-    //A vérifier
-	L->head = newHead->pred;
+	L->head = newHead;
 }
 void setTail(List* L, LNode* newTail) {
-	L->tail = newTail->succ;
+	L->tail = newTail;
 }
 
 void freeList(List * L, int deleteData) {
