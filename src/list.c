@@ -9,10 +9,10 @@
  ********************************************************************/
 
 LNode * newLNode(void* data) {
-    struct ListNode *L = (struct ListNode *)calloc(1, sizeof(struct ListNode));
+    struct ListNode *LNode = (struct ListNode *)calloc(1, sizeof(struct ListNode));
     assert(data);
-    L->data = data;
-    return L;
+    LNode->data = data;
+    return LNode;
 }
 
 void* getLNodeData(const LNode* node) {
@@ -44,46 +44,56 @@ void setPredecessor(LNode* node, LNode* newPred) {
  ********************************************************************/
 
 List * newList(void (*viewData)(const void*), void (*freeData)(void*)) {
-	// TODO
+    //A vérifier, pas sur de sa validité
+    struct List *Lst = calloc(1, sizeof(struct List));
+    //faire des vérifs si la liste est bien initialisé
+    //Initialisé les pointeurs de fonctions
+    assert(viewData);
+    assert(freeData);
+    return Lst;
 }
 
 int listIsEmpty(List* L) {
-	// TODO
+    if (L->numelm == 0){
+        return 1;
+    }
+    else
+        return 0;
 }
 
 int getListSize(const List* L) {
-	// TODO
+	return L->numelm;
 }
 
 LNode* Head(const List* L) {
-	// TODO
+	return L->head;
 }
 
 LNode* Tail(const List* L) {
-	// TODO
+	return L->tail;
 }
 
 void increaseListSize(List* L) {
-	// TODO
+    L->numelm = L->numelm + 1;
 }
 
 void decreaseListSize(List* L) {
-	// TODO
+    L->numelm = L->numelm - 1;
 }
 
 void setListSize(List* L, int newSize) {
-	// TODO
+	L->numelm = newSize;
 }
 
 void resetListSize(List* L) {
-	// TODO
+	L->numelm = 0;
 }
 
 void setHead(List* L, LNode* newHead) {
-	// TODO
+	L->head = newHead;
 }
 void setTail(List* L, LNode* newTail) {
-	// TODO
+	L->tail = newTail;
 }
 
 void freeList(List * L, int deleteData) {
