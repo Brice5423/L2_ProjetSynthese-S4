@@ -144,17 +144,22 @@ void listInsertLast(List *L, void *data) {
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
     if (ptrelm == NULL){
-        newList(data, ptrelm);
+        setLNodeData(ptrelm, data);
     }
     else{
         struct ListNode *newNode = newLNode(data);
         assert(newNode);
-        setSuccessor(newNode, Successor(ptrelm));
-        setSuccessor(ptrelm, newNode);
-        increaseListSize(L);
-        if (ptrelm == Tail(L)){
-            setTail(L, newNode);
+        if (listIsEmpty(L)){
+            setHead(L,newNode);
         }
+        else if (listIsEmpty(L)){
+            setSuccessor(newNode, Successor(ptrelm));
+            setSuccessor(ptrelm, newNode);
+            if (ptrelm == Tail(L)){
+                setTail(L, newNode);
+            }
+        }
+        increaseListSize(L);
     }
 }
 
