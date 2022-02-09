@@ -100,9 +100,7 @@ void setTail(List *L, LNode *newTail) {
 void freeList(List *L, int deleteData) {
     assert(deleteData == 0 || deleteData == 1);
     assert(L != NULL);
-    if (deleteData == 0) {
-        //alors la liste n'est pas libérer
-    } else if (deleteData == 1) {
+    if (deleteData == 1) {
         LNode *node = L->head;
         while (node != NULL) {
             LNode *next = node->succ;
