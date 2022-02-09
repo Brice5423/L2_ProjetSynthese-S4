@@ -108,6 +108,9 @@ void freeList(List *L, int deleteData) {
             node = next;
         }
     }
+    else if (deleteData == 0){
+        free(L);
+    }
 }
 
 void viewList(const List *L) {
@@ -128,14 +131,15 @@ void viewList(const List *L) {
 
 void listInsertFirst(List *L, void *data) {
     assert(L);
-    struct ListNode *LNode = newLNode(data);
-    assert(LNode);
-    LNode->succ = L->head;
-    L->head = LNode;
-    if (L->numelm == 0) {
-        L->tail = LNode;
+    struct ListNode *newNode = newLNode(data);
+    assert(newNode);
+    if ()
+    setSuccessor(newNode, Successor(data));
+    setHead(L,newNode);
+    if(L->numelm == 0){
+        setTail(L, Tail(L));
     }
-    L->numelm++;
+    increaseListSize(L);
 }
 
 void listInsertLast(List *L, void *data) {
@@ -147,13 +151,13 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
         newList(data, ptrelm);
     }
     else{
-        struct ListNode *new = newLNode(data);
-        assert(new);
-        new->succ = ptrelm->succ;
-        ptrelm->succ = new;
-        L->numelm++;
-        if (ptrelm == L->tail){
-            L->tail = new;
+        struct ListNode *newNode = newLNode(data);
+        assert(newNode);
+        setSuccessor(newNode, Successor(ptrelm));
+        setSuccessor(ptrelm, newNode);
+        increaseListSize(L);
+        if (ptrelm == Tail(L)){
+            setTail(L, newNode);
         }
     }
 }
