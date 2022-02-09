@@ -10,7 +10,7 @@
 
 LNode *newLNode(void *data) {
     assert(data);
-    struct ListNode *LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
+    LNode *LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
     assert(LNode);
     LNode->data = data;
     return LNode;
@@ -45,7 +45,7 @@ void setPredecessor(LNode *node, LNode *newPred) {
  ********************************************************************/
 
 List *newList(void (*viewData)(const void *), void (*freeData)(void *)) {
-    struct List *Lst = calloc(1, sizeof(struct List));
+    List *Lst = calloc(1, sizeof(struct List));
     //faire des vérifs si la liste est bien initialisé
     assert(Lst);
     //Initialisé les pointeurs de fonctions
@@ -115,9 +115,7 @@ void freeList(List *L, int deleteData) {
 
 void viewList(const List *L) {
     assert(L);
-
     LNode *N;
-
     printf("\n[ ");
     for (N = L->head; N; N = N->succ) {
         (*L->viewData)(N->data);
@@ -129,11 +127,11 @@ void listInsertFirst(List *L, void *data) {
     assert(L);
     struct ListNode *newNode = newLNode(data);
     assert(newNode);
-    if ()
-    setSuccessor(newNode, Successor(data));
-    setHead(L,newNode);
-    if(L->numelm == 0){
-        setTail(L, Tail(L));
+    if(listIsEmpty(L)){
+        setHead(L,newNode);
+    }
+    else{
+        setSuccessor(newNode, Successor(data));
     }
     increaseListSize(L);
 }
@@ -150,17 +148,22 @@ void listInsertLast(List *L, void *data) {
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
     if (ptrelm == NULL){
-        newList(data, ptrelm);
+        setLNodeData(ptrelm, data);
     }
     else{
         struct ListNode *newNode = newLNode(data);
         assert(newNode);
-        setSuccessor(newNode, Successor(ptrelm));
-        setSuccessor(ptrelm, newNode);
-        increaseListSize(L);
-        if (ptrelm == Tail(L)){
-            setTail(L, newNode);
+        if (listIsEmpty(L)){
+            setHead(L,newNode);
         }
+        else{
+            setSuccessor(newNode, Successor(ptrelm));
+            setSuccessor(ptrelm, newNode);
+            if (ptrelm == Tail(L)){
+                setTail(L, newNode);
+            }
+        }
+        increaseListSize(L);
     }
 }
 
