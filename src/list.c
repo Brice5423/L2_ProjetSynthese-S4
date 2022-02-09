@@ -116,14 +116,10 @@ void freeList(List *L, int deleteData) {
 void viewList(const List *L) {
     assert(L);
 
-    int i;
     LNode *N;
 
-    N = (LNode *) calloc(1, sizeof(LNode));
-    N = L->head;
-
     printf("\n[ ");
-    for (i = 0; i < getListSize(L); i++, N = N->succ) {
+    for (N = L->head; N; N = N->succ) {
         (*L->viewData)(N->data);
     }
     printf(" ]\n");
