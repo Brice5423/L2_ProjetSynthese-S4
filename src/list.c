@@ -10,7 +10,7 @@
 
 LNode *newLNode(void *data) {
     assert(data);
-    struct ListNode *LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
+    LNode *LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
     assert(LNode);
     LNode->data = data;
     return LNode;
@@ -45,7 +45,7 @@ void setPredecessor(LNode *node, LNode *newPred) {
  ********************************************************************/
 
 List *newList(void (*viewData)(const void *), void (*freeData)(void *)) {
-    struct List *Lst = calloc(1, sizeof(struct List));
+    List *Lst = calloc(1, sizeof(struct List));
     //faire des vérifs si la liste est bien initialisé
     assert(Lst);
     //Initialisé les pointeurs de fonctions
