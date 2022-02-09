@@ -114,11 +114,19 @@ void freeList(List * L, int deleteData) {
 }
 
 void viewList(const List * L) {
-
+    //TODO
 }
 
 void listInsertFirst(List * L, void * data) {
-	//TODO
+	assert(L);
+    struct ListNode *LNode = newLNode(data);
+    assert(LNode);
+    LNode->succ = L->head;
+    L->head = LNode;
+    if(L->numelm == 0){
+        L->tail = LNode;
+    }
+    L->numelm++;
 }
 
 void listInsertLast(List * L, void * data) {
@@ -126,12 +134,24 @@ void listInsertLast(List * L, void * data) {
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
-    // TODO
+    if (ptrelm == NULL){
+        newList(data, ptrelm);
+    }
+    else{
+        struct ListNode *new = newLNode(data);
+        assert(new);
+        new->succ = ptrelm->succ;
+        ptrelm->succ = new;
+        L->numelm++;
+        if (ptrelm == L->tail){
+            L->tail = new;
+        }
+    }
 }
 
 void* listRemoveFirst(List * L) {
 	assert(Head(L));
-	// TODO
+	// T
 }
 
 void* listRemoveLast(List * L) {
