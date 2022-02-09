@@ -9,8 +9,9 @@
  ********************************************************************/
 
 LNode * newLNode(void* data) {
-    struct ListNode *LNode = (struct ListNode *)calloc(1, sizeof(struct ListNode));
     assert(data);
+    struct ListNode *LNode = (struct ListNode *)calloc(1, sizeof(struct ListNode));
+    assert(LNode);
     LNode->data = data;
     return LNode;
 }
@@ -44,8 +45,8 @@ void setPredecessor(LNode* node, LNode* newPred) {
  ********************************************************************/
 
 List * newList(void (*viewData)(const void*), void (*freeData)(void*)) {
-    //A vérifier, pas sur de sa validité
     struct List *Lst = calloc(1, sizeof(struct List));
+    assert(Lst);
     //faire des vérifs si la liste est bien initialisé
     //Initialisé les pointeurs de fonctions
     assert(viewData);
@@ -98,15 +99,26 @@ void setTail(List* L, LNode* newTail) {
 
 void freeList(List * L, int deleteData) {
 	assert(deleteData == 0 || deleteData == 1);
-	// TODO
+	assert (L!=NULL);
+    if (deleteData == 0){
+        //alors la liste n'est pas libérer
+    }
+    else if (deleteData == 1){
+        LNode *node = L->head;
+        while (node != NULL){
+            LNode *next = node->succ;
+            L->freeData(node->data);
+            node = next;
+        }
+    }
 }
 
 void viewList(const List * L) {
-	// TODO
+
 }
 
 void listInsertFirst(List * L, void * data) {
-	// TODO
+	//TODO
 }
 
 void listInsertLast(List * L, void * data) {
