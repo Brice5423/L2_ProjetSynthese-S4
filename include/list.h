@@ -48,7 +48,7 @@ LNode* Successor(const LNode* node);
  * @param[in] node 
  * @return LNode* 
  */
-LNode* Predecessor(const LNode* node);
+LNode*Predecessor(const LNode* node);
 
 /**
  * @brief Remplace la donnée du nœud \p node par \p newData.

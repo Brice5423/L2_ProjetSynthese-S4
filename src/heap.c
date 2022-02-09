@@ -10,24 +10,24 @@
  * ARRAY HEAP
  **********************************************************************************/
 
-int getAHMaxSize(const ArrayHeap* AH) {
-	// TODO
+int getAHMaxSize(const ArrayHeap *AH) {
+    // TODO
 }
 
-int getAHActualSize(const ArrayHeap* AH) {
-	// TODO
+int getAHActualSize(const ArrayHeap *AH) {
+    // TODO
 }
 
-void* getAHNodeAt(const ArrayHeap* AH, int pos) {
-	// TODO
+void *getAHNodeAt(const ArrayHeap *AH, int pos) {
+    // TODO
 }
 
-void decreaseAHActualSize(ArrayHeap* AH) {
-	// TODO
+void decreaseAHActualSize(ArrayHeap *AH) {
+    // TODO
 }
 
-void setAHNodeAt(ArrayHeap* AH, int position, void* newData) {
-	// TODO
+void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
+    // TODO
 }
 
 /**
@@ -40,42 +40,42 @@ void setAHNodeAt(ArrayHeap* AH, int position, void* newData) {
  * @param[in] AH 
  * @param[in] pos L'indice de la valeur en mouvement vers le bas.
  */
-static void updateArrayHeapDownwards(ArrayHeap* AH, int pos) {
-	// TODO
+static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
+    // TODO
 }
 
-ArrayHeap* ArrayToArrayHeap(void** A, int N,
-					int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*)) {
-	// TODO
+ArrayHeap *ArrayToArrayHeap(void **A, int N,
+                            int (*preceed)(const void *, const void *),
+                            void (*viewHeapData)(const void *),
+                            void (*freeHeapData)(void *)) {
+    // TODO
 }
 
-void viewArrayHeap(const ArrayHeap* AH) {
-	// TODO
+void viewArrayHeap(const ArrayHeap *AH) {
+    // TODO
 }
 
-void freeArrayHeap(ArrayHeap* AH, int deletenode) {
-	// TODO
+void freeArrayHeap(ArrayHeap *AH, int deletenode) {
+    // TODO
 }
 
-void* ArrayHeapExtractMin(ArrayHeap* AH) {
-	assert(getAHActualSize(AH) > 0);
-	// TODO
+void *ArrayHeapExtractMin(ArrayHeap *AH) {
+    assert(getAHActualSize(AH) > 0);
+    // TODO
 }
 
 /**********************************************************************************
  * COMPLETE BINARY TREE HEAP
  **********************************************************************************/
 
-CBTHeap* newCBTHeap(int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*)) {
-	// TODO
+CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
+                    void (*viewHeapData)(const void *),
+                    void (*freeHeapData)(void *)) {
+    // TODO
 }
 
-CBTree* getCBTree(const CBTHeap* H) {
-	// TODO
+CBTree *getCBTree(const CBTHeap *H) {
+    // TODO
 }
 
 /**
@@ -93,12 +93,12 @@ CBTree* getCBTree(const CBTHeap* H) {
  * @param[in] position 
  * @param[in] preceed 
  */
-static void updateCBTHeapUpwards(TNode* node, int pos, int (*preceed)(const void*, const void*)) {
-	// TODO
+static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void *, const void *)) {
+    // TODO
 }
 
-void CBTHeapInsert(CBTHeap *H, void* data) {
-	// TODO
+void CBTHeapInsert(CBTHeap *H, void *data) {
+    // TODO
 }
 
 /**
@@ -113,20 +113,20 @@ void CBTHeapInsert(CBTHeap *H, void* data) {
  * @param[in] node 
  * @param[in] preceed 
  */
-static void updateCBTHeapDownwards(TNode* node, int (*preceed)(const void*, const void*)) {
-	assert(node);
-	// TODO
+static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, const void *)) {
+    assert(node);
+    // TODO
 }
 
-void * CBTHeapExtractMin(CBTHeap *H) {
-	assert(Root(getCBTree(H)));
-	// TODO
+void *CBTHeapExtractMin(CBTHeap *H) {
+    assert(Root(getCBTree(H)));
+    // TODO
 }
 
-void viewCBTHeap(const CBTHeap * H) {
-	// TODO
+void viewCBTHeap(const CBTHeap *H) {
+    // TODO
 }
 
-void freeCBTHeap(CBTHeap* H, int deletenode) {
-	// TODO
+void freeCBTHeap(CBTHeap *H, int deletenode) {
+    // TODO
 }

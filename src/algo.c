@@ -20,8 +20,8 @@
  * (paramètre de sortie).
  * @return Point** le tableau avec les points du fichier \p filename.
  */
-static Point** readInstance(const char* filename, int* N) {
-	// TODO
+static Point **readInstance(const char *filename, int *N) {
+    // TODO
 }
 
 /**
@@ -31,8 +31,8 @@ static Point** readInstance(const char* filename, int* N) {
  * @param[in] filename le nom du fichier d'écriture.
  * @param[in] L la liste des points à écrire dans le fichier \p filename.
  */
-static void writeSolution(const char* filename, List* L) {
-	// TODO
+static void writeSolution(const char *filename, List *L) {
+    // TODO
 }
 
 /**
@@ -44,12 +44,12 @@ static void writeSolution(const char* filename, List* L) {
  * @return List* la liste des points de l'enveloppe convexe dans le sens
  * horaire
  */
-static List * DedgesToClockwisePoints(List* dedges) {
-	// TODO
+static List *DedgesToClockwisePoints(List *dedges) {
+    // TODO
 }
 
-void SlowConvexHull(const char* infilename, const char* outfilename) {
-	// TODO
+void SlowConvexHull(const char *infilename, const char *outfilename) {
+    // TODO
 }
 
 /**
@@ -61,8 +61,8 @@ void SlowConvexHull(const char* infilename, const char* outfilename) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus petite que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-static int smallerPoint(const void* a, const void* b) {
-	// TODO
+static int smallerPoint(const void *a, const void *b) {
+    // TODO
 }
 
 /**
@@ -74,14 +74,14 @@ static int smallerPoint(const void* a, const void* b) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-static int biggerPoint(const void* a, const void* b) {
-	// TODO
+static int biggerPoint(const void *a, const void *b) {
+    // TODO
 }
 
-void ConvexHull(const char* infilename, const char* outfilename, int sortby) {
-	// TODO
+void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
+    // TODO
 }
 
-void RapidConvexHull(const char* infilename, const char* outfilename) {
-	// TODO
+void RapidConvexHull(const char *infilename, const char *outfilename) {
+    // TODO
 }

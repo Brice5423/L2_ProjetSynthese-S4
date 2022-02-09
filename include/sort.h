@@ -18,10 +18,10 @@
  * @param[in] freeHeapData Pointeur de fonction pour libérer la mémoire
  * des données du nouveau tas.
  */
-void ArrayHeapSort(void** A, int N,
-					int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*));
+void ArrayHeapSort(void **A, int N,
+                   int (*preceed)(const void *, const void *),
+                   void (*viewHeapData)(const void *),
+                   void (*freeHeapData)(void *));
 
 /**
  * @brief Tri par tas (implémenté par un arbre binaire complet).
@@ -35,10 +35,10 @@ void ArrayHeapSort(void** A, int N,
  * @param[in] freeHeapData Pointeur de fonction pour libérer la mémoire
  * des données du nouveau tas.
  */
-void CBTHeapSort(void** A, int N,
-					int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*));
+void CBTHeapSort(void **A, int N,
+                 int (*preceed)(const void *, const void *),
+                 void (*viewHeapData)(const void *),
+                 void (*freeHeapData)(void *));
 
 /**
  * @brief Tri par sélection (tri par échange)
@@ -48,6 +48,6 @@ void CBTHeapSort(void** A, int N,
  * @param[in] preceed Pointeur de fonction qui définit la relation de
  * priorité entre deux éléments du tas.
  */
-void SelectionSort(void** A, int N, int (*preceed)(const void*, const void*));
+void SelectionSort(void **A, int N, int (*preceed)(const void *, const void *));
 
 #endif // _SORT_H_
