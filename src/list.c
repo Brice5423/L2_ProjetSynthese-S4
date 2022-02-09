@@ -125,7 +125,19 @@ void listInsertLast(List *L, void *data) {
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
-    // TODO
+    if (ptrelm == NULL){
+        newList(data, ptrelm);
+    }
+    else{
+        struct ListNode *new = newLNode(data);
+        assert(new);
+        new->succ = ptrelm->succ;
+        ptrelm->succ = new;
+        L->numelm++;
+        if (ptrelm == L->tail){
+            L->tail = new;
+        }
+    }
 }
 
 void *listRemoveFirst(List *L) {
