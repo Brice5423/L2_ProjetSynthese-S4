@@ -125,7 +125,7 @@ void viewList(const List *L) {
 
 void listInsertFirst(List *L, void *data) {
     assert(L);
-    struct ListNode *newNode = newLNode(data);
+    LNode *newNode = newLNode(data);
     assert(newNode);
     if(listIsEmpty(L)){
         setHead(L,newNode);
