@@ -126,7 +126,7 @@ void viewList(const List *L) {
     for (i = 0; i < getListSize(L); i++, N = N->succ) {
         (*L->viewData)(N->data);
     }
-    printf("]\n");
+    printf(" ]\n");
 }
 
 void listInsertFirst(List *L, void *data) {
