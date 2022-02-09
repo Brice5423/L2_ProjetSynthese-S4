@@ -125,8 +125,8 @@ void listInsertLast(List * L, void * data) {
 	// TODO
 }
 
-void listInsertAfter(List * L, void * data, LNode * ptrelm) {
-	// TODO
+void listInsertAfter(List *L, void *data, LNode *ptrelm) {
+    // TODO
 }
 
 void* listRemoveFirst(List * L) {
