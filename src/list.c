@@ -115,9 +115,7 @@ void freeList(List *L, int deleteData) {
 
 void viewList(const List *L) {
     assert(L);
-
     LNode *N;
-
     printf("\n[ ");
     for (N = L->head; N; N = N->succ) {
         (*L->viewData)(N->data);
@@ -152,7 +150,7 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
         if (listIsEmpty(L)){
             setHead(L,newNode);
         }
-        else if (listIsEmpty(L)){
+        else{
             setSuccessor(newNode, Successor(ptrelm));
             setSuccessor(ptrelm, newNode);
             if (ptrelm == Tail(L)){
