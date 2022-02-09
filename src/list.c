@@ -100,15 +100,18 @@ void setTail(List *L, LNode *newTail) {
 void freeList(List *L, int deleteData) {
     assert(deleteData == 0 || deleteData == 1);
     assert(L != NULL);
+    LNode *node = Head(L);
     if (deleteData == 1) {
-        LNode *node = L->head;
         while (node != NULL) {
-            LNode *next = node->succ;
-            L->freeData(node->data);
+            LNode *next = Successor(node);
+            L->freeData(getLNodeData(node));
             node = next;
         }
     }
     else if (deleteData == 0){
+        while(node != NULL){
+            free(node);
+        }
         free(L);
     }
 }
@@ -117,8 +120,8 @@ void viewList(const List *L) {
     assert(L);
     LNode *N;
     printf("\n[ ");
-    for (N = L->head; N; N = N->succ) {
-        (*L->viewData)(N->data);
+    for (N = Head(L); N; N = Successor(N)) {
+        (*L->viewData)(getLNodeData(N));
     }
     printf(" ]\n");
 }
@@ -139,7 +142,7 @@ void listInsertFirst(List *L, void *data) {
 void listInsertLast(List *L, void *data) {
     // TODO : Briçou
 
-    LNode *nexN;
+    LNode *newN;
 
     newN = newLNode(data);
 
