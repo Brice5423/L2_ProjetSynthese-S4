@@ -129,11 +129,11 @@ void listInsertFirst(List *L, void *data) {
     assert(L);
     struct ListNode *newNode = newLNode(data);
     assert(newNode);
-    if ()
-    setSuccessor(newNode, Successor(data));
-    setHead(L,newNode);
-    if(L->numelm == 0){
-        setTail(L, Tail(L));
+    if(listIsEmpty(L)){
+        setHead(L,newNode);
+    }
+    else{
+        setSuccessor(newNode, Successor(data));
     }
     increaseListSize(L);
 }
