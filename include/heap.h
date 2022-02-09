@@ -15,12 +15,15 @@
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct {
-	void** A;
-	int MAX;
-	int N;
-	int (*preceed)(const void*, const void*);
-	void (*viewHeapData)(const void*);
-	void (*freeHeapData)(void*);
+    void **A;
+    int MAX;
+    int N;
+
+    int (*preceed)(const void *, const void *);
+
+    void (*viewHeapData)(const void *);
+
+    void (*freeHeapData)(void *);
 } ArrayHeap;
 
 /**
@@ -29,7 +32,7 @@ typedef struct {
  * @param[in] AH 
  * @return int 
  */
-int getAHMaxSize(const ArrayHeap* AH);
+int getAHMaxSize(const ArrayHeap *AH);
 
 /**
  * @brief  Restitue la taille actuelle du tas \p AH.
@@ -37,7 +40,7 @@ int getAHMaxSize(const ArrayHeap* AH);
  * @param[in] AH 
  * @return int 
  */
-int getAHActualSize(const ArrayHeap* AH);
+int getAHActualSize(const ArrayHeap *AH);
 
 /**
  * @brief Restitue l'élément de la position \p pos du tas \p AH
@@ -46,14 +49,14 @@ int getAHActualSize(const ArrayHeap* AH);
  * @param[in] pos
  * @return void* 
  */
-void* getAHNodeAt(const ArrayHeap* AH, int pos);
+void *getAHNodeAt(const ArrayHeap *AH, int pos);
 
 /**
  * @brief Décrémente la taille du tas \p AH par 1.
  * 
  * @param[in] AH 
  */
-void decreaseAHActualSize(ArrayHeap* AH);
+void decreaseAHActualSize(ArrayHeap *AH);
 
 /**
  * @brief Remplace l'élément de la position \p pos du tas \p AH
@@ -63,7 +66,7 @@ void decreaseAHActualSize(ArrayHeap* AH);
  * @param[in] position 
  * @param[in] newData 
  */
-void setAHNodeAt(ArrayHeap* AH, int position, void* newData);
+void setAHNodeAt(ArrayHeap *AH, int position, void *newData);
 
 /**
  * @brief Transforme le tableau \p A à un tas en réorganisant ses éléments
@@ -83,10 +86,10 @@ void setAHNodeAt(ArrayHeap* AH, int position, void* newData);
  * des données du nouveau tas.
  * @return ArrayHeap* Le nouveau tas créé.
  */
-ArrayHeap* ArrayToArrayHeap(void** A, int N,
-					int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*));
+ArrayHeap *ArrayToArrayHeap(void **A, int N,
+                            int (*preceed)(const void *, const void *),
+                            void (*viewHeapData)(const void *),
+                            void (*freeHeapData)(void *));
 
 
 /**
@@ -96,7 +99,7 @@ ArrayHeap* ArrayToArrayHeap(void** A, int N,
  * 
  * @param[in] AH 
  */
-void viewArrayHeap(const ArrayHeap* AH);
+void viewArrayHeap(const ArrayHeap *AH);
 
 /**
  * @brief Deux possibilités pour liberer la memoire du tas \p AH :
@@ -111,7 +114,7 @@ void viewArrayHeap(const ArrayHeap* AH);
  * @param[in] AH 
  * @param[in] daletedata 
  */
-void freeArrayHeap(ArrayHeap* AH, int daletedata);
+void freeArrayHeap(ArrayHeap *AH, int daletedata);
 
 /**
  * @brief Supprime du tas \p AH l'élément avec la plus grande priorité.
@@ -121,7 +124,7 @@ void freeArrayHeap(ArrayHeap* AH, int daletedata);
  * @param[in] AH 
  * @return void* 
  */
-void* ArrayHeapExtractMin(ArrayHeap* AH);
+void *ArrayHeapExtractMin(ArrayHeap *AH);
 
 /***************************************************
  * COMPLETE BINARY TREE HEAP
@@ -136,11 +139,14 @@ void* ArrayHeapExtractMin(ArrayHeap* AH);
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct {
-	CBTree* T;
-	int (*preceed)(const void*, const void*);
-	void (*viewHeapData)(const void*);
-	void (*freeHeapData)(void*);
-}  CBTHeap;
+    CBTree *T;
+
+    int (*preceed)(const void *, const void *);
+
+    void (*viewHeapData)(const void *);
+
+    void (*freeHeapData)(void *);
+} CBTHeap;
 
 /**
  * @brief Construit et initialise un arbre binaire complet vide.
@@ -156,9 +162,9 @@ typedef struct {
  * des données du nouveau tas.
  * @return CBTHeap* 
  */
-CBTHeap* newCBTHeap(int (*preceed)(const void*, const void*),
-					void (*viewHeapData)(const void*),
-					void (*freeHeapData)(void*));
+CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
+                    void (*viewHeapData)(const void *),
+                    void (*freeHeapData)(void *));
 
 /**
  * @brief Restitue l'arbre binaire complet implémentant le tas \p H.
@@ -166,7 +172,7 @@ CBTHeap* newCBTHeap(int (*preceed)(const void*, const void*),
  * @param[in] H 
  * @return CBTree* 
  */
-CBTree* getCBTree(const CBTHeap* H);
+CBTree *getCBTree(const CBTHeap *H);
 
 /**
  * @brief Insère dans le tas \p H un nouveau nœud de donnée \p data.
@@ -174,7 +180,7 @@ CBTree* getCBTree(const CBTHeap* H);
  * @param[in] H 
  * @param[in] data 
  */
-void CBTHeapInsert(CBTHeap *H, void* data);
+void CBTHeapInsert(CBTHeap *H, void *data);
 
 /**
  * @brief Supprime du tas \p H l'élément avec la plus grande priorité.
@@ -184,7 +190,7 @@ void CBTHeapInsert(CBTHeap *H, void* data);
  * @param[in] H 
  * @return void* 
  */
-void* CBTHeapExtractMin(CBTHeap *H);
+void *CBTHeapExtractMin(CBTHeap *H);
 
 /**
  * @brief Affiche les éléments du tas \p H.
@@ -193,7 +199,7 @@ void* CBTHeapExtractMin(CBTHeap *H);
  * 
  * @param[in] H 
  */
-void viewCBTHeap(const CBTHeap* H);
+void viewCBTHeap(const CBTHeap *H);
 
 /**
  * @brief Deux possibilités pour liberer la memoire du tas \p H :
@@ -208,6 +214,6 @@ void viewCBTHeap(const CBTHeap* H);
  * @param[in] H 
  * @param[in] deletenode 
  */
-void freeCBTHeap(CBTHeap* H, int deletenode);
+void freeCBTHeap(CBTHeap *H, int deletenode);
 
 #endif // _HEAP_H_

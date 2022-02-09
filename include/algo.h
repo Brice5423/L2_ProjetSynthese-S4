@@ -9,7 +9,7 @@
  * @param[in] outfilename le nom du fichier qui contiendra les points de
  * l'enveloppe convexe
  */
-void SlowConvexHull(const char* infilename, const char* outfilename);
+void SlowConvexHull(const char *infilename, const char *outfilename);
 
 /**
  * @brief Calcule l'enveloppe convexe d'un ensemble des points en 2D.
@@ -23,7 +23,7 @@ void SlowConvexHull(const char* infilename, const char* outfilename);
  *              (+) 2: tri par tas utilisant un tableau
  *              (+) 3: tri par sélection (tri par échange)
  */
-void ConvexHull(const char* infilename, const char* outfilename, int sortby);
+void ConvexHull(const char *infilename, const char *outfilename, int sortby);
 
 /**
  * @brief Calcule l'enveloppe convexe d'un ensemble des points en 2D.
@@ -33,6 +33,6 @@ void ConvexHull(const char* infilename, const char* outfilename, int sortby);
  * @param[in] outfilename le nom du fichier qui contiendra les points de
  * l'enveloppe convexe
  */
-void RapidConvexHull(const char* infilename, const char* outfilename);
+void RapidConvexHull(const char *infilename, const char *outfilename);
 
 #endif // _ALGO_H_

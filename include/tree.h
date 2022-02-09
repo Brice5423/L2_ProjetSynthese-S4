@@ -12,9 +12,9 @@
  * (+) Une référence (right) au fils droit.
  */
 typedef struct TreeNode {
-	void * data;
-	struct TreeNode * left;
-	struct TreeNode * right;
+    void *data;
+    struct TreeNode *left;
+    struct TreeNode *right;
 } TNode;
 
 /**
@@ -23,7 +23,7 @@ typedef struct TreeNode {
  * @param[in] data Donnée à affecter au nouveau nœud.
  * @return TNode* Le nouveau nœud créé.
  */
-TNode * newTNode(void *data);
+TNode *newTNode(void *data);
 
 /**
  * @brief Restitue la donnée du nœud \p node.
@@ -31,7 +31,7 @@ TNode * newTNode(void *data);
  * @param[in] node 
  * @return void* 
  */
-void* getTNodeData(const TNode* node);
+void *getTNodeData(const TNode *node);
 
 /**
  * @brief Restitue le fils gauche du nœud \p node.
@@ -39,7 +39,7 @@ void* getTNodeData(const TNode* node);
  * @param[in] node 
  * @return TNode* 
  */
-TNode* Left(const TNode* node);
+TNode *Left(const TNode *node);
 
 /**
  * @brief Restitue le fils droit du nœud \p node.
@@ -47,7 +47,7 @@ TNode* Left(const TNode* node);
  * @param[in] node 
  * @return TNode* 
  */
-TNode* Right(const TNode* node);
+TNode *Right(const TNode *node);
 
 /**
  * @brief Remplace la donnée du nœud \p node par \p newData.
@@ -55,7 +55,7 @@ TNode* Right(const TNode* node);
  * @param[in] node 
  * @param[in] newData 
  */
-void setTNodeData(TNode* node, void* newData);
+void setTNodeData(TNode *node, void *newData);
 
 /**
  * @brief Remplace le fils gauche du nœud \p node par \p newLeft.
@@ -63,7 +63,7 @@ void setTNodeData(TNode* node, void* newData);
  * @param[in] node 
  * @param[in] newLeft 
  */
-void setLeft(TNode* node, TNode* newLeft);
+void setLeft(TNode *node, TNode *newLeft);
 
 /**
  * @brief Remplace le fils gauche du nœud \p node par \p newRight.
@@ -71,7 +71,7 @@ void setLeft(TNode* node, TNode* newLeft);
  * @param[in] node 
  * @param[in] newRight 
  */
-void setRight(TNode* node, TNode* newRight);
+void setRight(TNode *node, TNode *newRight);
 
 /**
  * @brief L'arbre binaire complet est une structure contenant :
@@ -81,10 +81,12 @@ void setRight(TNode* node, TNode* newRight);
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct CompleteBinaryTree {
-	TNode * root;
-	int numelm;
-	void (*viewData)(const void*);
-	void (*freeData)(void*);
+    TNode *root;
+    int numelm;
+
+    void (*viewData)(const void *);
+
+    void (*freeData)(void *);
 } CBTree;
 
 /**
@@ -99,7 +101,7 @@ typedef struct CompleteBinaryTree {
  * des données du nouveau arbre.
  * @return CBTree* Le nouveau arbre binaire complet créé.
  */
-CBTree * newCBTree(void (*viewData)(const void*), void (*freeData)(void*));
+CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *));
 
 /**
  * @brief Renvoie 1 si l'arbre \p T est vide, sinon renvoie 0.
@@ -107,7 +109,7 @@ CBTree * newCBTree(void (*viewData)(const void*), void (*freeData)(void*));
  * @param[in] T 
  * @return int 
  */
-int treeIsEmpty(CBTree* T);
+int treeIsEmpty(CBTree *T);
 
 /**
  * @brief Restitue la taille (nombre d'éléments) de l'arbre \p T.
@@ -115,7 +117,7 @@ int treeIsEmpty(CBTree* T);
  * @param[in] T 
  * @return int 
  */
-int getCBTreeSize(const CBTree* T);
+int getCBTreeSize(const CBTree *T);
 
 /**
  * @brief Restitue la racine de l'arbre \p T.
@@ -123,28 +125,28 @@ int getCBTreeSize(const CBTree* T);
  * @param[in] T 
  * @return TNode* 
  */
-TNode* Root(const CBTree* T);
+TNode *Root(const CBTree *T);
 
 /**
  * @brief Incrémente la taille de l'arbre \p T par 1.
  * 
  * @param[in] T 
  */
-void increaseCBTreeSize(CBTree* T);
+void increaseCBTreeSize(CBTree *T);
 
 /**
  * @brief Décrémente la taille de l'arbre \p T par 1.
  * 
  * @param[in] T 
  */
-void decreaseCBTreeSize(CBTree* T);
+void decreaseCBTreeSize(CBTree *T);
 
 /**
  * @brief Réinitialise la taille de l'arbre \p T à zéro.
  * 
  * @param[in] T 
  */
-void resetCBTreeSize(CBTree* T);
+void resetCBTreeSize(CBTree *T);
 
 /**
  * @brief Remplace la racine de l'arbre \p T par \p newRoot.
@@ -152,7 +154,7 @@ void resetCBTreeSize(CBTree* T);
  * @param[in] T 
  * @param[in] newRoot 
  */
-void setRoot(CBTree* T, TNode* newRoot);
+void setRoot(CBTree *T, TNode *newRoot);
 
 /**
  * @brief Deux possibilités pour liberer la memoire de l'arbre \p T :
@@ -167,7 +169,7 @@ void setRoot(CBTree* T, TNode* newRoot);
  * @param[in] T 
  * @param[in] deleteData 
  */
-void freeCBTree(CBTree * T, int deleteData);
+void freeCBTree(CBTree *T, int deleteData);
 
 /**
  * @brief Affiche les éléments de l'arbre \p T.
@@ -180,7 +182,7 @@ void freeCBTree(CBTree * T, int deleteData);
  * 					(+) 1 = ordre postfixe, et
  * 					(+) 2 = ordre infixe.
  */
-void viewCBTree(const CBTree* T, int order);
+void viewCBTree(const CBTree *T, int order);
 
 /**
  * @brief Insère au dernier niveau et le plus à gauche possible
@@ -189,7 +191,7 @@ void viewCBTree(const CBTree* T, int order);
  * @param[in] T 
  * @param[in] data 
  */
-void CBTreeInsert(CBTree* T, void* data);
+void CBTreeInsert(CBTree *T, void *data);
 
 /**
  * @brief Supprime le dernier nœud de l'arbre \p T et restitue sa donnée.
@@ -201,7 +203,7 @@ void CBTreeInsert(CBTree* T, void* data);
  * @param[in] T L'arbre ne doit pas être vide.
  * @return void* La donnée du nœud supprimé.
  */
-void* CBTreeRemove(CBTree* T);
+void *CBTreeRemove(CBTree *T);
 
 /**
  * @brief Restitue le dernier nœud de l'arbre \p T.
@@ -212,7 +214,7 @@ void* CBTreeRemove(CBTree* T);
  * @param[in] T 
  * @return TNode* 
  */
-TNode* CBTreeGetLast(CBTree* T);
+TNode *CBTreeGetLast(CBTree *T);
 
 /**
  * @brief Permute les données des nœuds \p node1 et \p node2.
@@ -220,6 +222,6 @@ TNode* CBTreeGetLast(CBTree* T);
  * @param[in] node1 
  * @param[in] node2 
  */
-void CBTreeSwapData(TNode* node1, TNode* node2);
+void CBTreeSwapData(TNode *node1, TNode *node2);
 
 #endif // _TREE_H_

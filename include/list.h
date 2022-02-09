@@ -13,8 +13,9 @@
  * (+) une référence (pred) à l'élément précédent.
  */
 typedef struct ListNode {
-	void * data;
-	struct ListNode * succ, * pred;
+    void *data;
+    struct ListNode *succ;
+    struct ListNode *pred;
 } LNode;
 
 /**
@@ -24,7 +25,7 @@ typedef struct ListNode {
  * @param[in] data Donnée à affecter au nouveau nœud.
  * @return LNode* Le nouveau nœud créé.
  */
-LNode * newLNode(void* data);
+LNode *newLNode(void *data);
 
 /**
  * @brief Restitue la donnée du nœud \p node.
@@ -32,7 +33,7 @@ LNode * newLNode(void* data);
  * @param[in] node 
  * @return void* 
  */
-void* getLNodeData(const LNode* node);
+void *getLNodeData(const LNode *node);
 
 /**
  * @brief Restitue le successeur du nœud \p node.
@@ -40,7 +41,7 @@ void* getLNodeData(const LNode* node);
  * @param[in] node 
  * @return LNode* 
  */
-LNode* Successor(const LNode* node);
+LNode *Successor(const LNode *node);
 
 /**
  * @brief Restitue le prédécesseur du nœud \p node.
@@ -48,7 +49,7 @@ LNode* Successor(const LNode* node);
  * @param[in] node 
  * @return LNode* 
  */
-LNode* Predecessor(const LNode* node);
+LNode *Predecessor(const LNode *node);
 
 /**
  * @brief Remplace la donnée du nœud \p node par \p newData.
@@ -56,7 +57,7 @@ LNode* Predecessor(const LNode* node);
  * @param[in] node 
  * @param[in] newData 
  */
-void setLNodeData(LNode* node, void* newData);
+void setLNodeData(LNode *node, void *newData);
 
 /**
  * @brief Remplace le successeur du nœud \p node par \p newSucc.
@@ -64,7 +65,7 @@ void setLNodeData(LNode* node, void* newData);
  * @param[in] node 
  * @param[in] newSucc 
  */
-void setSuccessor(LNode* node, LNode* newSucc);
+void setSuccessor(LNode *node, LNode *newSucc);
 
 /**
  * @brief Remplace le prédécesseur du nœud \p node par \p newSucc.
@@ -72,7 +73,7 @@ void setSuccessor(LNode* node, LNode* newSucc);
  * @param[in] node 
  * @param[in] NewPred 
  */
-void setPredecessor(LNode* node, LNode* NewPred);
+void setPredecessor(LNode *node, LNode *NewPred);
 
 /**
  * @brief La liste est une structure contenant :
@@ -83,10 +84,12 @@ void setPredecessor(LNode* node, LNode* NewPred);
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct List {
-	LNode * head, * tail;
-	int numelm;
-	void (*viewData)(const void* data);
-	void (*freeData)(void* data);
+    LNode *head, *tail;
+    int numelm;
+
+    void (*viewData)(const void *data);
+
+    void (*freeData)(void *data);
 } List;
 
 /**
@@ -99,7 +102,7 @@ typedef struct List {
  * @param[in] freeData Pointeur de fonction pour libérer la mémoire des données de la nouvelle liste.
  * @return List* La nouvelle liste créée.
  */
-List * newList(void (*viewData)(const void*), void (*freeData)(void*));
+List *newList(void (*viewData)(const void *), void (*freeData)(void *));
 
 /**
  * @brief Renvoie 1 si la liste \p L est vide, sinon renvoie 0.
@@ -107,7 +110,7 @@ List * newList(void (*viewData)(const void*), void (*freeData)(void*));
  * @param[in] L 
  * @return int 
  */
-int listIsEmpty(List* L);
+int listIsEmpty(List *L);
 
 /**
  * @brief Restitue la taille (nombre d'éléments) de la liste \p L.
@@ -115,7 +118,7 @@ int listIsEmpty(List* L);
  * @param[in] L 
  * @return int 
  */
-int getListSize(const List* L);
+int getListSize(const List *L);
 
 /**
  * @brief Restitue la tête (premier élément) de la liste \p L.
@@ -123,7 +126,7 @@ int getListSize(const List* L);
  * @param[in] L 
  * @return LNode* 
  */
-LNode* Head(const List* L);
+LNode *Head(const List *L);
 
 /**
  * @brief Restitue la queue (dernier élément) de la liste \p L.
@@ -131,21 +134,21 @@ LNode* Head(const List* L);
  * @param[in] L 
  * @return LNode* 
  */
-LNode* Tail(const List* L);
+LNode *Tail(const List *L);
 
 /**
  * @brief Incrémente la taille de la liste \p L par 1.
  * 
  * @param[in] L 
  */
-void increaseListSize(List* L);
+void increaseListSize(List *L);
 
 /**
  * @brief Décrémente la taille de la liste \p L par 1.
  * 
  * @param[in] L 
  */
-void decreaseListSize(List* L);
+void decreaseListSize(List *L);
 
 /**
  * @brief Met à jour la taille de la liste \p L à \p newSize.
@@ -153,14 +156,14 @@ void decreaseListSize(List* L);
  * @param[in] L 
  * @param[in] newSize 
  */
-void setListSize(List* L, int newSize);
+void setListSize(List *L, int newSize);
 
 /**
  * @brief Réinitialise la taille de la liste \p L à zéro.
  * 
  * @param[in] L 
  */
-void resetListSize(List* L);
+void resetListSize(List *L);
 
 /**
  * @brief Remplace la tête de la liste \p L par \p newHead.
@@ -168,7 +171,7 @@ void resetListSize(List* L);
  * @param[in] L 
  * @param newHead 
  */
-void setHead(List* L, LNode* newHead);
+void setHead(List *L, LNode *newHead);
 
 /**
  * @brief Remplace la queue de la liste \p L par \p newTail.
@@ -176,7 +179,7 @@ void setHead(List* L, LNode* newHead);
  * @param[in] L 
  * @param[in] newTail 
  */
-void setTail(List* L, LNode* newTail);
+void setTail(List *L, LNode *newTail);
 
 /**
  * @brief Deux possibilités pour liberer la memoire de la liste \p L :
@@ -191,7 +194,7 @@ void setTail(List* L, LNode* newTail);
  * @param[in] L 
  * @param[in] deleteData 
  */
-void freeList(List * L, int deleteData);
+void freeList(List *L, int deleteData);
 
 /**
  * @brief Affiche les éléments de la liste \p L.
@@ -200,7 +203,7 @@ void freeList(List * L, int deleteData);
  * 
  * @param[in] L 
  */
-void viewList(const List * L);
+void viewList(const List *L);
 
 /**
  * @brief Insère en tête de la liste \p L un nouveau nœud de donnée \p data.
@@ -208,7 +211,7 @@ void viewList(const List * L);
  * @param[in] L 
  * @param[in] data
  */
-void listInsertFirst(List * L, void * data);
+void listInsertFirst(List *L, void *data);
 
 /**
  * @brief Insère à la fin de la liste \p L un nouveau nœud de donnée \p data.
@@ -216,7 +219,7 @@ void listInsertFirst(List * L, void * data);
  * @param[in] L 
  * @param[in] data
  */
-void listInsertLast(List * L, void * data);
+void listInsertLast(List *L, void *data);
 
 /**
  * @brief Insère un nouveau nœud de donnée \p data dans la liste \p L
@@ -227,7 +230,7 @@ void listInsertLast(List * L, void * data);
  * @param[in] ptrelm Ce pointeur désigne obligatoirement
  * 					un nœud de la liste \p L.
  */
-void listInsertAfter(List * L, void * data, LNode * ptrelm);
+void listInsertAfter(List *L, void *data, LNode *ptrelm);
 
 /**
  * @brief Supprime le premier nœud de la liste \p L et restitue sa donnée.
@@ -236,7 +239,7 @@ void listInsertAfter(List * L, void * data, LNode * ptrelm);
  * @param[in] L La liste ne doit pas être vide.
  * @return void* La donnée du nœud supprimé.
  */
-void* listRemoveFirst(List * L);
+void *listRemoveFirst(List *L);
 
 /**
  * @brief Supprime le dernier nœud de la liste \p L et restitue sa donnée.
@@ -245,7 +248,7 @@ void* listRemoveFirst(List * L);
  * @param[in] L La liste ne doit pas être vide.
  * @return void* La donnée du nœud supprimé.
  */
-void* listRemoveLast(List * L);
+void *listRemoveLast(List *L);
 
 /**
  * @brief Supprime le nœud de la liste \p L indiqué par le pointeur \p node
@@ -256,7 +259,7 @@ void* listRemoveLast(List * L);
  * @param[in] node Ce pointeur désigne obligatoirement un nœud de la liste \p L.
  * @return void* La donnée du nœud supprimé.
  */
-void* listRemoveNode(List * L, LNode * node);
+void *listRemoveNode(List *L, LNode *node);
 
 /**
  * @brief Concatène les listes \p L1 et \p L2 :
@@ -269,6 +272,6 @@ void* listRemoveNode(List * L, LNode * node);
  * @param[in] L2 
  * @return List* 
  */
-List* listConcatenate(List* L1, List* L2);
+List *listConcatenate(List *L1, List *L2);
 
 #endif // _LIST_H_

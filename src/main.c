@@ -11,5 +11,5 @@
 
 int main() {
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

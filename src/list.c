@@ -100,7 +100,10 @@ void setTail(List* L, LNode* newTail) {
 void freeList(List * L, int deleteData) {
 	assert(deleteData == 0 || deleteData == 1);
 	assert (L!=NULL);
-    if (deleteData == 1){
+    if (deleteData == 0){
+        //alors la liste n'est pas libérer
+    }
+    else if (deleteData == 1){
         LNode *node = L->head;
         while (node != NULL){
             LNode *next = node->succ;
@@ -111,7 +114,7 @@ void freeList(List * L, int deleteData) {
 }
 
 void viewList(const List * L) {
-    //TODO
+
 }
 
 void listInsertFirst(List * L, void * data) {
@@ -123,15 +126,7 @@ void listInsertLast(List * L, void * data) {
 }
 
 void listInsertAfter(List * L, void * data, LNode * ptrelm) {
-	if (ptrelm == NULL){
-        newList(data,ptrelm);
-    }
-    else{
-        struct ListNode *new = newLNode(data);
-        assert(new);
-        new->succ = ptrelm->succ;
-    }
-
+	// TODO
 }
 
 void* listRemoveFirst(List * L) {
