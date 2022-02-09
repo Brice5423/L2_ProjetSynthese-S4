@@ -111,7 +111,19 @@ void freeList(List *L, int deleteData) {
 }
 
 void viewList(const List *L) {
-    //TODO
+    assert(L);
+
+    int i;
+    LNode *N;
+
+    N = (LNode *) calloc(1, sizeof(LNode));
+    N = L->head;
+
+    printf("\n[ ");
+    for (i = 0; i < getListSize(L); i++, N = N->succ) {
+        (*L->viewData)(N->data);
+    }
+    printf("]\n");
 }
 
 void listInsertFirst(List *L, void *data) {
@@ -120,7 +132,7 @@ void listInsertFirst(List *L, void *data) {
     assert(LNode);
     LNode->succ = L->head;
     L->head = LNode;
-    if(L->numelm == 0){
+    if (L->numelm == 0) {
         L->tail = LNode;
     }
     L->numelm++;
