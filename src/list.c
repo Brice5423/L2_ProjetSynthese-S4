@@ -137,7 +137,13 @@ void listInsertFirst(List *L, void *data) {
 }
 
 void listInsertLast(List *L, void *data) {
-    // TODO
+    // TODO : Briçou
+
+    LNode *nexN;
+
+    newN = newLNode(data);
+
+
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
