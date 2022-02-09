@@ -3,13 +3,13 @@
 
 /**
  * @brief
- * Liste générique homogène doublement chaînée
+ * Liste générique homogène doublement chaînée.\n
  */
 
 /**
- * @brief Un élément d'une liste doublement chaînée contient
- * (+) une donnée (data),
- * (+) une référence (succ) à l'élément suivant, et
+ * @brief Un élément d'une liste doublement chaînée contient :\n
+ * (+) une donnée (data),\n
+ * (+) une référence (succ) à l'élément suivant,\n
  * (+) une référence (pred) à l'élément précédent.
  */
 typedef struct ListNode {
@@ -76,15 +76,16 @@ void setSuccessor(LNode *node, LNode *newSucc);
 void setPredecessor(LNode *node, LNode *NewPred);
 
 /**
- * @brief La liste est une structure contenant :
- * (+) une référence (head) sur son premier élément,
- * (+) une référence (tail) sur son dernier élément,
- * (+) le nombre d'éléments,
- * (+) un pointeur de fonction pour afficher ses données, et
+ * @brief La liste est une structure contenant :\n
+ * (+) une référence (head) sur son premier élément,\n
+ * (+) une référence (tail) sur son dernier élément,\n
+ * (+) le nombre d'éléments (numelm),\n
+ * (+) un pointeur de fonction pour afficher ses données,\n
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct List {
-    LNode *head, *tail;
+    LNode *head;
+    LNode *tail;
     int numelm;
 
     void (*viewData)(const void *data);
@@ -182,10 +183,10 @@ void setHead(List *L, LNode *newHead);
 void setTail(List *L, LNode *newTail);
 
 /**
- * @brief Deux possibilités pour liberer la memoire de la liste \p L :
+ * @brief Deux possibilités pour liberer la memoire de la liste \p L :\n
  * (+) Si le paramètre \p deleteData vaut 0,
  *     alors les données (data) référencées par les éléments
- *     de la liste \p L ne sont pas supprimées ;
+ *     de la liste \p L ne sont pas supprimées ;\n
  * (+) Si le paramètre \p deleteData vaut 1,
  *     alors le pointeur de fonction freeData de la structure List
  *     va servir à supprimer les données (data) référencées par
@@ -197,7 +198,7 @@ void setTail(List *L, LNode *newTail);
 void freeList(List *L, int deleteData);
 
 /**
- * @brief Affiche les éléments de la liste \p L.
+ * @brief Affiche les éléments de la liste \p L.\n
  * Les données de chaque élément sont affichées grâce au pointeur
  * de fonction viewData de la structure List.
  * 
@@ -233,7 +234,7 @@ void listInsertLast(List *L, void *data);
 void listInsertAfter(List *L, void *data, LNode *ptrelm);
 
 /**
- * @brief Supprime le premier nœud de la liste \p L et restitue sa donnée.
+ * @brief Supprime le premier nœud de la liste \p L et restitue sa donnée.\n
  * La mémoire du nœud supprimé est libérée mais pas la mémoire de la donnée.
  * 
  * @param[in] L La liste ne doit pas être vide.
@@ -242,7 +243,7 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm);
 void *listRemoveFirst(List *L);
 
 /**
- * @brief Supprime le dernier nœud de la liste \p L et restitue sa donnée.
+ * @brief Supprime le dernier nœud de la liste \p L et restitue sa donnée.\n
  * La mémoire du nœud supprimé est libérée mais pas la mémoire de la donnée.
  * 
  * @param[in] L La liste ne doit pas être vide.
@@ -252,7 +253,7 @@ void *listRemoveLast(List *L);
 
 /**
  * @brief Supprime le nœud de la liste \p L indiqué par le pointeur \p node
- * et restitue sa donnée.
+ * et restitue sa donnée.\n
  * La mémoire du nœud supprimé est libérée mais pas la mémoire de la donnée.
  * 
  * @param[in] L La liste ne doit pas être vide.
@@ -262,10 +263,10 @@ void *listRemoveLast(List *L);
 void *listRemoveNode(List *L, LNode *node);
 
 /**
- * @brief Concatène les listes \p L1 et \p L2 :
+ * @brief Concatène les listes \p L1 et \p L2 :\n
  * (+) Si \p L1 n'est pas vide, lie la liste \p L2 à la fin de la liste \p L1
  * et restitue la liste \p L1 (la mémoire de la liste \p L2 est libérée,
- * mais pas ses nœuds).
+ * mais pas ses nœuds).\n
  * (+) Sinon, restitue la liste \p L2 (la mémoire de la liste \p L1 est libérée).
  * 
  * @param[in] L1 
