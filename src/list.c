@@ -117,7 +117,15 @@ void viewList(const List *L) {
 }
 
 void listInsertFirst(List *L, void *data) {
-    //TODO
+    assert(L);
+    struct ListNode *LNode = newLNode(data);
+    assert(LNode);
+    LNode->succ = L->head;
+    L->head = LNode;
+    if(L->numelm == 0){
+        L->tail = LNode;
+    }
+    L->numelm++;
 }
 
 void listInsertLast(List *L, void *data) {
