@@ -45,12 +45,11 @@ void setPredecessor(LNode *node, LNode *newPred) {
  ********************************************************************/
 
 List *newList(void (*viewData)(const void *), void (*freeData)(void *)) {
-    List *Lst = calloc(1, sizeof(struct List));
+    List *Lst = (List *)calloc(1, sizeof(struct List));
     //faire des vérifs si la liste est bien initialisé
     assert(Lst);
-    //Initialisé les pointeurs de fonctions
-    assert(viewData);
-    assert(freeData);
+    Lst->viewData = viewData;
+    Lst->freeData = freeData;
     return Lst;
 }
 
@@ -135,18 +134,24 @@ void listInsertFirst(List *L, void *data) {
     }
     else{
         setSuccessor(newNode, Successor(data));
+
+
     }
     increaseListSize(L);
 }
 
 void listInsertLast(List *L, void *data) {
-    // TODO : Briçou
-
-    LNode *newN;
-
-    newN = newLNode(data);
-
-
+    assert(L);
+    LNode *newNode = newLNode(data);
+    assert(newNode);
+    if(listIsEmpty(L)){
+        setTail(L,newNode);
+    }
+    else{
+        setSuccessor(Tail(L), newNode);
+        setPredecessor(newNode, Tail(L));
+    }
+    increaseListSize(L);
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
