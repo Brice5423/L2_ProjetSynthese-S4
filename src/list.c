@@ -134,8 +134,6 @@ void listInsertFirst(List *L, void *data) {
     }
     else{
         setSuccessor(newNode, Successor(data));
-
-
     }
     increaseListSize(L);
 }
