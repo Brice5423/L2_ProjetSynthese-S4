@@ -87,7 +87,19 @@ void setRoot(CBTree *T, TNode *newRoot) {
  * @param[in] freeData 
  */
 static void freeTNode(TNode *node, void (*freeData)(void *)) {
-    // TODO
+    // TODO freeTNode : Faire des tests
+    if ((Left(node) != NULL) && (Right(node) != NULL)) {
+        freeTNode(Left(node), freeData);
+        freeTNode(Right(node), freeData);
+
+    } else if (Left(node) != NULL) {
+        freeTNode(Left(node), freeData);
+
+    } else if (Right(node) != NULL) {
+        freeTNode(Right(node), freeData);
+    }
+
+    *(freeData)(node);
 }
 
 /**
