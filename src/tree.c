@@ -10,31 +10,35 @@
  ********************************************************************/
 
 TNode *newTNode(void *data) {
-    // TODO
+    assert(data);
+    TNode *TNode = (struct TNode *) calloc(1, sizeof(struct TreeNode));
+    assert(TNode);
+    TNode->data = data;
+    return TNode;
 }
 
 void *getTNodeData(const TNode *node) {
-    // TODO
+    return node->data;
 }
 
 TNode *Left(const TNode *node) {
-    // TODO
+    return node->left;
 }
 
 TNode *Right(const TNode *node) {
-    // TODO
+    return node->right;
 }
 
 void setTNodeData(TNode *node, void *newData) {
-    // TODO
+    node->data = newData;
 }
 
 void setLeft(TNode *node, TNode *newLeft) {
-    // TODO
+    node->left = newLeft;
 }
 
 void setRight(TNode *node, TNode *newRight) {
-    // TODO
+    node->right = newRight;
 }
 
 /********************************************************************
