@@ -10,9 +10,14 @@
 
 LNode *newLNode(void *data) {
     assert(data);
-    LNode *LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
+
+    LNode *LNode;
+
+    LNode = (struct ListNode *) calloc(1, sizeof(struct ListNode));
     assert(LNode);
+
     LNode->data = data;
+
     return LNode;
 }
 
@@ -45,11 +50,14 @@ void setPredecessor(LNode *node, LNode *newPred) {
  ********************************************************************/
 
 List *newList(void (*viewData)(const void *), void (*freeData)(void *)) {
-    List *Lst = (List *)calloc(1, sizeof(struct List));
-    //faire des vérifs si la liste est bien initialisé
+    List *Lst;
+
+    Lst = (List *) calloc(1, sizeof(struct List));
     assert(Lst);
+
     Lst->viewData = viewData;
     Lst->freeData = freeData;
+
     return Lst;
 }
 
@@ -97,18 +105,24 @@ void setTail(List *L, LNode *newTail) {
 }
 
 void freeList(List *L, int deleteData) {
+    // @TODO freeList : voir si la mémoire est bien libérée
     assert(deleteData == 0 || deleteData == 1);
     assert(L != NULL);
-    LNode *node = Head(L);
+
+    LNode *node;
+
+    node = Head(L);
+
     if (deleteData == 1) {
         while (node != NULL) {
-            LNode *next = Successor(node);
+            LNode *next;
+
+            next = Successor(node);
             L->freeData(getLNodeData(node));
             node = next;
         }
-    }
-    else if (deleteData == 0){
-        while(node != NULL){
+    } else if (deleteData == 0) {
+        while (node != NULL) {
             free(node);
         }
         free(L);
@@ -117,7 +131,9 @@ void freeList(List *L, int deleteData) {
 
 void viewList(const List *L) {
     assert(L);
+
     LNode *N;
+
     printf("\n[ ");
     for (N = Head(L); N; N = Successor(N)) {
         (*L->viewData)(getLNodeData(N));
@@ -127,12 +143,15 @@ void viewList(const List *L) {
 
 void listInsertFirst(List *L, void *data) {
     assert(L);
-    LNode *newNode = newLNode(data);
+
+    LNode *newNode;
+
+    newNode = newLNode(data);
     assert(newNode);
-    if(listIsEmpty(L)){
-        setHead(L,newNode);
-    }
-    else{
+
+    if (listIsEmpty(L)) {
+        setHead(L, newNode);
+    } else {
         setSuccessor(newNode, Successor(data));
     }
     increaseListSize(L);
@@ -140,12 +159,15 @@ void listInsertFirst(List *L, void *data) {
 
 void listInsertLast(List *L, void *data) {
     assert(L);
-    LNode *newNode = newLNode(data);
+
+    LNode *newNode;
+
+    newNode = newLNode(data);
     assert(newNode);
-    if(listIsEmpty(L)){
-        setTail(L,newNode);
-    }
-    else{
+
+    if (listIsEmpty(L)) {
+        setTail(L, newNode);
+    } else {
         setSuccessor(Tail(L), newNode);
         setPredecessor(newNode, Tail(L));
     }
@@ -153,19 +175,23 @@ void listInsertLast(List *L, void *data) {
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
-    if (ptrelm == NULL){
+    // @TODO listInsertAfter : si on met l'élément à la bonne place
+    if (ptrelm == NULL) {
         setLNodeData(ptrelm, data);
-    }
-    else{
-        struct ListNode *newNode = newLNode(data);
+
+    } else {
+        struct ListNode *newNode;
+
+        newNode = newLNode(data);
         assert(newNode);
-        if (listIsEmpty(L)){
-            setHead(L,newNode);
-        }
-        else{
+
+        if (listIsEmpty(L)) {
+            setHead(L, newNode);
+        } else {
             setSuccessor(newNode, Successor(ptrelm));
             setSuccessor(ptrelm, newNode);
-            if (ptrelm == Tail(L)){
+
+            if (ptrelm == Tail(L)) {
                 setTail(L, newNode);
             }
         }
@@ -175,19 +201,19 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
 
 void *listRemoveFirst(List *L) {
     assert(Head(L));
-    // TODO
+    // TODO listRemoveFirst
 }
 
 void *listRemoveLast(List *L) {
     assert(Head(L));
-    // TODO
+    // TODO listRemoveLast
 }
 
 void *listRemoveNode(List *L, LNode *node) {
     assert(Head(L) && Tail(L));
-    // TODO
+    // TODO listRemoveNode
 }
 
 List *listConcatenate(List *L1, List *L2) {
-    // TODO
+    // TODO listConcatenate
 }
