@@ -194,6 +194,7 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
 
         if (listIsEmpty(L)) {
             setHead(L, newNode);
+            setTail(L, newNode);
         } else {
             setSuccessor(newNode, Successor(ptrelm));
             setSuccessor(ptrelm, newNode);
