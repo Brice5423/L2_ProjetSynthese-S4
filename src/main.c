@@ -10,7 +10,7 @@
 #include "../include/algo.h"
 
 int main() {
-    struct List *L = newList(viewInt, freeInt);
+    struct List *L = newList(&viewInt, &freeInt);
     int *data1 = (int *)calloc(1, sizeof(int));
     *data1 = 1;
     int *data2 = (int *)calloc(1, sizeof(int));

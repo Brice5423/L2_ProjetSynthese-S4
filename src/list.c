@@ -151,8 +151,12 @@ void listInsertFirst(List *L, void *data) {
 
     if (listIsEmpty(L)) {
         setHead(L, newNode);
+        setTail(L, newNode);
+
     } else {
         setSuccessor(newNode, Successor(data));
+        setPredecessor(Head(L), newNode);
+        setHead(L, newNode);
     }
     increaseListSize(L);
 }
@@ -167,9 +171,12 @@ void listInsertLast(List *L, void *data) {
 
     if (listIsEmpty(L)) {
         setTail(L, newNode);
+        setHead(L, newNode);
+
     } else {
         setSuccessor(Tail(L), newNode);
         setPredecessor(newNode, Tail(L));
+        setTail(L, newNode);
     }
     increaseListSize(L);
 }
