@@ -99,7 +99,7 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
         freeTNode(Right(node), freeData);
     }
 
-    *(freeData)(node);
+    (*freeData)(node);
 }
 
 /**
