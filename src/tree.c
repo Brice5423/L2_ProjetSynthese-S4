@@ -46,35 +46,35 @@ void setRight(TNode *node, TNode *newRight) {
  ********************************************************************/
 
 CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *)) {
-    // TODO
+    // TODO newCBTree
 }
 
 int treeIsEmpty(CBTree *T) {
-    // TODO
+    // TODO treeIsEmpty
 }
 
 int getCBTreeSize(const CBTree *T) {
-    // TODO
+    // TODO getCBTreeSize
 }
 
 TNode *Root(const CBTree *T) {
-    // TODO
+    // TODO Root
 }
 
 void increaseCBTreeSize(CBTree *T) {
-    // TODO
+    // TODO increaseCBTreeSize
 }
 
 void decreaseCBTreeSize(CBTree *T) {
-    // TODO
+    // TODO decreaseCBTreeSize
 }
 
 void resetCBTreeSize(CBTree *T) {
-    // TODO
+    // TODO resetCBTreeSize
 }
 
 void setRoot(CBTree *T, TNode *newRoot) {
-    // TODO
+    // TODO setRoot
 }
 
 /**
@@ -108,7 +108,7 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
  * par rapport à la valeur de deleteData.
  */
 void freeCBTree(CBTree *T, int deleteData) {
-    // TODO
+    // TODO freeCBTree
 }
 
 /**
@@ -121,7 +121,7 @@ void freeCBTree(CBTree *T, int deleteData) {
  * @param[in] viewData 
  */
 static void preorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO
+    // TODO preorder
 }
 
 /**
@@ -134,7 +134,7 @@ static void preorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void inorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO
+    // TODO inorder
 }
 
 /**
@@ -147,7 +147,7 @@ static void inorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void postorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO
+    // TODO postorder
 }
 
 /**
@@ -155,7 +155,7 @@ static void postorder(TNode *node, void (*viewData)(const void *)) {
  * Rappel : order = 0 (preorder), 1 (postorder), 2 (inorder)
  */
 void viewCBTree(const CBTree *T, int order) {
-    // TODO
+    // TODO viewCBTree
 }
 
 /**
@@ -180,7 +180,7 @@ void viewCBTree(const CBTree *T, int order) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
-    // TODO
+    // TODO insertAfterLastTNode
 }
 
 /**
@@ -188,7 +188,7 @@ static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
  * afin de lancer l'insertion.
  */
 void CBTreeInsert(CBTree *T, void *data) {
-    // TODO
+    // TODO CBTreeInsert
 }
 
 /**
@@ -214,7 +214,7 @@ void CBTreeInsert(CBTree *T, void *data) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *removeLastTNode(TNode *node, int position, void **data) {
-    // TODO
+    // TODO removeLastTNode
 }
 
 /**
@@ -223,7 +223,7 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
  */
 void *CBTreeRemove(CBTree *T) {
     assert(Root(T));
-    // TODO
+    // TODO CBTreeRemove
 }
 
 /**
@@ -246,7 +246,7 @@ void *CBTreeRemove(CBTree *T) {
  * @return TNode* Le dernier nœud de l'arbre.
  */
 static TNode *getLastTNode(TNode *node, int position) {
-    // TODO
+    // TODO getLastTNode
 }
 
 /**
@@ -254,9 +254,9 @@ static TNode *getLastTNode(TNode *node, int position) {
  * afin de lancer la recherche.
  */
 TNode *CBTreeGetLast(CBTree *T) {
-    // TODO
+    // TODO CBTreeGetLast
 }
 
 void CBTreeSwapData(TNode *node1, TNode *node2) {
-    // TODO
+    // TODO CBTreeSwapData
 }
