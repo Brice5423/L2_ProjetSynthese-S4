@@ -6,9 +6,9 @@
  */
 
 /**
- * @brief Un élément d'un arbre binaire contient
- * (+) Une donnée (data),
- * (+) Une référence (left) au fils gauche, et
+ * @brief Un élément d'un arbre binaire contient :\n
+ * (+) Une donnée (data),\n
+ * (+) Une référence (left) au fils gauche,\n
  * (+) Une référence (right) au fils droit.
  */
 typedef struct TreeNode {
@@ -74,11 +74,11 @@ void setLeft(TNode *node, TNode *newLeft);
 void setRight(TNode *node, TNode *newRight);
 
 /**
- * @brief L'arbre binaire complet est une structure contenant :
- * (+) une référence (root) sur sa racine,
- * (+) le nombre d'éléments,
- * (+) un pointeur de fonction pour afficher ses données, et
- * (+) un pointeur de fonction pour libérer la mémoire de ses données.
+ * @brief L'arbre binaire complet est une structure contenant :\n
+ * (+) une référence (root) sur sa racine,\n
+ * (+) le nombre d'éléments,\n
+ * (+) un pointeur de fonction pour afficher ses données,\n
+ * (+) un pointeur de fonction pour libérer la mémoire de ses données.\n
  */
 typedef struct CompleteBinaryTree {
     TNode *root;
@@ -157,14 +157,16 @@ void resetCBTreeSize(CBTree *T);
 void setRoot(CBTree *T, TNode *newRoot);
 
 /**
- * @brief Deux possibilités pour liberer la memoire de l'arbre \p T :
+ * @brief Deux possibilités pour liberer la memoire de l'arbre \p T :\n
  * (+) Si le paramètre \p deleteData vaut 0,
  *     alors les données (data) référencées par les éléments
- *     de l'arbre \p T ne sont pas supprimées ;
+ *     de l'arbre \p T ne sont pas supprimées;
+ *     (Supprime l'arbre mais pas les éléments)\n
  * (+) Si le paramètre \p deleteData vaut 1,
  *     alors le pointeur de fonction freeData de la structure CBTree
  *     va servir à supprimer les données (data) référencées par
  *     les éléments de l'arbre \p T.
+ *     (Supprime les éléments et l'arbre)
  * 
  * @param[in] T 
  * @param[in] deleteData 
@@ -177,9 +179,9 @@ void freeCBTree(CBTree *T, int deleteData);
  * de fonction viewData de la structure CBTree.
  * 
  * @param[in] T 
- * @param[in] order Spécifie l'ordre d'affichage :
- * 					(+) 0 = ordre préfixe,
- * 					(+) 1 = ordre postfixe, et
+ * @param[in] order Spécifie l'ordre d'affichage :\n
+ * 					(+) 0 = ordre préfixe,\n
+ * 					(+) 1 = ordre postfixe,\n
  * 					(+) 2 = ordre infixe.
  */
 void viewCBTree(const CBTree *T, int order);
