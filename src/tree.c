@@ -243,6 +243,28 @@ void viewCBTree(const CBTree *T, int order) {
 }
 
 /**
+ * Renvoie si la position demander est à gauche ou à droite de la node\n
+ * @param node
+ * @param position
+ * @return 1 : gauche & 0 : droite
+ */
+static int etreAGaucheDuNode(TNode *node, int position) {
+    int h;
+    double k;
+    double t;
+
+    h = (int) (log2(position + 1) + 1);
+    k = (position + 1) - (pow(2., (h - 1).) - 1);
+    t = (pow(2, (k - 1).) / 2);
+
+    if (k <= t) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/**
  * @brief Insère récursivement un nouveau nœud de donnée \p data
  * dans l'arbre raciné au nœud \p node.\n
  * La position (par rapport à la racine \p node) où le nouveau nœud
@@ -264,9 +286,10 @@ void viewCBTree(const CBTree *T, int order) {
  */
 static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
     // TODO insertAfterLastTNode : en cours Brice
-    /* Regarde le lien pour trouver une solution (pas  sûr) :
-     * https://fr.wikipedia.org/wiki/Arbre_binaire
+    /* Voir photo sur Discord pour les calculs si position est à gauche ou pas
+     * utiliser la fonction fait pour juste en haut (etreAGaucheDuNode)
      */
+
 }
 
 /**
