@@ -19,7 +19,7 @@ int getAHActualSize(const ArrayHeap *AH) {
 }
 
 void *getAHNodeAt(const ArrayHeap *AH, int pos) {
-    //TODO
+    return AH->A[pos];
 }
 
 void decreaseAHActualSize(ArrayHeap *AH) {
@@ -27,7 +27,7 @@ void decreaseAHActualSize(ArrayHeap *AH) {
 }
 
 void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
-    //TODO
+    AH->A[position] = newData;
 }
 
 /**
@@ -52,7 +52,8 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 }
 
 void viewArrayHeap(const ArrayHeap *AH) {
-    AH->viewHeapData(AH->A);
+    for (int i = 0; i <= getAHActualSize(AH); i++)
+        AH->viewHeapData(AH->A[i]);
 }
 
 void freeArrayHeap(ArrayHeap *AH, int deletedata) {
