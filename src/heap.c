@@ -11,11 +11,11 @@
  **********************************************************************************/
 
 int getAHMaxSize(const ArrayHeap *AH) {
-    return AH->MAX;
+    //TODO
 }
 
 int getAHActualSize(const ArrayHeap *AH) {
-    return AH->N;
+    //TODO
 }
 
 void *getAHNodeAt(const ArrayHeap *AH, int pos) {
@@ -23,7 +23,7 @@ void *getAHNodeAt(const ArrayHeap *AH, int pos) {
 }
 
 void decreaseAHActualSize(ArrayHeap *AH) {
-    AH->N = AH->N + 1;
+    //TODO
 }
 
 void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
