@@ -11,11 +11,11 @@
  **********************************************************************************/
 
 int getAHMaxSize(const ArrayHeap *AH) {
-    //TODO
+    return AH->MAX;
 }
 
 int getAHActualSize(const ArrayHeap *AH) {
-    //TODO
+    return AH->N;
 }
 
 void *getAHNodeAt(const ArrayHeap *AH, int pos) {
@@ -23,11 +23,11 @@ void *getAHNodeAt(const ArrayHeap *AH, int pos) {
 }
 
 void decreaseAHActualSize(ArrayHeap *AH) {
-    //TODO
+    AH->N--;
 }
 
 void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
-    // TODO
+    //TODO
 }
 
 /**
@@ -52,16 +52,19 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 }
 
 void viewArrayHeap(const ArrayHeap *AH) {
-    // TODO
+    AH->viewHeapData(AH->A);
 }
 
-void freeArrayHeap(ArrayHeap *AH, int deletenode) {
-    // TODO
+void freeArrayHeap(ArrayHeap *AH, int deletedata) {
+    if(deletedata == 1)
+        AH->freeHeapData(AH);
+    else if (deletedata == 0) {
+        //TODO : il faut suremenet ajouter quelque chose ici mais je ne comprends pas quoi
+    }
 }
 
 void *ArrayHeapExtractMin(ArrayHeap *AH) {
     assert(getAHActualSize(AH) > 0);
-    // TODO
 }
 
 /**********************************************************************************

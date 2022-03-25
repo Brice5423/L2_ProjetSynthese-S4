@@ -112,9 +112,9 @@ void viewArrayHeap(const ArrayHeap *AH);
  *     les éléments du tas \p AH.
  * 
  * @param[in] AH 
- * @param[in] daletedata 
+ * @param[in] deletedata
  */
-void freeArrayHeap(ArrayHeap *AH, int daletedata);
+void freeArrayHeap(ArrayHeap *AH, int deletedata);
 
 /**
  * @brief Supprime du tas \p AH l'élément avec la plus grande priorité.
