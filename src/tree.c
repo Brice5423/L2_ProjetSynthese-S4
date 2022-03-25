@@ -57,7 +57,7 @@ CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *)) {
     T = (CBTree *) calloc(1, sizeof(CBTree));
     assert(T);
 
-    T->root = null;
+    T->root = NULL;
     resetCBTreeSize(T);
     T->viewData = viewData;
     T->freeData = freeData;
@@ -102,7 +102,7 @@ void setRoot(CBTree *T, TNode *newRoot) {
     assert(T);
     assert(newRoot);
 
-    TNode root;
+    TNode *root;
 
     root = Root(T);
 
@@ -248,14 +248,16 @@ void viewCBTree(const CBTree *T, int order) {
  * @param position
  * @return 1 : gauche & 0 : droite
  */
-static int etreAGaucheDuNode(TNode *node, int position) {
+static int etreAGaucheDuNode(int position) {
+    int nbNode;
     int h;
     double k;
     double t;
 
-    h = (int) (log2(position + 1) + 1);
-    k = (position + 1) - (pow(2., (h - 1).) - 1);
-    t = (pow(2, (k - 1).) / 2);
+    nbNode = position + 1;
+    h = floor((log2(nbNode) + 1));
+    k = nbNode - (pow(2, (h - 1)) - 1);
+    t = (pow(2, (h - 1)) / 2);
 
     if (k <= t) {
         return 1;
