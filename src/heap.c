@@ -60,7 +60,7 @@ void freeArrayHeap(ArrayHeap *AH, int deletedata) {
     if(deletedata == 1)
         AH->freeHeapData(AH);
     else if (deletedata == 0) {
-        //TODO : il faut suremenet ajouter quelque chose ici mais je ne comprends pas quoi
+        //TODO : il faut surement ajouter quelque chose ici mais je ne comprends pas quoi
     }
 }
 
@@ -79,7 +79,7 @@ CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
 }
 
 CBTree *getCBTree(const CBTHeap *H) {
-    // TODO
+    return H->T;
 }
 
 /**

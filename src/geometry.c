@@ -8,19 +8,19 @@ Point *newPoint(long long int x, long long int y) {
 }
 
 long long int X(const Point *P) {
-    // TODO
+    return P->x;
 }
 
 long long int Y(const Point *P) {
-    // TODO
+    return P->y;
 }
 
 void viewPoint(const void *P) {
-    // TODO
+    //TODO
 }
 
 void freePoint(void *P) {
-    // TODO
+    free(P);
 }
 
 int onRight(const Point *origin, const Point *destination, const Point *P) {
