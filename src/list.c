@@ -105,7 +105,7 @@ void setTail(List *L, LNode *newTail) {
 }
 
 void freeList(List *L, int deleteData) {
-    // @TODO freeList : voir si la mémoire est bien libérée
+    // @TODO freeList : revoir quand deletedata est 0 car crash
     assert(deleteData == 0 || deleteData == 1);
     assert(L != NULL);
 
@@ -242,7 +242,7 @@ void *listRemoveLast(List *L) {
 }
 
 void *listRemoveNode(List *L, LNode *node) {
-    // @TODO à revoir
+    // @TODO à revoir car obliger de mettre Head ou Tail pour l'appeler
     assert(Head(L) && Tail(L));
     if(listIsEmpty(L)){
         ShowMessage("La liste est vide", 0);
