@@ -41,7 +41,32 @@ void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
  * @param[in] pos L'indice de la valeur en mouvement vers le bas.
  */
 static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
-    // TODO
+    int pere = (pos-1) / 2;
+    int fg = 2*pos + 1;
+    int fd = 2*pos + 2;
+    int min;
+    int temp;
+
+    if(fd < getAHActualSize(AH)){
+        if(AH->preceed(getAHNodeAt(AH, fg), getAHNodeAt(AH, fd)))
+            min = fg;
+        else
+            min = fd;
+        if(AH->preceed(getAHNodeAt(AH, min), getAHNodeAt(AH, pere))){
+            temp = min;
+            min = pere;
+            pere = temp;
+        }
+        updateArrayHeapDownwards(AH, pos++);
+    }
+    else{
+        if(AH->preceed(getAHNodeAt(AH, min), getAHNodeAt(AH, pere))){
+            temp = min;
+            min = pere;
+            pere = temp;
+            updateArrayHeapDownwards(AH, pos++);
+        }
+    }
 }
 
 ArrayHeap *ArrayToArrayHeap(void **A, int N,
