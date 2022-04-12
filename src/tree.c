@@ -18,11 +18,14 @@ TNode *newTNode(void *data) {
     assert(node);
 
     node->data = data;
+    setRight(node, NULL);
+    setLeft(node, NULL);
 
     return node;
 }
 
 void *getTNodeData(const TNode *node) {
+    assert(node);
     return node->data;
 }
 
@@ -35,23 +38,25 @@ TNode *Right(const TNode *node) {
 }
 
 void setTNodeData(TNode *node, void *newData) {
+    assert(node);
     node->data = newData;
 }
 
 void setLeft(TNode *node, TNode *newLeft) {
+    assert(node);
     node->left = newLeft;
 }
 
 void setRight(TNode *node, TNode *newRight) {
+    assert(node);
     node->right = newRight;
 }
 
 /********************************************************************
- * Complete Binary Tree
+ * Complete Binary Tree TODO BriceBriçou : Arbre complet binaire
  ********************************************************************/
 
 CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *)) {
-    // TODO newCBTree : à tester
     CBTree *T;
 
     T = (CBTree *) calloc(1, sizeof(CBTree));
@@ -66,39 +71,36 @@ CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *)) {
 }
 
 int treeIsEmpty(CBTree *T) {
-    // TODO treeIsEmpty : à tester
     assert(T);
-
     return ((int) (getCBTreeSize(T) == 0));
 }
 
 int getCBTreeSize(const CBTree *T) {
-    // TODO getCBTreeSize : à tester
+    assert(T);
     return T->numelm;
 }
 
 TNode *Root(const CBTree *T) {
-    // TODO Root : à tester
+    assert(T);
     return T->root;
 }
 
 void increaseCBTreeSize(CBTree *T) {
-    // TODO increaseCBTreeSize : à tester
+    assert(T);
     T->numelm++;
 }
 
 void decreaseCBTreeSize(CBTree *T) {
-    // TODO decreaseCBTreeSize : à tester
+    assert(T);
     T->numelm--;
 }
 
 void resetCBTreeSize(CBTree *T) {
-    // TODO resetCBTreeSize : à tester
+    assert(T);
     T->numelm = 0;
 }
 
 void setRoot(CBTree *T, TNode *newRoot) {
-    // TODO setRoot : à tester
     assert(T);
     assert(newRoot);
 
@@ -106,10 +108,15 @@ void setRoot(CBTree *T, TNode *newRoot) {
 
     root = Root(T);
 
-    setLeft(newRoot, Left(root));
-    setRight(newRoot, Right(root));
+    if (root != NULL) {
+        setLeft(newRoot, Left(root));
+        setRight(newRoot, Right(root));
 
-    (*T->freeData)(root);
+        (*T->freeData)(getTNodeData(root));
+        setLeft(root, NULL);
+        setRight(root, NULL);
+        free(root);
+    }
 
     T->root = newRoot;
 }
@@ -117,46 +124,43 @@ void setRoot(CBTree *T, TNode *newRoot) {
 /**
  * @brief Libère récursivement le sous-arbre raciné au nœud \p node.
  * Dans le cas où le pointeur de fonction \p freeData n'est pas NULL,
- * la mémoire de la donnée du nœud actuel est aussi libérée.
+ * la mémoire de la donnée du nœud actuel est aussi libérée.\n
  * NB : procédure récursive.
  * 
  * @param[in] node 
  * @param[in] freeData 
  */
 static void freeTNode(TNode *node, void (*freeData)(void *)) {
-    // TODO freeTNode : à tester
-    if ((Left(node) != NULL) && (Right(node) != NULL)) {
+    if (Left(node) != NULL) {
         freeTNode(Left(node), freeData);
-        freeTNode(Right(node), freeData);
+    }
 
-    } else if (Left(node) != NULL) {
-        freeTNode(Left(node), freeData);
-
-    } else if (Right(node) != NULL) {
+    if (Right(node) != NULL) {
         freeTNode(Right(node), freeData);
     }
 
-    (*freeData)(node);
+    setLeft(node, NULL);
+    setRight(node, NULL);
+    (*freeData)(getTNodeData(node));
+    free(node);
 }
 
 /**
- * NB : Utilisez la procédure récursive freeTNode.
- * Vous devez initialiser le paramètre freeData
- * par rapport à la valeur de deleteData.
+ * NB : Utilisez la procédure récursive freeTNode.\n
+ * Vous devez initialiser le paramètre freeData par rapport à la valeur de deleteData.
+ * @param deleteData 1 : data free & 0 : data non free
  */
 void freeCBTree(CBTree *T, int deleteData) {
-    // TODO freeCBTree : à tester
+    assert(T);
+
     if (deleteData == 1) {
         freeTNode(Root(T), T->freeData);
     }
 
     resetCBTreeSize(T);
-    free(T->viewData);
     T->viewData = NULL;
-    free(T->freeData);
     T->freeData = NULL;
     free(T);
-    T = NULL;
 }
 
 /**
@@ -169,14 +173,15 @@ void freeCBTree(CBTree *T, int deleteData) {
  * @param[in] viewData 
  */
 static void preorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO preorder : à tester
-    (*viewData)(node);
+    (*viewData)(getTNodeData(node));
 
     if (Left(node) != NULL) {
+        printf("-");
         preorder(Left(node), viewData);
     }
 
     if (Right(node) != NULL) {
+        printf("-");
         preorder(Right(node), viewData);
     }
 }
@@ -191,15 +196,16 @@ static void preorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void inorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO inorder : à tester
     if (Left(node) != NULL) {
-        preorder(Left(node), viewData);
+        inorder(Left(node), viewData);
+        printf("-");
     }
 
-    (*viewData)(node);
+    (*viewData)(getTNodeData(node));
 
     if (Right(node) != NULL) {
-        preorder(Right(node), viewData);
+        printf("-");
+        inorder(Right(node), viewData);
     }
 }
 
@@ -213,16 +219,17 @@ static void inorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void postorder(TNode *node, void (*viewData)(const void *)) {
-    // TODO postorder : à tester
     if (Left(node) != NULL) {
-        preorder(Left(node), viewData);
+        postorder(Left(node), viewData);
+        printf("-");
     }
 
     if (Right(node) != NULL) {
-        preorder(Right(node), viewData);
+        postorder(Right(node), viewData);
+        printf("-");
     }
 
-    (*viewData)(node);
+    (*viewData)(getTNodeData(node));
 }
 
 /**
@@ -230,7 +237,6 @@ static void postorder(TNode *node, void (*viewData)(const void *)) {
  * Rappel : order = 0 (preorder), 1 (postorder), 2 (inorder)
  */
 void viewCBTree(const CBTree *T, int order) {
-    // TODO viewCBTree : à tester
     if (order == 0) {
         preorder(Root(T), T->viewData);
 
@@ -239,7 +245,12 @@ void viewCBTree(const CBTree *T, int order) {
 
     } else if (order == 2) {
         inorder(Root(T), T->viewData);
+
+    } else {
+        exit(1);
     }
+
+    printf("\n");
 }
 
 /**
@@ -263,7 +274,6 @@ void viewCBTree(const CBTree *T, int order) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
-    // TODO insertAfterLastTNode : à tester
     if (position == 0) {
         return newTNode(data);
 
@@ -294,10 +304,14 @@ static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
  * NB : Utilisez la procédure récursive insertAfterLastTNode afin de lancer l'insertion.
  */
 void CBTreeInsert(CBTree *T, void *data) {
-    // TODO CBTreeInsert : à tester
-    assert(Root(T));
+    assert(T);
 
-    insertAfterLastTNode(Root(T), getCBTreeSize(T), data);
+    if (getCBTreeSize(T) == 0) {
+        setRoot(T, newTNode(data));
+    } else {
+        insertAfterLastTNode(Root(T), getCBTreeSize(T), data);
+    }
+
     increaseCBTreeSize(T);
 }
 
@@ -329,7 +343,7 @@ void CBTreeInsert(CBTree *T, void *data) {
 static TNode *removeLastTNode(TNode *node, int position, void **data) {
     // TODO removeLastTNode : à test
     if (position == 0) {
-        data = &getTNodeData(node);
+        data = getTNodeData(node);
         free(node);
 
         return NULL;
@@ -347,13 +361,13 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
 
         if (k <= t) {
             // A gauche de la node
-            setLeft(node, insertAfterLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1), data));
+            setLeft(node, removeLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1), data));
         } else {
             // A droite de la node
-            setRight(node, insertAfterLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1), data));
+            setRight(node, removeLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1), data));
         }
 
-        return node
+        return node;
     }
 }
 
@@ -361,13 +375,16 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
  * NB : Utilisez la procédure récursive removeLastTNode afin de lancer la suppression.
  */
 void *CBTreeRemove(CBTree *T) {
-    // TODO CBTreeRemove : à tester
+    // TODO CBTreeRemove : à tester ____________________
     assert(Root(T));
 
-    removeLastTNode(Root(T), getCBTreeSize(T), data);
+    void *data;
+
+    removeLastTNode(Root(T), getCBTreeSize(T), &data);
     decreaseCBTreeSize(T);
-    (*T->freeData)(**data);
-    free(*data);
+    //(*T->freeData)(data);
+
+    return data;
 }
 
 /**
@@ -418,7 +435,7 @@ static TNode *getLastTNode(TNode *node, int position) {
  * NB : Utilisez la procédure récursive getLastTNode afin de lancer la recherche.
  */
 TNode *CBTreeGetLast(CBTree *T) {
-    // TODO CBTreeGetLast : à tester
+    // TODO CBTreeGetLast : à tester ____________________
     assert(T);
 
     return getLastTNode(Root(T), getCBTreeSize(T));
@@ -431,7 +448,7 @@ TNode *CBTreeGetLast(CBTree *T) {
  * @param node2
  */
 void CBTreeSwapData(TNode *node1, TNode *node2) {
-    // TODO CBTreeSwapData : à tester
+    // TODO CBTreeSwapData : à tester _________________
     void *data1;
 
     data1 = getTNodeData(node1);
