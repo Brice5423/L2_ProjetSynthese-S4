@@ -11,12 +11,12 @@ Chaque étape correspond à comment on écrie un commit.
 
 ## 1.1. Importance des commits
 
-- 🔴 : Très important _(si notre vie était en jeu, très rare)_
-- 🟠 : Important _(fonction entière, code plus volumineux)_
-- 🟡 : Normale _(fonction partielle, code peu volumineux)_
-- 🟢 : Peu important _(commentaire, formatage, renommage, norme de codage, etc.)_
+- 🟥 : Très important _(si notre vie était en jeu, très rare)_
+- 🟧 : Important _(fonction entière, code plus volumineux)_
+- 🟨 : Normale _(fonction partielle, code peu volumineux)_
+- 🟩 : Peu important _(commentaire, formatage, renommage, norme de codage, etc.)_
 
-> Les emojis 🟢, 🟡, 🟠, 🔴 sont obtenus avec la touche `windows` + `;`.
+> Les emojis 🟩, 🟨, 🟧, 🟥 sont obtenus avec la touche `windows` + `;`.
 
 ## 1.2. Action des commits
 
@@ -26,7 +26,7 @@ Chaque étape correspond à comment on écrie un commit.
 
 ## 1.3. Fichier/dossier cible & Détaille
 
-Pour savoir ce qu'on a fait après avoir indiqué l'importance du commit _(🟢, 🟡, 🟠, 🔴)_ et quelle action _(+, ~, -)_,
+Pour savoir ce qu'on a fait après avoir indiqué l'importance du commit _(🟩, 🟨, 🟧, 🟥_ et quelle action _(+, ~, -)_,
 on indique dans quels fichiers ça était appliqué.  
 Si l'action ce porte dans l'ensemble des éléments d'un dossier, nous l'indiquerons par des `[nom_dossier]`.
 
@@ -35,7 +35,7 @@ S'il y a plusieurs fichier qui ont les mêmes détaille, on met un `+` entre cha
 
 **Exemple :**
 ```
-🟢 ~ fichier1 + fichier2 (commentaire & format) 
+🟩 ~ fichier1 + fichier2 (commentaire & format) 
 ```
 > Le commit indique que le `fichier1` et le `fichier2` ont eu une modification dans leurs commentaires et un formatage.
 
@@ -45,7 +45,7 @@ On met un `&` entre chaque fichier/dossier cible avec son détaille _(s'il y a)_
 
 **Exemple :**
 ```
-🟢 + fichier1 (commantaire) & fichier2 (format)
+🟩 + fichier1 (commantaire) & fichier2 (format)
 ```
 > Le commit indique que le `fichier1` à eu une modification dans ces commentaires et que le `fichier2` à fait un formatage.
 
@@ -56,7 +56,7 @@ On recommence directement par indiquer l'importance puis son action pour montrer
 
 **Exemple :**
 ```
-🟠 + fichier1 (fonction1) 🟢 - fichier1 (commantaire)
+🟧 + fichier1 (fonction1) 🟩 - fichier1 (commantaire)
 ```
 > Le commit  indique que le `fichier1` à ajouté une fonction et qu'il a supprimé un commentaire.
 

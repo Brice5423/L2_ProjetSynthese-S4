@@ -243,30 +243,6 @@ void viewCBTree(const CBTree *T, int order) {
 }
 
 /**
- * Renvoie si la position demander est à gauche ou à droite de la node\n
- * @param node
- * @param position
- * @return 1 : gauche & 0 : droite
- */
-static int etreAGaucheDuNode(int position) {
-    int nbNode;
-    int h;
-    double k;
-    double t;
-
-    nbNode = position + 1;
-    h = floor((log2(nbNode) + 1));
-    k = nbNode - (pow(2, (h - 1)) - 1);
-    t = (pow(2, (h - 1)) / 2);
-
-    if (k <= t) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-/**
  * @brief Insère récursivement un nouveau nœud de donnée \p data
  * dans l'arbre raciné au nœud \p node.\n
  * La position (par rapport à la racine \p node) où le nouveau nœud
@@ -287,24 +263,46 @@ static int etreAGaucheDuNode(int position) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
-    // TODO insertAfterLastTNode : en cours Brice
-    /* Voir photo sur Discord pour les calculs si position est à gauche ou pas
-     * utiliser la fonction fait pour juste en haut (etreAGaucheDuNode)
-     */
+    // TODO insertAfterLastTNode : à tester
+    if (position == 0) {
+        return newTNode(data);
 
+    } else {
+        int nbNode;
+        int h;
+        double k;
+        double t;
+
+        nbNode = position + 1;
+        h = floor((log2(nbNode) + 1));
+        k = nbNode - (pow(2, (h - 1)) - 1);
+        t = (pow(2, (h - 1)) / 2);
+
+        if (k <= t) {
+            // A gauche de la node
+            setLeft(node, insertAfterLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1), data));
+        } else {
+            // A droite de la node
+            setRight(node, insertAfterLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1), data));
+        }
+
+        return node;
+    }
 }
 
 /**
- * NB : Utilisez la procédure récursive insertAfterLastTNode
- * afin de lancer l'insertion.
+ * NB : Utilisez la procédure récursive insertAfterLastTNode afin de lancer l'insertion.
  */
 void CBTreeInsert(CBTree *T, void *data) {
-    // TODO CBTreeInsert :
+    // TODO CBTreeInsert : à tester
+    assert(Root(T));
+
+    insertAfterLastTNode(Root(T), getCBTreeSize(T), data);
+    increaseCBTreeSize(T);
 }
 
 /**
- * @brief Supprime récursivement le dernier nœud
- * de l'arbre raciné au nœud \p node.
+ * @brief Supprime récursivement le dernier nœud de l'arbre raciné au nœud \p node.
  * La position (par rapport à la racine \p node) du nœud à supprimer
  * est indiquée par le paramètre \p position
  * (voir la figure ci-dessous pour la définition de la position).
@@ -317,32 +315,66 @@ void CBTreeInsert(CBTree *T, void *data) {
  *    3   4   5   6
  *   / \
  *  7  ...
- * 
+ * \n
+ * Cette fonction fait aucune suppression.\n
+ * Elle renvoie la node qui contient la modification.\n
+ * La node à sup est free mais ça \p data devra être free dans la fonction qui appel removeLastTNode\n.
+ * Le paramètre \p data contient la donnée que la node doit sup.
+ *
  * @param[in] node La racine de l'arbre actuel.
- * @param[in] position La position de l'élément à supprimer
- *                         par rapport à la racine \p node.
+ * @param[in] position La position de l'élément à supprimer par rapport à la racine \p node.
  * @param[out] data La donnée du nœud supprimé (sortie).
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *removeLastTNode(TNode *node, int position, void **data) {
-    // TODO removeLastTNode :
+    // TODO removeLastTNode : à test
+    if (position == 0) {
+        data = &getTNodeData(node);
+        free(node);
+
+        return NULL;
+
+    } else {
+        int nbNode;
+        int h;
+        double k;
+        double t;
+
+        nbNode = position + 1;
+        h = floor((log2(nbNode) + 1));
+        k = nbNode - (pow(2, (h - 1)) - 1);
+        t = (pow(2, (h - 1)) / 2);
+
+        if (k <= t) {
+            // A gauche de la node
+            setLeft(node, insertAfterLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1), data));
+        } else {
+            // A droite de la node
+            setRight(node, insertAfterLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1), data));
+        }
+
+        return node
+    }
 }
 
 /**
- * NB : Utilisez la procédure récursive removeLastTNode
- * afin de lancer la suppression.
+ * NB : Utilisez la procédure récursive removeLastTNode afin de lancer la suppression.
  */
 void *CBTreeRemove(CBTree *T) {
+    // TODO CBTreeRemove : à tester
     assert(Root(T));
-    // TODO CBTreeRemove :
+
+    removeLastTNode(Root(T), getCBTreeSize(T), data);
+    decreaseCBTreeSize(T);
+    (*T->freeData)(**data);
+    free(*data);
 }
 
 /**
- * @brief Restitue récursivement le dernier nœud
- * de l'arbre raciné au nœud \p node.
+ * @brief Restitue récursivement le dernier nœud de l'arbre raciné au nœud \p node.\n
  * La position (par rapport à la racine \p node) de ce dernier nœud
- * est indiquée par le paramètre \p position
- * (voir la figure ci-dessous pour la définition de la position).
+ * est indiquée par le paramètre \p position\n
+ * (voir la figure ci-dessous pour la définition de la position).\n
  *  
  *          0
  *       /     \
@@ -357,17 +389,52 @@ void *CBTreeRemove(CBTree *T) {
  * @return TNode* Le dernier nœud de l'arbre.
  */
 static TNode *getLastTNode(TNode *node, int position) {
-    // TODO getLastTNode :
+    // TODO getLastTNode : à tester
+    if (position == 0) {
+        return node;
+
+    } else {
+        int nbNode;
+        int h;
+        double k;
+        double t;
+
+        nbNode = position + 1;
+        h = floor((log2(nbNode) + 1));
+        k = nbNode - (pow(2, (h - 1)) - 1);
+        t = (pow(2, (h - 1)) / 2);
+
+        if (k <= t) {
+            // A gauche de la node
+            return getLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1));
+        } else {
+            // A droite de la node
+            return getLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1));
+        }
+    }
 }
 
 /**
- * NB : Utilisez la procédure récursive getLastTNode
- * afin de lancer la recherche.
+ * NB : Utilisez la procédure récursive getLastTNode afin de lancer la recherche.
  */
 TNode *CBTreeGetLast(CBTree *T) {
-    // TODO CBTreeGetLast :
+    // TODO CBTreeGetLast : à tester
+    assert(T);
+
+    return getLastTNode(Root(T), getCBTreeSize(T));
 }
 
+/**
+ * Echange les data des deux nodes entre eux.
+ *
+ * @param node1
+ * @param node2
+ */
 void CBTreeSwapData(TNode *node1, TNode *node2) {
-    // TODO CBTreeSwapData :
+    // TODO CBTreeSwapData : à tester
+    void *data1;
+
+    data1 = getTNodeData(node1);
+    setTNodeData(node1, getTNodeData(node2));
+    setTNodeData(node2, data1);
 }
