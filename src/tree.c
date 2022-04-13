@@ -53,7 +53,7 @@ void setRight(TNode *node, TNode *newRight) {
 }
 
 /********************************************************************
- * Complete Binary Tree TODO BriceBriçou : Arbre complet binaire
+ * Complete Binary Tree
  ********************************************************************/
 
 CBTree *newCBTree(void (*viewData)(const void *), void (*freeData)(void *)) {
@@ -274,8 +274,18 @@ void viewCBTree(const CBTree *T, int order) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
+    assert(node);
+
     if (position == 0) {
         return newTNode(data);
+
+    } else if (position == 1) {
+        setLeft(node, newTNode(data));
+        return node;
+
+    } else if (position == 2) {
+        setRight(node, newTNode(data));
+        return node;
 
     } else {
         int nbNode;
@@ -341,9 +351,10 @@ void CBTreeInsert(CBTree *T, void *data) {
  * @return TNode* Le nœud \p node mis à jour.
  */
 static TNode *removeLastTNode(TNode *node, int position, void **data) {
-    // TODO removeLastTNode : à test
+    assert(node);
+
     if (position == 0) {
-        data = getTNodeData(node);
+        *data = getTNodeData(node);
         free(node);
 
         return NULL;
@@ -375,12 +386,11 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
  * NB : Utilisez la procédure récursive removeLastTNode afin de lancer la suppression.
  */
 void *CBTreeRemove(CBTree *T) {
-    // TODO CBTreeRemove : à tester ____________________
-    assert(Root(T));
+    assert(T);
 
     void *data;
 
-    removeLastTNode(Root(T), getCBTreeSize(T), &data);
+    removeLastTNode(Root(T), (getCBTreeSize(T) - 1), &data);
     decreaseCBTreeSize(T);
     //(*T->freeData)(data);
 
@@ -406,7 +416,8 @@ void *CBTreeRemove(CBTree *T) {
  * @return TNode* Le dernier nœud de l'arbre.
  */
 static TNode *getLastTNode(TNode *node, int position) {
-    // TODO getLastTNode : à tester
+    assert(node);
+
     if (position == 0) {
         return node;
 
@@ -435,10 +446,9 @@ static TNode *getLastTNode(TNode *node, int position) {
  * NB : Utilisez la procédure récursive getLastTNode afin de lancer la recherche.
  */
 TNode *CBTreeGetLast(CBTree *T) {
-    // TODO CBTreeGetLast : à tester ____________________
     assert(T);
 
-    return getLastTNode(Root(T), getCBTreeSize(T));
+    return getLastTNode(Root(T), (getCBTreeSize(T) - 1));
 }
 
 /**
@@ -448,7 +458,6 @@ TNode *CBTreeGetLast(CBTree *T) {
  * @param node2
  */
 void CBTreeSwapData(TNode *node1, TNode *node2) {
-    // TODO CBTreeSwapData : à tester _________________
     void *data1;
 
     data1 = getTNodeData(node1);
