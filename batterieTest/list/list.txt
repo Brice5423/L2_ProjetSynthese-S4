@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "../include/util.h"
+#include "../include/list.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
+#include "../include/geometry.h"
+#include "../include/algo.h"
+
+int main(int argc, char *argv[]) {
+    List *L1 = newList(viewInt, freeInt);
+    List *L2 = newList(viewInt, freeInt);
+
+    int *data1 = (int *)calloc(1, sizeof(int));
+    *data1 = 1;
+    int *data2 = (int *)calloc(1, sizeof(int));
+    *data2 = 2;
+    int *data3 = (int *)calloc(1, sizeof(int));
+    *data3 = 3;
+    int *data4 = (int *)calloc(1, sizeof(int));
+    *data4 = 4;
+    int *data5 = (int *)calloc(1, sizeof(int));
+    *data5 = 5;
+    int *data6 = (int *)calloc(1, sizeof(int));
+    *data6 = 6;
+
+    //int ptr1 = 1;
+    //void *data1 = &ptr1;
+
+    //int ptr2 = 2;
+    //void *data2 = &ptr2;
+
+    //int ptr3 = 3;
+    //void *data3 = &ptr3;
+
+   // int ptr4 = 4;
+    //void *data4 = &ptr4;
+
+    //int ptr5 = 5;
+    //void *data5 = &ptr5;
+
+    //int ptr6 = 6;
+    //void *data6 = &ptr6;
+
+    listInsertLast(L1, data1);
+    listInsertLast(L1, data2);
+    listInsertAfter(L1, data3, Head(L1));
+
+    listInsertFirst(L2, data4);
+    listInsertFirst(L2, data5);
+    listInsertFirst(L2, data6);
+
+
+    viewList(L1);
+    viewList(L2);
+
+    listRemoveFirst(L2);
+    listRemoveLast(L2);
+    viewList(L2);
+
+    listRemoveNode(L1, Successor(Head(L1)));
+    viewList(L1);
+
+    List *L3 = listConcatenate(L1, L2); //crash ici
+
+    viewList(L3);
+
+    //freeList(L1, 1);
+    printf("free L1 ok\n");
+    //freeList(L2, 1);
+    //printf("free L2 ok\n");
+    freeList(L3,1);
+
+    return EXIT_SUCCESS;
+}
