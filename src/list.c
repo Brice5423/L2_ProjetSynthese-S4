@@ -105,7 +105,6 @@ void setTail(List *L, LNode *newTail) {
 }
 
 void freeList(List *L, int deleteData) {
-    // @TODO freeList : revoir quand deletedata est 0 car crash
     assert(deleteData == 0 || deleteData == 1);
     assert(L != NULL);
 
@@ -119,11 +118,17 @@ void freeList(List *L, int deleteData) {
 
             next = Successor(node);
             L->freeData(getLNodeData(node));
+            free(node);
             node = next;
         }
+        free(L);
     } else if (deleteData == 0) {
         while (node != NULL) {
+            LNode *next;
+
+            next = Successor(node);
             free(node);
+            node = next;
         }
         free(L);
     }
@@ -181,7 +186,6 @@ void listInsertLast(List *L, void *data) {
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
-    // @TODO listInsertAfter : si on met l'élément à la bonne place
     if (ptrelm == NULL) {
         setLNodeData(ptrelm, data);
 
@@ -196,7 +200,7 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
             setTail(L, newNode);
         } else {
             setSuccessor(newNode, Successor(ptrelm));
-            setSuccessor(ptrelm, newNode);
+            setPredecessor(ptrelm, newNode);
 
             if (ptrelm == Tail(L)) {
                 setTail(L, newNode);
@@ -242,12 +246,12 @@ void *listRemoveLast(List *L) {
 }
 
 void *listRemoveNode(List *L, LNode *node) {
-    // @TODO à revoir car obliger de mettre Head ou Tail pour l'appeler
     assert(Head(L) && Tail(L));
     if(listIsEmpty(L)){
         ShowMessage("La liste est vide", 0);
     }
     else{
+        void *dataTemp = getLNodeData(node);
         if(node == Head(L)){
             listRemoveFirst(L);
         }
@@ -255,18 +259,13 @@ void *listRemoveNode(List *L, LNode *node) {
             listRemoveLast(L);
         }
         else{
-            void *dataTemp = getLNodeData(node);
-
-            setPredecessor(Predecessor(node), Successor(node));
-            setSuccessor(Successor(node), Predecessor(node));
-
-            setSuccessor(Tail(L), NULL);
-            setPredecessor(Head(L), NULL);
+            setSuccessor(Predecessor(node), Successor(node));
+            setPredecessor(Successor(node), Predecessor(node));
 
             free(node);
             decreaseListSize(L);
-            return dataTemp;
         }
+        return dataTemp;
     }
 }
 
@@ -277,11 +276,15 @@ List *listConcatenate(List *L1, List *L2) {
     if(!listIsEmpty(L1)){
         setSuccessor(Tail(L1), Head(L2));
         setPredecessor(Head(L2), Tail(L1));
-        freeList(L2, 1);
+        free(L2);
+        return L1;
+    }
+    else if(listIsEmpty(L2)){
+        free(L2);
         return L1;
     }
     else{
-        freeList(L1, 1);
+        free(L1);
         return L2;
     }
 }
