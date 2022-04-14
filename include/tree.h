@@ -115,7 +115,7 @@ int treeIsEmpty(CBTree *T);
  * @brief Restitue la taille (nombre d'éléments) de l'arbre \p T.
  * 
  * @param[in] T 
- * @return int 
+ * @return int
  */
 int getCBTreeSize(const CBTree *T);
 
