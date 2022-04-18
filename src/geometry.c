@@ -51,7 +51,6 @@ int onLeft(const Point *origin, const Point *destination, const Point *P) {
 }
 
 int collinear(const Point *origin, const Point *destination, const Point *P) {
-    // TODO : à tester collinear
     if( (X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) == 0)
         return 1;
     return 0;
