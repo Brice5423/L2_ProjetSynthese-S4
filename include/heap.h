@@ -1,17 +1,24 @@
 #ifndef _HEAP_H_
 #define _HEAP_H_
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <math.h>
+#include "tree.h"
+#include "util.h"
+
 /***************************************************
  * ARRAY HEAP
  ***************************************************/
 
 /**
- * @brief Un tas implémenté par un tableau est une structure contenant:
- * (+) un tableau d'éléments génériques de type void*,
- * (+) la taille maximale/initiale du tableau,
- * (+) le nombre d'éléments existants actuellement au tableau,
- * (+) un pointeur de fonction pour comparer la priorité de 2 éléments,
- * (+) un pointeur de fonction pour afficher ses données, et
+ * @brief Un tas implémenté par un tableau est une structure contenant:\n
+ * (+) un tableau d'éléments génériques de type void*,\n
+ * (+) la taille maximale/initiale du tableau,\n
+ * (+) le nombre d'éléments existants actuellement au tableau\n
+ * (+) un pointeur de fonction pour comparer la priorité de 2 éléments,\n
+ * (+) un pointeur de fonction pour afficher ses données, et\n
  * (+) un pointeur de fonction pour libérer la mémoire de ses données.
  */
 typedef struct {
@@ -59,8 +66,7 @@ void *getAHNodeAt(const ArrayHeap *AH, int pos);
 void decreaseAHActualSize(ArrayHeap *AH);
 
 /**
- * @brief Remplace l'élément de la position \p pos du tas \p AH
- * par \p newData
+ * @brief Remplace l'élément de la position \p pos du tas \p AH par \p newData
  * 
  * @param[in] AH 
  * @param[in] position 
@@ -70,8 +76,8 @@ void setAHNodeAt(ArrayHeap *AH, int position, void *newData);
 
 /**
  * @brief Transforme le tableau \p A à un tas en réorganisant ses éléments
- * selon le pointeur de fonction \p preceed.
- * En fait, il s'agit du constructeur de ce type de tas
+ * selon le pointeur de fonction \p preceed.\n
+ * En fait, il s'agit du constructeur de ce type de tas.\n\n
  *
  * Les deux pointeurs de fonction viewHeapData et freeHeapData indiquent
  * de façon implicite le type de la donnée du tas créée.
@@ -93,7 +99,7 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 
 
 /**
- * @brief Affiche les éléments du tas \p AH.
+ * @brief Affiche les éléments du tas \p AH.\n
  * Les données de chaque élément sont affichées grâce au pointeur
  * de fonction viewHeapData de la structure ArrayHeap.
  * 
@@ -102,10 +108,10 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 void viewArrayHeap(const ArrayHeap *AH);
 
 /**
- * @brief Deux possibilités pour liberer la memoire du tas \p AH :
+ * @brief Deux possibilités pour liberer la memoire du tas \p AH :\n
  * (+) Si le paramètre \p deleteData vaut 0,
  *     alors les données (data) référencées par les éléments
- *     du tas \p AH ne sont pas supprimées ;
+ *     du tas \p AH ne sont pas supprimées;\n
  * (+) Si le paramètre \p deleteData vaut 1,
  *     alors le pointeur de fonction freeData de la structure ArrayHeap
  *     va servir à supprimer les données (data) référencées par
@@ -117,8 +123,8 @@ void viewArrayHeap(const ArrayHeap *AH);
 void freeArrayHeap(ArrayHeap *AH, int deletedata);
 
 /**
- * @brief Supprime du tas \p AH l'élément avec la plus grande priorité.
- * La mémoire de l'élément n'est pas libérée.
+ * @brief Supprime du tas \p AH l'élément avec la plus grande priorité.\n
+ * La mémoire de l'élément n'est pas libérée.\n
  * Au contraire, l'élément est restitué à la fin de la fonction.
  * 
  * @param[in] AH 
@@ -132,11 +138,11 @@ void *ArrayHeapExtractMin(ArrayHeap *AH);
 
 /**
  * @brief Un tas implémenté par un arbre binaire complet est 
- * une structure contenant:
- * (+) un arbre binaire complet,
- * (+) un pointeur de fonction pour comparer la priorité de 2 éléments,
- * (+) un pointeur de fonction pour afficher ses données, et
- * (+) un pointeur de fonction pour libérer la mémoire de ses données.
+ * une structure contenant:\n
+ * (+) un arbre binaire complet,\n
+ * (+) un pointeur de fonction pour comparer la priorité de 2 éléments,\n
+ * (+) un pointeur de fonction pour afficher ses données, et\n
+ * (+) un pointeur de fonction pour libérer la mémoire de ses données.\n
  */
 typedef struct {
     CBTree *T;
@@ -149,7 +155,7 @@ typedef struct {
 } CBTHeap;
 
 /**
- * @brief Construit et initialise un arbre binaire complet vide.
+ * @brief Construit et initialise un arbre binaire complet vide.\n\n
  * 
  * Les deux pointeurs de fonction \p viewHeapData et \p freeHeapData
  * indiquent de façon implicite le type de la donnée de l'arbre créée.
@@ -184,7 +190,7 @@ void CBTHeapInsert(CBTHeap *H, void *data);
 
 /**
  * @brief Supprime du tas \p H l'élément avec la plus grande priorité.
- * La mémoire de l'élément n'est pas libérée.
+ * La mémoire de l'élément n'est pas libérée.\n
  * Au contraire, l'élément est restitué à la fin de la fonction.
  * 
  * @param[in] H 
@@ -193,7 +199,7 @@ void CBTHeapInsert(CBTHeap *H, void *data);
 void *CBTHeapExtractMin(CBTHeap *H);
 
 /**
- * @brief Affiche les éléments du tas \p H.
+ * @brief Affiche les éléments du tas \p H.\n
  * Les données de chaque élément sont affichées grâce au pointeur
  * de fonction viewHeapData de la structure CBTHeap.
  * 
@@ -202,10 +208,10 @@ void *CBTHeapExtractMin(CBTHeap *H);
 void viewCBTHeap(const CBTHeap *H);
 
 /**
- * @brief Deux possibilités pour liberer la memoire du tas \p H :
+ * @brief Deux possibilités pour liberer la memoire du tas \p H :\n
  * (+) Si le paramètre \p deletenode vaut 0,
  *     alors les données (data) référencées par les éléments
- *     de l'arbre T du tas \p H ne sont pas supprimées ;
+ *     de l'arbre T du tas \p H ne sont pas supprimées;\n
  * (+) Si le paramètre \p deletenode vaut 1,
  *     alors le pointeur de fonction freeData de la structure CBTree
  *     va servir à supprimer les données (data) référencées par
