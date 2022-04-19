@@ -21,7 +21,18 @@
  * @return Point** le tableau avec les points du fichier \p filename.
  */
 static Point **readInstance(const char *filename, int *N) {
-    // TODO
+    //TODO : tester readInstance, demander au prof
+    FILE *fp;
+    fp = fopen(filename, "r");
+    if(!fp)
+        ShowMessage("fopen", 0);
+    Point *buffer = calloc(1, sizeof(Point));
+    N = atoi((const char *) fscanf(fp, 1, buffer));
+    for(int i = 2; i <= sizeof(filename); i++){
+        fscanf(fp, "%[^\n]", buffer);
+    }
+    fclose(fp);
+    return (Point **) buffer;
 }
 
 /**
@@ -32,7 +43,14 @@ static Point **readInstance(const char *filename, int *N) {
  * @param[in] L la liste des points à écrire dans le fichier \p filename.
  */
 static void writeSolution(const char *filename, List *L) {
-    // TODO
+    //TODO : tester writeSolution, demander au prof
+    FILE *fp;
+    fp = fopen(filename, "wb");
+    if(!fp)
+        ShowMessage("fopen", 0);
+    for(int i = 1; i <= getListSize(L); i++)
+        fprintf(fp, "%s", L);
+    fclose(fp);
 }
 
 /**
@@ -45,7 +63,7 @@ static void writeSolution(const char *filename, List *L) {
  * horaire
  */
 static List *DedgesToClockwisePoints(List *dedges) {
-    // TODO
+    // TODO : je ne comprends pas comment la faire
 }
 
 void SlowConvexHull(const char *infilename, const char *outfilename) {
@@ -62,7 +80,17 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  * est plus petite que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
 static int smallerPoint(const void *a, const void *b) {
-    // TODO
+    //TODO tester smallerPoint
+    if(X(a) < X(b))
+        return 1;
+    else if (X(a) == X(b)) {
+        if (Y(a) < Y(b))
+            return 1;
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
 /**
@@ -75,7 +103,17 @@ static int smallerPoint(const void *a, const void *b) {
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
 static int biggerPoint(const void *a, const void *b) {
-    // TODO
+    //TODO tester biggerPoint
+    if(X(a) > X(b))
+        return 1;
+    else if (X(a) == X(b)) {
+        if (Y(a) > Y(b))
+            return 1;
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
