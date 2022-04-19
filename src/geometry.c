@@ -101,7 +101,7 @@ void viewDEdge(const void *DE) {
 }
 
 void freeDEdge(void *DE) {
-    free(getOrigin(DE));
     free(getDestination(DE));
+    free(getOrigin(DE));
     free(DE);
 }
