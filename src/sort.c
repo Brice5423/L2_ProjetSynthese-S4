@@ -18,5 +18,17 @@ void CBTHeapSort(void **A, int N,
 }
 
 void SelectionSort(void **A, int N, int (*preceed)(const void *, const void *)) {
-    // TODO
+    int i, j, temp, index;
+    for(i = 0; i < N - 1; i++){
+        index = i;
+        for(j = i + 1; j < N; j++){
+            if(preceed(A[index], A[j]))
+                index = j;
+        }
+        if(index != i){
+            temp = A[i];
+            A[i] = A[index];
+            A[index] = temp;
+        }
+    }
 }

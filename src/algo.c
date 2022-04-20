@@ -63,7 +63,29 @@ static void writeSolution(const char *filename, List *L) {
  * horaire
  */
 static List *DedgesToClockwisePoints(List *dedges) {
-    // TODO : je ne comprends pas comment la faire
+    //TODO : tester DedgesToClockwisePoints
+    assert(dedges != NULL);
+
+    LNode *node;
+    node = Head(dedges);
+    List *lstPoint;
+    lstPoint = calloc(1, sizeof(List));
+
+    Point *des;
+    while(node != NULL){
+        LNode *next;
+        next = Successor(node);
+        if(getDestination(getLNodeData(node)) != getOrigin(getLNodeData(next))){
+            listRemoveNode(dedges, node);
+            listInsertLast(dedges, getLNodeData(node));
+        }
+        else{
+            des = getDestination(getLNodeData(node));
+            listInsertLast(lstPoint, getLNodeData(des));
+        }
+        node = next;
+    }
+    return lstPoint;
 }
 
 void SlowConvexHull(const char *infilename, const char *outfilename) {
