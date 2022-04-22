@@ -189,7 +189,7 @@ CBTree *getCBTree(const CBTHeap *H);
 void CBTHeapInsert(CBTHeap *H, void *data);
 
 /**
- * @brief Supprime du tas \p H l'élément avec la plus grande priorité.
+ * @brief Supprime du tas \p H l'élément avec la plus grande priorité.\n
  * La mémoire de l'élément n'est pas libérée.\n
  * Au contraire, l'élément est restitué à la fin de la fonction.
  * 
