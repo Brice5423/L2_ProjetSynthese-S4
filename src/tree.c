@@ -126,6 +126,8 @@ void setRoot(CBTree *T, TNode *newRoot) {
  * @param[in] freeData 
  */
 static void freeTNode(TNode *node, void (*freeData)(void *)) {
+    assert(node);
+
     if (Left(node) != NULL) {
         freeTNode(Left(node), freeData);
     }
@@ -168,6 +170,9 @@ void freeCBTree(CBTree *T, int deleteData) {
  * @param[in] viewData 
  */
 static void preorder(TNode *node, void (*viewData)(const void *)) {
+    assert(node);
+    assert(viewData);
+
     (*viewData)(getTNodeData(node));
 
     if (Left(node) != NULL) {
@@ -191,6 +196,9 @@ static void preorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void inorder(TNode *node, void (*viewData)(const void *)) {
+    assert(node);
+    assert(viewData);
+
     if (Left(node) != NULL) {
         inorder(Left(node), viewData);
         printf("-");
@@ -214,6 +222,9 @@ static void inorder(TNode *node, void (*viewData)(const void *)) {
  * @param[in] viewData 
  */
 static void postorder(TNode *node, void (*viewData)(const void *)) {
+    assert(node);
+    assert(viewData);
+
     if (Left(node) != NULL) {
         postorder(Left(node), viewData);
         printf("-");
@@ -232,6 +243,8 @@ static void postorder(TNode *node, void (*viewData)(const void *)) {
  * Rappel : order = 0 (preorder), 1 (postorder), 2 (inorder)
  */
 void viewCBTree(const CBTree *T, int order) {
+    assert(T);
+
     if (order == 0) {
         preorder(Root(T), T->viewData);
 
@@ -242,7 +255,7 @@ void viewCBTree(const CBTree *T, int order) {
         inorder(Root(T), T->viewData);
 
     } else {
-        exit(1);
+        ShowMessage("order != {0, 1, 2} dans viewCBTree (fichier : tree.c / ligne : 245)", 1);
     }
 
     printf("\n");
@@ -306,7 +319,7 @@ static TNode *insertAfterLastTNode(TNode *node, int position, void *data) {
 }
 
 /**
- * NB : Utilisez la procédure récursive insertAfterLastTNode afin de lancer l'insertion.
+ * NB : Utilisez la procédure récursive insertAfterLastTNode a fin de lancer l'insertion.
  */
 void CBTreeInsert(CBTree *T, void *data) {
     assert(T);
