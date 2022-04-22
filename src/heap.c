@@ -5,31 +5,31 @@
  **********************************************************************************/
 
 int getAHMaxSize(const ArrayHeap *AH) {
-    // TODO getAHMaxSize : à tester
+    // TODO getAHMaxSize : à tester -------------------------------------
     assert(AH);
     return AH->MAX;
 }
 
 int getAHActualSize(const ArrayHeap *AH) {
-    // TODO getAHActualSize : à tester
+    // TODO getAHActualSize : à tester ---------------------------------
     assert(AH);
     return AH->N;
 }
 
 void *getAHNodeAt(const ArrayHeap *AH, int pos) {
-    // TODO getAHNodeAt : à tester
+    // TODO getAHNodeAt : à tester ------------------------------------
     assert(AH);
     return AH->A[pos];
 }
 
 void decreaseAHActualSize(ArrayHeap *AH) {
-    // TODO decreaseAHActualSize : à tester
+    // TODO decreaseAHActualSize : à tester ---------------------------
     assert(AH);
     AH->N--;
 }
 
 void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
-    // TODO setAHNodeAt : à tester
+    // TODO setAHNodeAt : à tester ------------------------------------
     assert(AH);
     AH->A[position] = newData;
 }
@@ -86,7 +86,7 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
                             int (*preceed)(const void *, const void *),
                             void (*viewHeapData)(const void *),
                             void (*freeHeapData)(void *)) {
-    // TODO ArrayToArrayHeap : à tester
+    // TODO ArrayToArrayHeap : à tester -------------------------------
     assert(A);
     assert(preceed);
     assert(viewHeapData);
@@ -116,7 +116,7 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 }
 
 void viewArrayHeap(const ArrayHeap *AH) {
-    // TODO viewArrayHeap : à tester
+    // TODO viewArrayHeap : à tester ----------------------------------
     assert(AH);
 
     printf("[ ");
@@ -130,7 +130,7 @@ void viewArrayHeap(const ArrayHeap *AH) {
 }
 
 void freeArrayHeap(ArrayHeap *AH, int deletedata) {
-    // TODO freeArrayHeap : à tester
+    // TODO freeArrayHeap : à tester -----------------------------------
     assert(AH);
 
     if (deletedata == 1) {
@@ -151,7 +151,8 @@ void freeArrayHeap(ArrayHeap *AH, int deletedata) {
 }
 
 void *ArrayHeapExtractMin(ArrayHeap *AH) {
-    // TODO ArrayHeapExtractMin : à tester (à voir si c'est ce qu'il demande de faire)
+    // TODO ArrayHeapExtractMin : à tester ----------------------------
+    // TODO (à voir si c'est ce qu'il demande de faire)
     assert(AH);
     assert(getAHActualSize(AH));
 
@@ -174,7 +175,7 @@ void *ArrayHeapExtractMin(ArrayHeap *AH) {
 CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
                     void (*viewHeapData)(const void *),
                     void (*freeHeapData)(void *)) {
-    // TODO newCBTHeap : à tester
+    // TODO newCBTHeap : à tester ------------------------------------
     assert(preceed);
     assert(viewHeapData);
     assert(freeHeapData);
@@ -193,7 +194,7 @@ CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
 }
 
 CBTree *getCBTree(const CBTHeap *H) {
-    // TODO getCBTree : à tester
+    // TODO getCBTree : à tester ----------------------------------------
     assert(H);
     return H->T;
 }
@@ -268,7 +269,7 @@ static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void
 }
 
 void CBTHeapInsert(CBTHeap *H, void *data) {
-    // TODO CBTHeapInsert : à tester
+    // TODO CBTHeapInsert : à tester -----------------------------------
     assert(H);
 
     CBTree *T;
@@ -337,7 +338,7 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
 }
 
 void *CBTHeapExtractMin(CBTHeap *H) {
-    // TODO CBTHeapExtractMin
+    // TODO CBTHeapExtractMin ----------------------------------------
     assert(H);
 
     CBTree *T;
@@ -356,14 +357,14 @@ void *CBTHeapExtractMin(CBTHeap *H) {
 }
 
 void viewCBTHeap(const CBTHeap *H) {
-    // TODO viewCBTHeap : à tester
+    // TODO viewCBTHeap : à tester ---------------------------------------------------------
     assert(H);
 
     viewCBTree(getCBTree(H), 2); // TODO je ne suis pas sur qu'il faut que faire ça -_-
 }
 
 void freeCBTHeap(CBTHeap *H, int deletenode) {
-    // TODO freeCBTHeap : à tester
+    // TODO freeCBTHeap : à tester ---------------------------------------------------
     assert(H);
 
     freeCBTree(getCBTree(H), deletenode);
