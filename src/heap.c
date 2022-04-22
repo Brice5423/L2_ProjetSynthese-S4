@@ -357,14 +357,14 @@ void *CBTHeapExtractMin(CBTHeap *H) {
 }
 
 void viewCBTHeap(const CBTHeap *H) {
-    // TODO viewCBTHeap : à tester ---------------------------------------------------------
+    // TODO viewCBTHeap : à tester -------------------------------------
     assert(H);
 
     viewCBTree(getCBTree(H), 2); // TODO je ne suis pas sur qu'il faut que faire ça -_-
 }
 
 void freeCBTHeap(CBTHeap *H, int deletenode) {
-    // TODO freeCBTHeap : à tester ---------------------------------------------------
+    // TODO freeCBTHeap : à tester --------------------------------------
     assert(H);
 
     freeCBTree(getCBTree(H), deletenode);
