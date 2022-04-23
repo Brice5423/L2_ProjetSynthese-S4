@@ -38,12 +38,10 @@ void setTNodeData(TNode *node, void *newData) {
 }
 
 void setLeft(TNode *node, TNode *newLeft) {
-    assert(node);
     node->left = newLeft;
 }
 
 void setRight(TNode *node, TNode *newRight) {
-    assert(node);
     node->right = newRight;
 }
 
@@ -97,20 +95,21 @@ void resetCBTreeSize(CBTree *T) {
 
 void setRoot(CBTree *T, TNode *newRoot) {
     assert(T);
-    assert(newRoot);
 
-    TNode *root;
+    if (newRoot != NULL) {
+        TNode *root;
 
-    root = Root(T);
+        root = Root(T);
 
-    if (root != NULL) {
-        setLeft(newRoot, Left(root));
-        setRight(newRoot, Right(root));
+        if (root != NULL) {
+            setLeft(newRoot, Left(root));
+            setRight(newRoot, Right(root));
 
-        (*T->freeData)(getTNodeData(root));
-        setLeft(root, NULL);
-        setRight(root, NULL);
-        free(root);
+            (*T->freeData)(getTNodeData(root));
+            setLeft(root, NULL);
+            setRight(root, NULL);
+            free(root);
+        }
     }
 
     T->root = newRoot;
@@ -394,10 +393,9 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
 }
 
 /**
- * NB : Utilisez la procédure récursive removeLastTNode afin de lancer la suppression.
+ * NB : Utilisez la procédure récursive removeLastTNode a fin de lancer la suppression.
  */
 void *CBTreeRemove(CBTree *T) {
-    // TODO CBTreeRemove : à tester cas avec un arbre à seulement une racine
     assert(T);
 
     void *data;
