@@ -139,6 +139,7 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
     setLeft(node, NULL);
     setRight(node, NULL);
     (*freeData)(getTNodeData(node));
+
     free(node);
 }
 
@@ -154,9 +155,11 @@ void freeCBTree(CBTree *T, int deleteData) {
         freeTNode(Root(T), T->freeData);
     }
 
+    T->root = NULL;
     resetCBTreeSize(T);
     T->viewData = NULL;
     T->freeData = NULL;
+
     free(T);
 }
 
@@ -255,7 +258,7 @@ void viewCBTree(const CBTree *T, int order) {
         inorder(Root(T), T->viewData);
 
     } else {
-        ShowMessage("order != {0, 1, 2} dans viewCBTree (fichier : tree.c / ligne : 245)", 1);
+        ShowMessage("order != {0, 1, 2} dans viewCBTree (fichier : tree.c / ligne : 248)", 1);
     }
 
     printf("\n");
@@ -394,13 +397,13 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
  * NB : Utilisez la procédure récursive removeLastTNode afin de lancer la suppression.
  */
 void *CBTreeRemove(CBTree *T) {
+    // TODO CBTreeRemove : à tester cas avec un arbre à seulement une racine
     assert(T);
 
     void *data;
 
-    removeLastTNode(Root(T), (getCBTreeSize(T) - 1), &data);
+    setRoot(T, removeLastTNode(Root(T), (getCBTreeSize(T) - 1), &data));
     decreaseCBTreeSize(T);
-    //(*T->freeData)(data);
 
     return data;
 }
@@ -455,7 +458,6 @@ static TNode *getLastTNode(TNode *node, int position) {
  */
 TNode *CBTreeGetLast(CBTree *T) {
     assert(T);
-
     return getLastTNode(Root(T), (getCBTreeSize(T) - 1));
 }
 

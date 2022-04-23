@@ -49,35 +49,34 @@ static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
     assert(AH);
     assert(getAHActualSize(AH));
 
-    if (pos) {
-        int posFg;
-        int posFd;
-        int fdExiste;
-        void *dataPos;
-        void *dataPosFg;
-        void *dataPosFd;
-        void *dataSave;
+    int posFg;
+    int posFd;
+    int fdExiste;
+    void *dataPos;
+    void *dataPosFg;
+    void *dataPosFd;
+    void *dataSave;
 
-        posFg = 2 * pos + 1;
-        posFd = 2 * pos + 2;
-        dataPos = getAHNodeAt(AH, pos);
-        dataPosFg = getAHNodeAt(AH, posFg);
+    posFg = 2 * pos + 1;
+    posFd = 2 * pos + 2;
+    dataPos = getAHNodeAt(AH, pos);
+    dataPosFg = getAHNodeAt(AH, posFg);
 
-        fdExiste = (posFd < getAHActualSize(AH)) ? 1 : 0;
-        dataPosFd = (fdExiste) ? getAHNodeAt(AH, posFd) : NULL;
+    fdExiste = (posFd < getAHActualSize(AH)) ? 1 : 0;
+    dataPosFd = (fdExiste) ? getAHNodeAt(AH, posFd) : NULL;
 
-        if (AH->preceed(dataPosFg, dataPos) && (!fdExiste || (fdExiste && AH->preceed(dataPosFg, dataPosFd)))) {
-            dataSave = dataPosFg;
-            setAHNodeAt(AH, posFg, dataPos);
-            setAHNodeAt(AH, pos, dataSave);
+    if (AH->preceed(dataPosFg, dataPos) && (!fdExiste || (fdExiste && AH->preceed(dataPosFg, dataPosFd)))) {
+        dataSave = dataPosFg;
+        setAHNodeAt(AH, posFg, dataPos);
+        setAHNodeAt(AH, pos, dataSave);
 
-        } else if (fdExiste && AH->preceed(dataPosFd, dataPos)) {
-            dataSave = dataPosFd;
-            setAHNodeAt(AH, posFd, dataPos);
-            setAHNodeAt(AH, pos, dataSave);
-        }
+    } else if (fdExiste && AH->preceed(dataPosFd, dataPos)) {
+        dataSave = dataPosFd;
+        setAHNodeAt(AH, posFd, dataPos);
+        setAHNodeAt(AH, pos, dataSave);
+    }
 
-    } else {
+    if (pos > 0) {
         updateArrayHeapDownwards(AH, pos--);
     }
 }
@@ -99,18 +98,15 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
     assert(AH);
 
     // Donne les différents attributs de l'ArrayHeap AH
+    AH->A = (void **) calloc(N, sizeof(void *));
     AH->A = A;
-    AH->MAX = 1048576; // = 2^20 TODO AH->MAX = ?
+    AH->MAX = N;
     AH->N = N;
     AH->preceed = preceed;
     AH->viewHeapData = viewHeapData;
     AH->freeHeapData = freeHeapData;
 
-    // Organise les datas de l'array on fonction du preceed
-    // de 0 à N - 2 (-1 car taille 1 + grand et -1 car inutile sur dernier élément
-    for (i = 0; i < (N - 1); i++) {
-        updateArrayHeapDownwards(AH, (N - 1 - i));
-    }
+    updateArrayHeapDownwards(AH, (N - 2));
 
     return AH;
 }
@@ -137,10 +133,9 @@ void freeArrayHeap(ArrayHeap *AH, int deletedata) {
         for (int i = 0; i < getAHActualSize(AH); i++) {
             AH->freeHeapData(getAHNodeAt(AH, i));
         }
-        free(*AH->A);
-        free(AH->A);
     }
 
+    free(AH->A);
     AH->MAX = 0;
     AH->N = 0;
     AH->preceed = NULL;
@@ -156,16 +151,19 @@ void *ArrayHeapExtractMin(ArrayHeap *AH) {
     assert(AH);
     assert(getAHActualSize(AH));
 
-    int posData;
-    void *data;
+    int posDernierData;
+    void *dataRoot;
 
-    // Récupérer la position et la data, et la retire de la l'array
-    posData = getAHActualSize(AH) - 1;
-    data = getAHNodeAt(AH, posData);
-    setAHNodeAt(AH, posData, NULL);
+    posDernierData = getAHActualSize(AH) - 1;
+
+    dataRoot = getAHNodeAt(AH, 0);
+    setAHNodeAt(AH, 0, getAHNodeAt(AH, posDernierData));
+    setAHNodeAt(AH, posDernierData, NULL);
     decreaseAHActualSize(AH);
 
-    return data;
+    updateArrayHeapDownwards(AH, posDernierData - 2);
+
+    return dataRoot;
 }
 
 /**********************************************************************************
@@ -206,8 +204,8 @@ CBTree *getCBTree(const CBTHeap *H) {
  * Le pointeur de fonction \p preceed est utilisé pour la comparaison.\n\n
  *
  * Procédure récursive. En descendant, on cherche le premier nœud
- * à corriger qui se trouve dans la position \p pos (de la même façon
- * que dans insertAfterLastTNode).\n
+ * à corriger qui se trouve dans la position \p pos
+ * (de la même façon que dans insertAfterLastTNode).\n
  * En remontant, on corrige en échangeant avec le père, si besoin.
  * 
  * @param[in] node 
@@ -223,27 +221,21 @@ static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void
     if (pos == 1) {
         // dans le fils gauche
         TNode *nodeFg;
-        void *dataFgSave;
 
         nodeFg = Left(node);
 
         if (preceed(node, nodeFg)) {
-            dataFgSave = getTNodeData(nodeFg);
-            setTNodeData(nodeFg, getTNodeData(node));
-            setTNodeData(node, dataFgSave);
+            CBTreeSwapData(nodeFg, node);
         }
 
     } else if (pos == 2) {
         // dans le fils droit
         TNode *nodeFd;
-        void *dataFgSave;
 
         nodeFd = Right(node);
 
         if (preceed(node, nodeFd)) {
-            dataFgSave = getTNodeData(nodeFd);
-            setTNodeData(nodeFd, getTNodeData(node));
-            setTNodeData(node, dataFgSave);
+            CBTreeSwapData(nodeFd, node);
         }
 
     } else {
@@ -277,8 +269,9 @@ void CBTHeapInsert(CBTHeap *H, void *data) {
     T = getCBTree(H);
 
     CBTreeInsert(T, data);
-    updateCBTHeapUpwards(Root(T), getCBTreeSize(T), H->preceed);
-    increaseCBTreeSize(T);
+    if (getCBTreeSize(T) > 1) {
+        updateCBTHeapUpwards(Root(T), getCBTreeSize(T), H->preceed);
+    }
 }
 
 /**
@@ -301,7 +294,6 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
     TNode *nodeFg;
     TNode *nodeFd;
     int fdExiste;
-    void *dataSave;
     void *dataNode;
     void *dataFg;
     void *dataFd;
@@ -315,61 +307,61 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
 
     if (preceed(dataFg, dataNode) && (!fdExiste || (fdExiste && preceed(dataFg, dataFd)))) {
         // dans le cas où le fils gauche à la priorité sur le fils droit et le père
-        dataSave = dataFg;
-        setTNodeData(nodeFg, dataNode);
-        setTNodeData(node, dataSave);
+        CBTreeSwapData(nodeFg, node);
+
+        if (Left(nodeFg) != NULL) {
+            updateCBTHeapDownwards(nodeFg, preceed);
+        }
 
     } else if (fdExiste && preceed(dataFd, dataNode)) {
         // dans le cas où le fils droit à la priorité sur le fils gauche et le père
-        dataSave = dataFd;
-        setTNodeData(nodeFd, dataNode);
-        setTNodeData(node, dataSave);
-    }
+        CBTreeSwapData(nodeFd, node);
 
-    // Appel recursive par le fils gauche
-    if (Left(nodeFg) != NULL) {
-        updateCBTHeapDownwards(nodeFg, preceed);
-    }
-
-    // Appel recursive par le fils droit
-    if (fdExiste && Left(nodeFd) != NULL) {
-        updateCBTHeapDownwards(nodeFd, preceed);
+        if (fdExiste && Left(nodeFd) != NULL) {
+            updateCBTHeapDownwards(nodeFd, preceed);
+        }
     }
 }
 
 void *CBTHeapExtractMin(CBTHeap *H) {
-    // TODO CBTHeapExtractMin ----------------------------------------
+    // TODO CBTHeapExtractMin : à tester ------------------------------
     assert(H);
 
     CBTree *T;
-    TNode *nodeRacine;
-    void *dataPlusGrandePriorite;
+    TNode *root;
+    void *dataRoot;
+    int tailleArbre;
 
     T = getCBTree(H);
-    nodeRacine = Root(T);
+    root = Root(T);
+    tailleArbre = getCBTreeSize(T);
 
-    updateCBTHeapDownwards(nodeRacine, H->preceed);
-    dataPlusGrandePriorite = getTNodeData(nodeRacine);
+    assert(root);
+    assert(tailleArbre);
 
-    // TODO On doit retirer le node mais comment faire ça -_-
+    if (tailleArbre > 1) {
+        CBTreeSwapData(root, CBTreeGetLast(T));
+    }
+    dataRoot = CBTreeRemove(T);
 
-    return dataPlusGrandePriorite;
+    return dataRoot;
 }
 
 void viewCBTHeap(const CBTHeap *H) {
-    // TODO viewCBTHeap : à tester -------------------------------------
+    // TODO viewCBTHeap : à tester ------------------------------------
     assert(H);
 
-    viewCBTree(getCBTree(H), 2); // TODO je ne suis pas sur qu'il faut que faire ça -_-
+    viewCBTree(getCBTree(H), 2);
 }
 
 void freeCBTHeap(CBTHeap *H, int deletenode) {
-    // TODO freeCBTHeap : à tester --------------------------------------
+    // TODO freeCBTHeap : à tester -------------------------------------
     assert(H);
 
     freeCBTree(getCBTree(H), deletenode);
     H->preceed = NULL;
     H->viewHeapData = NULL;
     H->freeHeapData = NULL;
+
     free(H);
 }
