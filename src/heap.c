@@ -5,31 +5,26 @@
  **********************************************************************************/
 
 int getAHMaxSize(const ArrayHeap *AH) {
-    // TODO getAHMaxSize : à tester -------------------------------------
     assert(AH);
     return AH->MAX;
 }
 
 int getAHActualSize(const ArrayHeap *AH) {
-    // TODO getAHActualSize : à tester ---------------------------------
     assert(AH);
     return AH->N;
 }
 
 void *getAHNodeAt(const ArrayHeap *AH, int pos) {
-    // TODO getAHNodeAt : à tester ------------------------------------
     assert(AH);
     return AH->A[pos];
 }
 
 void decreaseAHActualSize(ArrayHeap *AH) {
-    // TODO decreaseAHActualSize : à tester ---------------------------
     assert(AH);
     AH->N--;
 }
 
 void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
-    // TODO setAHNodeAt : à tester ------------------------------------
     assert(AH);
     AH->A[position] = newData;
 }
@@ -45,39 +40,85 @@ void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
  * @param[in] pos L'indice de la valeur en mouvement vers le bas.
  */
 static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
-    // TODO updateArrayHeapDownwards : à tester
     assert(AH);
     assert(getAHActualSize(AH));
 
+    int nbElem;
     int posFg;
     int posFd;
+    int fgExiste;
     int fdExiste;
+
     void *dataPos;
     void *dataPosFg;
     void *dataPosFd;
     void *dataSave;
 
+    nbElem = getAHActualSize(AH);
     posFg = 2 * pos + 1;
     posFd = 2 * pos + 2;
     dataPos = getAHNodeAt(AH, pos);
     dataPosFg = getAHNodeAt(AH, posFg);
 
-    fdExiste = (posFd < getAHActualSize(AH)) ? 1 : 0;
+    fgExiste = (posFg < nbElem) ? 1 : 0;
+    fdExiste = (posFd < nbElem) ? 1 : 0;
     dataPosFd = (fdExiste) ? getAHNodeAt(AH, posFd) : NULL;
 
-    if (AH->preceed(dataPosFg, dataPos) && (!fdExiste || (fdExiste && AH->preceed(dataPosFg, dataPosFd)))) {
-        dataSave = dataPosFg;
-        setAHNodeAt(AH, posFg, dataPos);
-        setAHNodeAt(AH, pos, dataSave);
+    if (fgExiste) {
+        if (fdExiste) {
+            if (AH->preceed(dataPosFg, dataPos) && (AH->preceed(dataPosFg, dataPosFd) != 0)) {
+                dataSave = dataPosFg;
+                setAHNodeAt(AH, posFg, dataPos);
+                setAHNodeAt(AH, pos, dataSave);
 
-    } else if (fdExiste && AH->preceed(dataPosFd, dataPos)) {
-        dataSave = dataPosFd;
-        setAHNodeAt(AH, posFd, dataPos);
-        setAHNodeAt(AH, pos, dataSave);
+                if ((2 * posFg + 1) < nbElem) {
+                    updateArrayHeapDownwards(AH, posFg);
+                }
+
+            } else if (AH->preceed(dataPosFd, dataPos)) {
+                dataSave = dataPosFd;
+                setAHNodeAt(AH, posFd, dataPos);
+                setAHNodeAt(AH, pos, dataSave);
+
+                if ((2 * posFd + 1) < nbElem) {
+                    updateArrayHeapDownwards(AH, posFd);
+                }
+            }
+
+        } else {
+            if (AH->preceed(dataPosFg, dataPos)) {
+                dataSave = dataPosFg;
+                setAHNodeAt(AH, posFg, dataPos);
+                setAHNodeAt(AH, pos, dataSave);
+            }
+        }
     }
 
     if (pos > 0) {
-        updateArrayHeapDownwards(AH, pos--);
+        int posPere;
+
+        posPere = ((pos - 1) / 2);
+        updateArrayHeapDownwards(AH, posPere);
+    }
+}
+
+/**
+ *
+ * @param[in] AH
+ * @param[in] nbElem
+ */
+static void organiseTableauEnTas(ArrayHeap *AH) {
+    int hauteur; // hauteur de l'"arbre" si on garde que les couches pleines
+    int nbElemHauteur;
+    int nbElemHauteurMoinsUnARacine;
+    int i;
+
+    hauteur = floor((log2(getAHActualSize(AH))));
+    nbElemHauteur = pow(2, hauteur - 1);
+    nbElemHauteurMoinsUnARacine = nbElemHauteur - 1;
+
+    for (i = 0; i < nbElemHauteur; i++) {
+        updateArrayHeapDownwards(AH, nbElemHauteurMoinsUnARacine + i);
     }
 }
 
@@ -85,13 +126,11 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
                             int (*preceed)(const void *, const void *),
                             void (*viewHeapData)(const void *),
                             void (*freeHeapData)(void *)) {
-    // TODO ArrayToArrayHeap : à tester -------------------------------
     assert(A);
     assert(preceed);
     assert(viewHeapData);
     assert(freeHeapData);
 
-    int i;
     ArrayHeap *AH;
 
     AH = (ArrayHeap *) calloc(1, sizeof(ArrayHeap));
@@ -106,13 +145,13 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
     AH->viewHeapData = viewHeapData;
     AH->freeHeapData = freeHeapData;
 
-    updateArrayHeapDownwards(AH, (N - 2));
+    // Organise le tableau pour qu'il soit un tas complet
+    organiseTableauEnTas(AH);
 
     return AH;
 }
 
 void viewArrayHeap(const ArrayHeap *AH) {
-    // TODO viewArrayHeap : à tester ----------------------------------
     assert(AH);
 
     printf("[ ");
@@ -122,7 +161,7 @@ void viewArrayHeap(const ArrayHeap *AH) {
             printf("; ");
         }
     }
-    printf(" ]");
+    printf(" ]\n");
 }
 
 void freeArrayHeap(ArrayHeap *AH, int deletedata) {
@@ -291,33 +330,29 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
     assert(node);
     assert(preceed);
 
-    TNode *nodeFg;
-    TNode *nodeFd;
-    int fdExiste;
-    void *dataNode;
-    void *dataFg;
-    void *dataFd;
+    if (Left(node) != NULL) {
+        TNode *nodeFg;
+        TNode *nodeFd;
+        int fdExiste;
+        void *dataNode;
+        void *dataFg;
+        void *dataFd;
 
-    nodeFg = Left(node);
-    nodeFd = Right(node);
-    fdExiste = (nodeFd != NULL) ? 1 : 0;
-    dataNode = getTNodeData(node);
-    dataFg = getTNodeData(nodeFg);
-    dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
+        nodeFg = Left(node);
+        nodeFd = Right(node);
+        fdExiste = (nodeFd != NULL) ? 1 : 0;
+        dataNode = getTNodeData(node);
+        dataFg = getTNodeData(nodeFg);
+        dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
 
-    if (preceed(dataFg, dataNode) && (!fdExiste || (fdExiste && preceed(dataFg, dataFd)))) {
-        // dans le cas où le fils gauche à la priorité sur le fils droit et le père
-        CBTreeSwapData(nodeFg, node);
-
-        if (Left(nodeFg) != NULL) {
+        if (preceed(dataFg, dataNode) && (!fdExiste || (fdExiste && preceed(dataFg, dataFd)))) {
+            // dans le cas où le fils gauche à la priorité sur le fils droit et le père
+            CBTreeSwapData(nodeFg, node);
             updateCBTHeapDownwards(nodeFg, preceed);
-        }
 
-    } else if (fdExiste && preceed(dataFd, dataNode)) {
-        // dans le cas où le fils droit à la priorité sur le fils gauche et le père
-        CBTreeSwapData(nodeFd, node);
-
-        if (fdExiste && Left(nodeFd) != NULL) {
+        } else if (fdExiste && preceed(dataFd, dataNode)) {
+            // dans le cas où le fils droit à la priorité sur le fils gauche et le père
+            CBTreeSwapData(nodeFd, node);
             updateCBTHeapDownwards(nodeFd, preceed);
         }
     }
@@ -341,6 +376,7 @@ void *CBTHeapExtractMin(CBTHeap *H) {
 
     if (tailleArbre > 1) {
         CBTreeSwapData(root, CBTreeGetLast(T));
+        updateCBTHeapDownwards(root, H->preceed);
     }
     dataRoot = CBTreeRemove(T);
 
