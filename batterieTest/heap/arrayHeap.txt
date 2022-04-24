@@ -1,0 +1,109 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "../include/util.h"
+#include "../include/list.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
+#include "../include/geometry.h"
+#include "../include/algo.h"
+
+int main(int argc, char *argv[]) {
+    int N;
+    void **A;
+    ArrayHeap *AH;
+
+    int *a = (int *) calloc(1, sizeof(int));
+    int *b = (int *) calloc(1, sizeof(int));
+    int *c = (int *) calloc(1, sizeof(int));
+    int *d = (int *) calloc(1, sizeof(int));
+    int *e = (int *) calloc(1, sizeof(int));
+    int *f = (int *) calloc(1, sizeof(int));
+
+    *a = 0;
+    *b = 1;
+    *c = 2;
+    *d = 3;
+    *e = 4;
+    *f = 5;
+
+    N = 6;
+    A = (void **) calloc(N, sizeof(int *));
+
+    A[0] = c;
+    A[1] = a;
+    A[2] = e;
+    A[3] = b;
+    A[4] = f;
+    A[5] = d;
+
+    printf("\nIl y a %d argument et argv[0] : %s\n", argc, argv[0]);
+
+    printf("\n\tVisualisation de l'arbre global (manuel) :\n");
+    printf("              0         |            2         |            0\n");
+    printf("           /     \\      |         /     \\      |         /     \\\n");
+    printf("          1       2     |        0       4     |        1       3\n");
+    printf("         / \\     /      |       / \\     /      |       / \\     /\n");
+    printf("        3   4   5       |      1   5   3       |      2   5   4\n");
+
+    printf("\n\tCréation de l'arrayHeap :\n");
+    AH = ArrayToArrayHeap(A, N, &intSmallerThan, &viewInt, &freeInt);
+    printf("\tAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\n\tExtraction du min dans ArrayHeap :\n");
+
+    printf("\t -> 1er exécution :\n");
+    int *data0;
+    data0 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data0);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\t -> 2ème exécution :\n");
+    int *data1;
+    data1 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data1);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\t -> 3ème exécution :\n");
+    int *data2;
+    data2 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data2);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\t -> 4ème exécution :\n");
+    int *data3;
+    data3 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data3);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\t -> 5ème exécution :\n");
+    int *data4;
+    data4 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data4);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\t -> 6ème exécution :\n");
+    int *data5;
+    data5 = ArrayHeapExtractMin(AH);
+    printf("Data du min de l'arrayHeap : ");
+    AH->viewHeapData(data5);
+    printf("\nAffiche l'arrayHeap :\n");
+    viewArrayHeap(AH);
+
+    printf("\n\tLibération de la mémoire :\n");
+    freeArrayHeap(AH, 1);
+
+    return EXIT_SUCCESS;
+}

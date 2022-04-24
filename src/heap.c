@@ -1,7 +1,7 @@
 #include "../include/heap.h"
 
 /**********************************************************************************
- * ARRAY HEAP TODO BriceBriçou : liste de tas ======================================   à tester
+ * ARRAY HEAP
  **********************************************************************************/
 
 int getAHMaxSize(const ArrayHeap *AH) {
@@ -137,7 +137,7 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
     assert(AH);
 
     // Donne les différents attributs de l'ArrayHeap AH
-    AH->A = (void **) calloc(N, sizeof(void *));
+    //AH->A = (void **) calloc(N, sizeof(void *));
     AH->A = A;
     AH->MAX = N;
     AH->N = N;
@@ -165,7 +165,6 @@ void viewArrayHeap(const ArrayHeap *AH) {
 }
 
 void freeArrayHeap(ArrayHeap *AH, int deletedata) {
-    // TODO freeArrayHeap : à tester -----------------------------------
     assert(AH);
 
     if (deletedata == 1) {
@@ -185,8 +184,6 @@ void freeArrayHeap(ArrayHeap *AH, int deletedata) {
 }
 
 void *ArrayHeapExtractMin(ArrayHeap *AH) {
-    // TODO ArrayHeapExtractMin : à tester ----------------------------
-    // TODO (à voir si c'est ce qu'il demande de faire)
     assert(AH);
     assert(getAHActualSize(AH));
 
@@ -200,7 +197,7 @@ void *ArrayHeapExtractMin(ArrayHeap *AH) {
     setAHNodeAt(AH, posDernierData, NULL);
     decreaseAHActualSize(AH);
 
-    updateArrayHeapDownwards(AH, posDernierData - 2);
+    organiseTableauEnTas(AH);
 
     return dataRoot;
 }
