@@ -209,7 +209,6 @@ void *ArrayHeapExtractMin(ArrayHeap *AH) {
 CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
                     void (*viewHeapData)(const void *),
                     void (*freeHeapData)(void *)) {
-    // TODO newCBTHeap : à tester ------------------------------------
     assert(preceed);
     assert(viewHeapData);
     assert(freeHeapData);
@@ -228,7 +227,6 @@ CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
 }
 
 CBTree *getCBTree(const CBTHeap *H) {
-    // TODO getCBTree : à tester ----------------------------------------
     assert(H);
     return H->T;
 }
@@ -249,28 +247,36 @@ CBTree *getCBTree(const CBTHeap *H) {
  * @param[in] preceed 
  */
 static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void *, const void *)) {
-    // TODO updateCBTHeapUpwards : à tester
     assert(node);
     assert(pos); // peut pas être = 0
     assert(preceed);
 
+    TNode *nodeFg;
+    TNode *nodeFd;
+    int fgExiste;
+    int fdExiste;
+    void *dataNode;
+    void *dataFg;
+    void *dataFd;
+
+    nodeFg = Left(node);
+    nodeFd = Right(node);
+    fgExiste = (nodeFg) ? 1 : 0;
+    fdExiste = (nodeFd) ? 1 : 0;
+
+    dataNode = getTNodeData(node);
+    dataFg = (fgExiste) ? getTNodeData(nodeFg) : NULL;
+    dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
+
     if (pos == 1) {
         // dans le fils gauche
-        TNode *nodeFg;
-
-        nodeFg = Left(node);
-
-        if (preceed(node, nodeFg)) {
+        if (preceed(dataFg, dataNode)) {
             CBTreeSwapData(nodeFg, node);
         }
 
     } else if (pos == 2) {
         // dans le fils droit
-        TNode *nodeFd;
-
-        nodeFd = Right(node);
-
-        if (preceed(node, nodeFd)) {
+        if (preceed(dataFd, dataNode)) {
             CBTreeSwapData(nodeFd, node);
         }
 
@@ -289,15 +295,23 @@ static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void
         if (k <= t) {
             // A gauche de la node
             updateCBTHeapUpwards(Left(node), (nbNode - pow(2, h - 2) - 1), preceed);
+
+            if (preceed(dataFg, dataNode)) {
+                CBTreeSwapData(nodeFg, node);
+            }
+
         } else {
             // A droite de la node
             updateCBTHeapUpwards(Right(node), (nbNode - pow(2, h - 1) - 1), preceed);
+
+            if (preceed(dataFd, dataNode)) {
+                CBTreeSwapData(nodeFd, node);
+            }
         }
     }
 }
 
 void CBTHeapInsert(CBTHeap *H, void *data) {
-    // TODO CBTHeapInsert : à tester -----------------------------------
     assert(H);
 
     CBTree *T;
@@ -306,7 +320,7 @@ void CBTHeapInsert(CBTHeap *H, void *data) {
 
     CBTreeInsert(T, data);
     if (getCBTreeSize(T) > 1) {
-        updateCBTHeapUpwards(Root(T), getCBTreeSize(T), H->preceed);
+        updateCBTHeapUpwards(Root(T), (getCBTreeSize(T) - 1), H->preceed);
     }
 }
 
@@ -372,7 +386,9 @@ void *CBTHeapExtractMin(CBTHeap *H) {
     assert(tailleArbre);
 
     if (tailleArbre > 1) {
+        printf("\t->CBTreeSwapData\n");
         CBTreeSwapData(root, CBTreeGetLast(T));
+        printf("\t->updateCBTHeapDownwards\n");
         updateCBTHeapDownwards(root, H->preceed);
     }
     dataRoot = CBTreeRemove(T);
@@ -381,14 +397,12 @@ void *CBTHeapExtractMin(CBTHeap *H) {
 }
 
 void viewCBTHeap(const CBTHeap *H) {
-    // TODO viewCBTHeap : à tester ------------------------------------
     assert(H);
 
     viewCBTree(getCBTree(H), 2);
 }
 
 void freeCBTHeap(CBTHeap *H, int deletenode) {
-    // TODO freeCBTHeap : à tester -------------------------------------
     assert(H);
 
     freeCBTree(getCBTree(H), deletenode);

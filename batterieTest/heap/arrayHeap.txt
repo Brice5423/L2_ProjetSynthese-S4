@@ -52,6 +52,7 @@ int main(int argc, char *argv[]) {
     printf("\tAffiche l'arrayHeap :\n");
     viewArrayHeap(AH);
 
+
     printf("\n\tExtraction du min dans ArrayHeap :\n");
 
     printf("\t -> 1er exécution :\n");
@@ -101,6 +102,7 @@ int main(int argc, char *argv[]) {
     AH->viewHeapData(data5);
     printf("\nAffiche l'arrayHeap :\n");
     viewArrayHeap(AH);
+
 
     printf("\n\tLibération de la mémoire :\n");
     freeArrayHeap(AH, 1);
