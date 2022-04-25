@@ -54,61 +54,51 @@ int main(int argc, char *argv[]) {
 
     printf("\n\tAffiche l'arbre :\n");
     printf("3-1-4-0-5-2 (ordre par position)\n");
-    printf("2-1-5-0-4-3 (ordre par rapport à ce que j'ai eu avant)\n");
+    printf("2-1-5-0-4-3 (bon ordre des éléments)\n");
+    printf("viewCBTHeap :\n");
     viewCBTHeap(H);
 
 
     printf("\n\tExtraction du min dans ArrayHeap :\n");
 
     printf("\t -> 1er exécution :\n");
-    int *data0;
-    data0 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data0);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 0) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
     printf("\t -> 2ème exécution :\n");
-    int *data1;
-    data1 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data1);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 1) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
     printf("\t -> 3ème exécution :\n");
-    int *data2;
-    data2 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data2);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 2) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
     printf("\t -> 4ème exécution :\n");
-    int *data3;
-    data3 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data3);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 3) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
     printf("\t -> 5ème exécution :\n");
-    int *data4;
-    data4 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data4);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 4) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
     printf("\t -> 6ème exécution :\n");
-    int *data5;
-    data5 = CBTHeapExtractMin(H);
-    printf("Data du min de l'arbre : ");
-    H->viewHeapData(data5);
-    printf("\nAffiche l'arbre :\n");
-    //viewCBTHeap(H);
+    printf("Data du min de l'arbre (= 5) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
 
-    printf("\n\tLibération de la mémoire :\n");
+
+    printf("\n\n\tLibération de la mémoire :\n");
     freeCBTHeap(H, 1);
 
     return EXIT_SUCCESS;

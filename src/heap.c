@@ -203,7 +203,7 @@ void *ArrayHeapExtractMin(ArrayHeap *AH) {
 }
 
 /**********************************************************************************
- * COMPLETE BINARY TREE HEAP TODO BriceBriçou : Arbre binaire complet de tas ==============
+ * COMPLETE BINARY TREE HEAP
  **********************************************************************************/
 
 CBTHeap *newCBTHeap(int (*preceed)(const void *, const void *),
@@ -337,11 +337,10 @@ void CBTHeapInsert(CBTHeap *H, void *data) {
  * @param[in] preceed 
  */
 static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, const void *)) {
-    // TODO updateCBTHeapDownwards : à tester
     assert(node);
     assert(preceed);
 
-    if (Left(node) != NULL) {
+    if (Left(node)) {
         TNode *nodeFg;
         TNode *nodeFd;
         int fdExiste;
@@ -351,54 +350,69 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
 
         nodeFg = Left(node);
         nodeFd = Right(node);
-        fdExiste = (nodeFd != NULL) ? 1 : 0;
+
+        fdExiste = (nodeFd) ? 1 : 0;
+
         dataNode = getTNodeData(node);
         dataFg = getTNodeData(nodeFg);
         dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
 
-        if (preceed(dataFg, dataNode) && (!fdExiste || (fdExiste && preceed(dataFg, dataFd)))) {
-            // dans le cas où le fils gauche à la priorité sur le fils droit et le père
-            CBTreeSwapData(nodeFg, node);
-            updateCBTHeapDownwards(nodeFg, preceed);
+        if (fdExiste) {
+            if (preceed(dataFg, dataNode) && preceed(dataFg, dataFd)) {
+                // dans le cas où le fils gauche à la priorité sur le fils droit et le père
+                CBTreeSwapData(nodeFg, node);
+                updateCBTHeapDownwards(nodeFg, preceed);
 
-        } else if (fdExiste && preceed(dataFd, dataNode)) {
-            // dans le cas où le fils droit à la priorité sur le fils gauche et le père
-            CBTreeSwapData(nodeFd, node);
-            updateCBTHeapDownwards(nodeFd, preceed);
+            } else if (preceed(dataFd, dataNode)) {
+                // dans le cas où le fils droit à la priorité sur le fils gauche et le père
+                CBTreeSwapData(nodeFd, node);
+                updateCBTHeapDownwards(nodeFd, preceed);
+            }
+
+        } else {
+            if (preceed(dataFg, dataNode)) {
+                // dans le cas où le fils gauche à la priorité sur le père
+                CBTreeSwapData(nodeFg, node);
+            }
         }
     }
 }
 
 void *CBTHeapExtractMin(CBTHeap *H) {
-    // TODO CBTHeapExtractMin : à tester ------------------------------
     assert(H);
 
     CBTree *T;
     TNode *root;
-    void *dataRoot;
+    void *data;
     int tailleArbre;
 
     T = getCBTree(H);
     root = Root(T);
     tailleArbre = getCBTreeSize(T);
 
-    assert(root);
-    assert(tailleArbre);
+    assert(T);
 
-    if (tailleArbre > 1) {
-        printf("\t->CBTreeSwapData\n");
-        CBTreeSwapData(root, CBTreeGetLast(T));
-        printf("\t->updateCBTHeapDownwards\n");
-        updateCBTHeapDownwards(root, H->preceed);
+    if (tailleArbre > 0) {
+        assert(root);
+
+        if (tailleArbre > 1) {
+            CBTreeSwapData(root, CBTreeGetLast(T));
+            data = CBTreeRemove(T);
+            updateCBTHeapDownwards(root, H->preceed);
+
+        } else {
+            data = CBTreeRemove(T);
+        }
+
+        return data;
+
+    } else {
+        return NULL;
     }
-    dataRoot = CBTreeRemove(T);
-
-    return dataRoot;
 }
 
 void viewCBTHeap(const CBTHeap *H) {
     assert(H);
-
     viewCBTree(getCBTree(H), 2);
 }
 
