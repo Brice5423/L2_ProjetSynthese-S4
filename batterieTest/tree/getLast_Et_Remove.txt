@@ -66,20 +66,56 @@ int main(int argc, char *argv[]) {
     (*T->viewData)(getTNodeData(node6));
 
     printf("\n\n\tVisualisation de l'arbre global (manuel) :\n");
-    printf("              1\n");
-    printf("           /     \\\n");
-    printf("          2       3\n");
-    printf("         / \\     /\n");
-    printf("        4   5   6\n");
+    printf("              0        |           1\n");
+    printf("           /     \\     |        /     \\\n");
+    printf("          1       2    |       2       3\n");
+    printf("         / \\     /     |      / \\     /\n");
+    printf("        3   4   5      |     4   5   6\n");
 
-    printf("\n\tCBTreeGetLast :");
-    TNode *nodeLast;
-    nodeLast = CBTreeGetLast(T);
-    printf("\n\tVérification :\n");
-    printf("data : ");
-    (*T->viewData)(getTNodeData(nodeLast));
-    printf("\n@L : %p\n@6 : %p\n", nodeLast, node6);
+    printf("\n\tCBTreeGetLast & CBTreeRemove :");
 
+    printf("\n\t -> 1er exécution :\n");
+    printf("data récupérer par CBTreeGetLast (= 6) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
 
+    printf("\n\t -> 2ème exécution (début des removes) :\n");
+    printf("data supprimer par CBTreeRemove (= 6) : ");
+    (*T->viewData)(CBTreeRemove(T));
+    printf("\ndata récupérer par CBTreeGetLast (= 5) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
+
+    printf("\n\t -> 3ème exécution :\n");
+    printf("data supprimer par CBTreeRemove (= 5) : ");
+    (*T->viewData)(CBTreeRemove(T));
+    printf("\ndata récupérer par CBTreeGetLast (= 4) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
+
+    printf("\n\t -> 4ème exécution :\n");
+    printf("data supprimer par CBTreeRemove (= 4) : ");
+    (*T->viewData)(CBTreeRemove(T));
+    printf("\ndata récupérer par CBTreeGetLast (= 3) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
+
+    printf("\n\t -> 5ème exécution :\n");
+    printf("data supprimer par CBTreeRemove (= 3) : ");
+    (*T->viewData)(CBTreeRemove(T));
+    printf("\ndata récupérer par CBTreeGetLast (= 2) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
+
+    printf("\n\t -> 6ème exécution :\n");
+    printf("data supprimer par CBTreeRemove (= 2) : ");
+    (*T->viewData)(CBTreeRemove(T));
+    printf("\ndata récupérer par CBTreeGetLast (= 1) : ");
+    (*T->viewData)(getTNodeData(CBTreeGetLast(T)));
+
+    printf("\n\t -> Remove final\n");
+    CBTreeRemove(T);
+    if (!Root(T)) {
+        printf("L'arbre est bien vide ^^\n");
+    } else {
+        printf("L'arbre n'est pas vide -_-\n");
+    }
+
+    printf("\n");
     return EXIT_SUCCESS;
 }
