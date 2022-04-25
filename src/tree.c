@@ -150,7 +150,7 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
 void freeCBTree(CBTree *T, int deleteData) {
     assert(T);
 
-    if (deleteData == 1) {
+    if (Root(T) && deleteData == 1) {
         freeTNode(Root(T), T->freeData);
     }
 
@@ -247,17 +247,19 @@ static void postorder(TNode *node, void (*viewData)(const void *)) {
 void viewCBTree(const CBTree *T, int order) {
     assert(T);
 
-    if (order == 0) {
-        preorder(Root(T), T->viewData);
+    if (Root(T)) {
+        if (order == 0) {
+            preorder(Root(T), T->viewData);
 
-    } else if (order == 1) {
-        postorder(Root(T), T->viewData);
+        } else if (order == 1) {
+            postorder(Root(T), T->viewData);
 
-    } else if (order == 2) {
-        inorder(Root(T), T->viewData);
+        } else {
+            inorder(Root(T), T->viewData);
+        }
 
     } else {
-        ShowMessage("order != {0, 1, 2} dans viewCBTree (fichier : tree.c / ligne : 248)", 1);
+        printf("--- L'arbre est vide ---");
     }
 
     printf("\n");
@@ -400,8 +402,12 @@ void *CBTreeRemove(CBTree *T) {
 
     void *data;
 
-    setRoot(T, removeLastTNode(Root(T), (getCBTreeSize(T) - 1), &data));
+    removeLastTNode(Root(T), (getCBTreeSize(T) - 1), &data);
     decreaseCBTreeSize(T);
+
+    if (!getCBTreeSize(T)) {
+        setRoot(T, NULL);
+    }
 
     return data;
 }
@@ -456,7 +462,16 @@ static TNode *getLastTNode(TNode *node, int position) {
  */
 TNode *CBTreeGetLast(CBTree *T) {
     assert(T);
-    return getLastTNode(Root(T), (getCBTreeSize(T) - 1));
+
+    int tailleArbre;
+
+    tailleArbre = getCBTreeSize(T);
+
+    if (tailleArbre) {
+        return getLastTNode(Root(T), (getCBTreeSize(T) - 1));
+    } else {
+        return NULL;
+    }
 }
 
 /**
