@@ -201,7 +201,9 @@ void *CBTHeapExtractMin(CBTHeap *H);
 /**
  * @brief Affiche les éléments du tas \p H.\n
  * Les données de chaque élément sont affichées grâce au pointeur
- * de fonction viewHeapData de la structure CBTHeap.
+ * de fonction viewHeapData de la structure CBTHeap.\n\n
+ *
+ * L'affichage se fait avec la fonction viewCBTree en mode infixé
  * 
  * @param[in] H 
  */
