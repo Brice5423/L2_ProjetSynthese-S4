@@ -61,3 +61,46 @@ On recommence directement par indiquer l'importance puis son action pour montrer
 > Le commit  indique que le `fichier1` à ajouté une fonction et qu'il a supprimé un commentaire.
 
 --------------------------------------
+
+# 2. Rapport de projet
+## 2.1 Introduction
+A travers ce rapport de projet de synthèse, nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
+
+Tout d'abord nous allons vous présenter quels outils nous avons utilisés pour développer cette première partie, notre outil de communication et notre outil de partage de code.
+
+Puis, nous allons vous présenter quelques fonctions que nous avons décidées au projet afin de nous faciliter la tâche pour certaine tâches.
+
+Nous allons également vous présentez les difficultés que nous avons pu rencontrer au cours de la réalisation du projet.
+
+Enfin, nous vous proposerons quelques améliorations qui selon nous pourrait améliorer la réalisation de ce projet.
+
+Vous pourrez également retrouver la répartition des tâches au sein de notre groupe et nos avis personnels pour chacun des points que nous allons traiter au cours du rapport. 
+
+## 2.2 Outils utilisés
+
+Liste des outils utilisés au cours du projet.
+
+- **CLion** : Développement de la partie en C du projet
+- **GitHub** : Outil pour partager notre code entre nous
+- **Discord** : Outil pour communiquer ensemble tout au long du projet
+
+## 2.3 Fonctions importantes 
+Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
+Voici la présentation de ces fonctions :
+
+## 2.4 Difficultés rencontrées 
+Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
+Voici une liste de quelques difficultés rencontrées avec leur explication.
+
+## 2.5 Améliorations possibles
+
+
+## 2.6 Répartition des tâches 
+
+## 2.7 Conclusion
+
+# 3. Compléxité du programme et temps d'éxécution
+
+## 3.1 Compléxité
+
+## 3.2 Temps d'éxécution 
