@@ -10,7 +10,96 @@
 #include "../include/algo.h"
 
 int main(int argc, char *argv[]) {
+    CBTHeap *H;
 
+    int *a = (int *) calloc(1, sizeof(int));
+    int *b = (int *) calloc(1, sizeof(int));
+    int *c = (int *) calloc(1, sizeof(int));
+    int *d = (int *) calloc(1, sizeof(int));
+    int *e = (int *) calloc(1, sizeof(int));
+    int *f = (int *) calloc(1, sizeof(int));
+
+    *a = 0;
+    *b = 1;
+    *c = 2;
+    *d = 3;
+    *e = 4;
+    *f = 5;
+
+    printf("\nIl y a %d argument et argv[0] : %s\n", argc, argv[0]);
+
+    printf("\n\tCréation d'un TreeHeap :\n");
+    H = newCBTHeap(&intSmallerThan, &viewInt, &freeInt);
+
+    printf("\n\tVisualisation de l'arbre global (manuel) :\n");
+    printf("              0         |            2         |            0\n");
+    printf("           /     \\      |         /     \\      |         /     \\\n");
+    printf("          1       2     |        0       4     |        1       3\n");
+    printf("         / \\     /      |       / \\     /      |       / \\     /\n");
+    printf("        3   4   5       |      1   5   3       |      2   5   4\n");
+
+    printf("\n\tAjouts des datas dans l'arbre :\n");
+    CBTHeapInsert(H, c); // = 2
+    printf("Ajout de la data c (2) : OK\n");
+    CBTHeapInsert(H, a); // = 0
+    printf("Ajout de la data a (0) : OK\n");
+    CBTHeapInsert(H, e); // = 4
+    printf("Ajout de la data e (4) : OK\n");
+    CBTHeapInsert(H, b); // = 1
+    printf("Ajout de la data b (1) : OK\n");
+    CBTHeapInsert(H, f); // = 5
+    printf("Ajout de la data f (5) : OK\n");
+    CBTHeapInsert(H, d); // = 3
+    printf("Ajout de la data d (3) : OK\n");
+
+    printf("\n\tAffiche l'arbre :\n");
+    printf("3-1-4-0-5-2 (ordre par position)\n");
+    printf("2-1-5-0-4-3 (bon ordre des éléments)\n");
+    printf("viewCBTHeap :\n");
+    viewCBTHeap(H);
+
+
+    printf("\n\tExtraction du min dans ArrayHeap :\n");
+
+    printf("\t -> 1er exécution :\n");
+    printf("Data du min de l'arbre (= 0) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+    printf("\t -> 2ème exécution :\n");
+    printf("Data du min de l'arbre (= 1) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+    printf("\t -> 3ème exécution :\n");
+    printf("Data du min de l'arbre (= 2) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+    printf("\t -> 4ème exécution :\n");
+    printf("Data du min de l'arbre (= 3) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+    printf("\t -> 5ème exécution :\n");
+    printf("Data du min de l'arbre (= 4) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+    printf("\t -> 6ème exécution :\n");
+    printf("Data du min de l'arbre (= 5) : ");
+    H->viewHeapData(CBTHeapExtractMin(H));
+    printf("\nAffiche l'arbre après extraction :\n");
+    viewCBTHeap(H);
+
+
+    printf("\n\n\tLibération de la mémoire :\n");
+    freeCBTHeap(H, 1);
 
     return EXIT_SUCCESS;
 }
