@@ -253,20 +253,17 @@ static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void
 
     TNode *nodeFg;
     TNode *nodeFd;
-    int fgExiste;
-    int fdExiste;
+
     void *dataNode;
     void *dataFg;
     void *dataFd;
 
     nodeFg = Left(node);
     nodeFd = Right(node);
-    fgExiste = (nodeFg) ? 1 : 0;
-    fdExiste = (nodeFd) ? 1 : 0;
 
     dataNode = getTNodeData(node);
-    dataFg = (fgExiste) ? getTNodeData(nodeFg) : NULL;
-    dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
+    dataFg = (nodeFg) ? getTNodeData(nodeFg) : NULL;
+    dataFd = (nodeFd) ? getTNodeData(nodeFd) : NULL;
 
     if (pos == 1) {
         // dans le fils gauche
@@ -343,6 +340,7 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
     if (Left(node)) {
         TNode *nodeFg;
         TNode *nodeFd;
+
         int fdExiste;
         void *dataNode;
         void *dataFg;
@@ -352,7 +350,6 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
         nodeFd = Right(node);
 
         fdExiste = (nodeFd) ? 1 : 0;
-
         dataNode = getTNodeData(node);
         dataFg = getTNodeData(nodeFg);
         dataFd = (fdExiste) ? getTNodeData(nodeFd) : NULL;
