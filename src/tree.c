@@ -148,6 +148,7 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
  * @param deleteData 1 : data free & 0 : data non free
  */
 void freeCBTree(CBTree *T, int deleteData) {
+    // TODO freeCBTree : voir comment corrigé son problème de mémoire
     assert(T);
 
     if (Root(T) && deleteData == 1) {
