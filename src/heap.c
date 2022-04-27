@@ -103,6 +103,8 @@ static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
 }
 
 /**
+ * On appel updateArrayHeapDownwards de telle sorte qu'il puisse ce lancer partout.\n
+ * Il est possible que cette manière réduit des récurrence.
  *
  * @param[in] AH
  * @param[in] nbElem
@@ -137,7 +139,6 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
     assert(AH);
 
     // Donne les différents attributs de l'ArrayHeap AH
-    //AH->A = (void **) calloc(N, sizeof(void *));
     AH->A = A;
     AH->MAX = N;
     AH->N = N;
