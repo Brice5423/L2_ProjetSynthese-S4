@@ -137,6 +137,8 @@ ArrayHeap *ArrayToArrayHeap(void **A, int N,
 
     AH = (ArrayHeap *) calloc(1, sizeof(ArrayHeap));
     assert(AH);
+    AH->A = (void **) calloc(N, sizeof(void *));
+    assert(AH->A);
 
     // Donne les différents attributs de l'ArrayHeap AH
     AH->A = A;
