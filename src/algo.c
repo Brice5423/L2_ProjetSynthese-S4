@@ -20,19 +20,27 @@
  * (paramètre de sortie).
  * @return Point** le tableau avec les points du fichier \p filename.
  */
-static Point **readInstance(const char *filename, int *N) {
-    //TODO : tester readInstance, demander au prof
+
+static Point ** readInstance(const char *filename, int *N) {
     FILE *fp;
+
     fp = fopen(filename, "r");
     if(!fp)
-        ShowMessage("fopen", 0);
-    Point *buffer = calloc(1, sizeof(Point));
-    N = atoi((const char *) fscanf(fp, 1, buffer));
-    for(int i = 2; i <= sizeof(filename); i++){
-        fscanf(fp, "%[^\n]", buffer);
+        printf("marche pas");
+
+    fscanf(fp, "%d", &N);
+    Point **buffer = (Point **) calloc(N, sizeof(Point *));
+
+    long long int x, y;
+
+    for(int i = 0; i < N; i++){
+        fscanf(fp, "%lld %lld", &x, &y);
+        buffer[i] = newPoint(x,y);
     }
+
     fclose(fp);
-    return (Point **) buffer;
+    return buffer;
+
 }
 
 /**
@@ -43,13 +51,21 @@ static Point **readInstance(const char *filename, int *N) {
  * @param[in] L la liste des points à écrire dans le fichier \p filename.
  */
 static void writeSolution(const char *filename, List *L) {
-    //TODO : tester writeSolution, demander au prof
+    printf("avant file\n");
     FILE *fp;
-    fp = fopen(filename, "wb");
+    fp = fopen(filename, "w");
     if(!fp)
-        ShowMessage("fopen", 0);
-    for(int i = 1; i <= getListSize(L); i++)
-        fprintf(fp, "%s", L);
+        ShowMessage("fopen write", 1);
+
+    printf("avant node\n");
+    LNode *node;
+    node = Head(L);
+
+    for(int i = 0; i < getListSize(L); i++){
+        fprintf(fp, "%lld %lld \n", X(getLNodeData(node)), Y(getLNodeData(node)));
+        node = Successor(node);
+    }
+
     fclose(fp);
 }
 
@@ -62,7 +78,7 @@ static void writeSolution(const char *filename, List *L) {
  * @return List* la liste des points de l'enveloppe convexe dans le sens
  * horaire
  */
-static List *DedgesToClockwisePoints(List *dedges) {
+List *DedgesToClockwisePoints(List *dedges) {
     //TODO : tester DedgesToClockwisePoints
     assert(dedges != NULL);
 
@@ -75,7 +91,7 @@ static List *DedgesToClockwisePoints(List *dedges) {
     while(node != NULL){
         LNode *next;
         next = Successor(node);
-        if(getDestination(getLNodeData(node)) != getOrigin(getLNodeData(next))){
+        if(getDestination(getLNodeData(node)) != getOrigin(getLNodeData(next))){ //nonEqualsTo(getDestination(node), getOrigin(next))
             listRemoveNode(dedges, node);
             listInsertLast(dedges, getLNodeData(node));
         }
@@ -88,9 +104,66 @@ static List *DedgesToClockwisePoints(List *dedges) {
     return lstPoint;
 }
 
-void SlowConvexHull(const char *infilename, const char *outfilename) {
-    // TODO
+/**
+ * @brief Compare le points \p a et \p b. Fonction créée par Matthieu FRITSCH
+ *
+ * @param[in] a
+ * @param[in] b
+ * @return int si l'abscisse de \p a est différente de l'abscisse de \p b
+ * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
+ * est différente de l'ordonnée de \p b renvoie 1, sinon renvoie 0.
+ */
+
+int nonEqualsPoint(const void *a, const void *b){
+    //TODO : tester nonEqualsPoint
+    if(X(a) != X(b)){
+        return 1;
+    }
+    else if(X(a) == X(b)){
+        if(Y(a) != Y(b)){
+            return 1;
+        }
+        else
+            return 0;
+    }
+    else
+        return 0;
 }
+
+/*void SlowConvexHull(const char *infilename, const char *outfilename) {
+    printf("avant création");
+    List *E = calloc(1, sizeof(List*));
+
+
+    int N;
+    printf("avant read");
+    Point **tab = (Point **) calloc(1, sizeof(Point **);
+    tab = readInstance(infilename, &N);
+
+    int ok;
+
+    for(int i = 0; i < N; i++){
+        Point *A = tab[i];
+        for(int j = 0; j < N; j++){
+            Point *B = tab[j];
+            ok = 1;
+            for(int k = 0; k < N; k++){
+                Point *P = tab[k];
+                if((nonEqualsPoint(P, A) == 1) && (nonEqualsPoint(P, B) == 1)){
+                    if((onLeft(A, B, P) || (isIncluded(A, B, P)))){
+                        ok = 0;
+                    }
+                }
+            }
+            if(ok == 1){
+                LNode *node;
+                node = newLNode(newDEdge(A, B));
+                listInsertLast(E, getLNodeData(node));
+            }
+        }
+    }
+    writeSolution(outfilename, DedgesToClockwisePoints(E));
+}*/
 
 /**
  * @brief Compare le points \p a et \p b.
@@ -103,8 +176,7 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  */
 static int smallerPoint(const void *a, const void *b) {
     //TODO tester smallerPoint
-    if(X(a) < X(b))
-        return 1;
+    if(X(a) < X(b))return 1;
     else if (X(a) == X(b)) {
         if (Y(a) < Y(b))
             return 1;
