@@ -96,7 +96,7 @@ void resetCBTreeSize(CBTree *T) {
 void setRoot(CBTree *T, TNode *newRoot) {
     assert(T);
 
-    if (newRoot != NULL) {
+    if (newRoot) {
         TNode *root;
 
         root = Root(T);
@@ -127,18 +127,19 @@ void setRoot(CBTree *T, TNode *newRoot) {
 static void freeTNode(TNode *node, void (*freeData)(void *)) {
     assert(node);
 
-    if (Left(node) != NULL) {
+    if (Left(node)) {
         freeTNode(Left(node), freeData);
     }
 
-    if (Right(node) != NULL) {
+    if (Right(node)) {
         freeTNode(Right(node), freeData);
     }
 
     setLeft(node, NULL);
     setRight(node, NULL);
-    (*freeData)(getTNodeData(node));
-
+    if (freeData) {
+        (*freeData)(getTNodeData(node));
+    }
     free(node);
 }
 
@@ -151,8 +152,12 @@ void freeCBTree(CBTree *T, int deleteData) {
     // TODO freeCBTree : voir comment corrigé son problème de mémoire
     assert(T);
 
-    if (Root(T) && deleteData == 1) {
-        freeTNode(Root(T), T->freeData);
+    if (Root(T)) {
+        if (deleteData == 1) {
+            freeTNode(Root(T), T->freeData);
+        } else {
+            freeTNode(Root(T), NULL);
+        }
     }
 
     T->root = NULL;
@@ -178,12 +183,12 @@ static void preorder(TNode *node, void (*viewData)(const void *)) {
 
     (*viewData)(getTNodeData(node));
 
-    if (Left(node) != NULL) {
+    if (Left(node)) {
         printf("-");
         preorder(Left(node), viewData);
     }
 
-    if (Right(node) != NULL) {
+    if (Right(node)) {
         printf("-");
         preorder(Right(node), viewData);
     }
@@ -202,14 +207,14 @@ static void inorder(TNode *node, void (*viewData)(const void *)) {
     assert(node);
     assert(viewData);
 
-    if (Left(node) != NULL) {
+    if (Left(node)) {
         inorder(Left(node), viewData);
         printf("-");
     }
 
     (*viewData)(getTNodeData(node));
 
-    if (Right(node) != NULL) {
+    if (Right(node)) {
         printf("-");
         inorder(Right(node), viewData);
     }
@@ -228,12 +233,12 @@ static void postorder(TNode *node, void (*viewData)(const void *)) {
     assert(node);
     assert(viewData);
 
-    if (Left(node) != NULL) {
+    if (Left(node)) {
         postorder(Left(node), viewData);
         printf("-");
     }
 
-    if (Right(node) != NULL) {
+    if (Right(node)) {
         postorder(Right(node), viewData);
         printf("-");
     }

@@ -64,8 +64,10 @@ List *newList(void (*viewData)(const void *), void (*freeData)(void *)) {
 int listIsEmpty(List *L) {
     if (L->numelm == 0) {
         return 1;
-    } else
+
+    } else {
         return 0;
+    }
 }
 
 int getListSize(const List *L) {
@@ -109,27 +111,27 @@ void freeList(List *L, int deleteData) {
     assert(L != NULL);
 
     LNode *node;
+    LNode *next;
 
     node = Head(L);
 
     if (deleteData == 1) {
-        while (node != NULL) {
-            LNode *next;
-
+        while (node) {
             next = Successor(node);
             L->freeData(getLNodeData(node));
             free(node);
             node = next;
         }
-        free(L);
-    } else if (deleteData == 0) {
-        while (node != NULL) {
-            LNode *next;
 
+        free(L);
+
+    } else if (deleteData == 0) {
+        while (node) {
             next = Successor(node);
             free(node);
             node = next;
         }
+
         free(L);
     }
 }
@@ -144,10 +146,11 @@ void viewList(const List *L) {
         (*L->viewData)(getLNodeData(N));
         printf(" ");
     }
-    printf(" ]\n");
+    printf("]\n");
 }
 
 void listInsertFirst(List *L, void *data) {
+    assert(L);
 
     LNode *newNode;
 
@@ -171,7 +174,6 @@ void listInsertLast(List *L, void *data) {
     LNode *newNode;
 
     newNode = newLNode(data);
-    assert(newNode);
 
     if (listIsEmpty(L)) {
         setTail(L, newNode);
@@ -186,18 +188,18 @@ void listInsertLast(List *L, void *data) {
 }
 
 void listInsertAfter(List *L, void *data, LNode *ptrelm) {
-    if (ptrelm == NULL) {
+    if (!ptrelm) {
         setLNodeData(ptrelm, data);
 
     } else {
         struct ListNode *newNode;
 
         newNode = newLNode(data);
-        assert(newNode);
 
         if (listIsEmpty(L)) {
             setHead(L, newNode);
             setTail(L, newNode);
+
         } else {
             setSuccessor(newNode, Successor(ptrelm));
             setPredecessor(ptrelm, newNode);
@@ -211,60 +213,80 @@ void listInsertAfter(List *L, void *data, LNode *ptrelm) {
 }
 
 void *listRemoveFirst(List *L) {
+    assert(L);
     assert(Head(L));
-    if(listIsEmpty(L)) {
+
+    if (listIsEmpty(L)) {
         ShowMessage("La liste L est vide", 0);
     }
-    void *dataTemp = getLNodeData(Head(L));
-    void *succ = Successor(Head(L));
-    void *nodeToRemove = Head(L);
+
+    void *dataTemp;
+    void *succ;
+    void *nodeToRemove;
+
+    dataTemp = getLNodeData(Head(L));
+    succ = Successor(Head(L));
+    nodeToRemove = Head(L);
 
     setHead(L, succ);
     setPredecessor(Head(L), NULL);
 
     free(nodeToRemove);
     decreaseListSize(L);
+
     return dataTemp;
 }
 
 void *listRemoveLast(List *L) {
+    assert(L);
     assert(Tail(L));
-    if(listIsEmpty(L)){
+
+    if (listIsEmpty(L)) {
         ShowMessage("La liste est vide", 0);
     }
-    void *dataTemp = getLNodeData(Tail(L));
-    void *pred = Predecessor(Tail(L));
-    void *nodeToRemove = Tail(L);
 
+    void *dataTemp;
+    void *pred;
+    void *nodeToRemove;
+
+    dataTemp = getLNodeData(Tail(L));
+    pred = Predecessor(Tail(L));
+    nodeToRemove = Tail(L);
 
     setTail(L, pred);
     setSuccessor(Tail(L), NULL);
 
     free(nodeToRemove);
     decreaseListSize(L);
+
     return dataTemp;
 }
 
 void *listRemoveNode(List *L, LNode *node) {
     assert(Head(L) && Tail(L));
-    if(listIsEmpty(L)){
+
+    if (listIsEmpty(L)) {
         ShowMessage("La liste est vide", 0);
-    }
-    else{
-        void *dataTemp = getLNodeData(node);
-        if(node == Head(L)){
+
+    } else {
+        void *dataTemp;
+
+        dataTemp = getLNodeData(node);
+
+        if (node == Head(L)) {
             listRemoveFirst(L);
-        }
-        else if(node == Tail(L)){
+
+        } else if (node == Tail(L)) {
             listRemoveLast(L);
-        }
-        else{
+
+        } else {
             setSuccessor(Predecessor(node), Successor(node));
             setPredecessor(Successor(node), Predecessor(node));
 
             free(node);
             decreaseListSize(L);
         }
+
         return dataTemp;
     }
 }
@@ -273,17 +295,17 @@ List *listConcatenate(List *L1, List *L2) {
     assert(L1);
     assert(L2);
 
-    if(!listIsEmpty(L1)){
+    if (!listIsEmpty(L1)) {
         setSuccessor(Tail(L1), Head(L2));
         setPredecessor(Head(L2), Tail(L1));
         free(L2);
         return L1;
-    }
-    else if(listIsEmpty(L2)){
+
+    } else if (listIsEmpty(L2)) {
         free(L2);
         return L1;
-    }
-    else{
+
+    } else {
         free(L1);
         return L2;
     }

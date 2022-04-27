@@ -14,20 +14,16 @@ void ArrayHeapSort(void **A, int N,
     assert(freeHeapData);
 
     int i;
-    void **ACopie;
     ArrayHeap *AH;
 
-    ACopie = (void **) calloc(N, sizeof(void *));
-    assert(ACopie);
+    AH = ArrayToArrayHeap(A, N, preceed, viewHeapData, freeHeapData);
 
-    ACopie = A;
-    AH = ArrayToArrayHeap(ACopie, N, preceed, viewHeapData, freeHeapData);
-
+    // Je ne sais pas si c'est normal que ça soit inverser ?
     for (i = (N - 1); i >= 0; i--) {
         A[i] = ArrayHeapExtractMin(AH);
     }
 
-    free(ACopie);
+    free(AH);
 }
 
 void CBTHeapSort(void **A, int N,
@@ -52,6 +48,8 @@ void CBTHeapSort(void **A, int N,
     for (i = 0; i < N; i++) {
         A[i] = CBTHeapExtractMin(H);
     }
+
+    freeCBTHeap(H, 0);
 }
 
 void SelectionSort(void **A, int N, int (*preceed)(const void *, const void *)) {
@@ -64,7 +62,7 @@ void SelectionSort(void **A, int N, int (*preceed)(const void *, const void *)) 
     for (i = 0; i < N - 1; i++) {
         posMin = i;
 
-        for (j = i + 1; j < N; j++) {
+        for (j = i; j < N; j++) {
             if (preceed(A[j], A[posMin]))
                 posMin = j;
         }

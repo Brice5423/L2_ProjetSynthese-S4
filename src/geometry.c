@@ -7,10 +7,10 @@
 
 Point *newPoint(long long int x, long long int y) {
     Point *Point;
-    if(Point == NULL)
-        ShowMessage("Le point Point est null", 1);
+
     Point = calloc(1, sizeof(Point));
     assert(Point);
+
     Point->x = x;
     Point->y = y;
 
@@ -26,12 +26,13 @@ long long int Y(const Point *P) {
 }
 
 void viewPoint(const void *P) {
-    printf("\nPoint ( Abscisse : %lld ; Ordonnée : %lld )\n", X((Point *)P), Y((Point *)P));
+    printf("\nPoint ( Abscisse : %lld ; Ordonnée : %lld )\n", X((Point *) P), Y((Point *) P));
 }
 
 void freePoint(void *P) {
     free(P);
 }
+
 /* < 0 : à droite
  * > 0 : à gauche
  * = 0 : colinéaire
@@ -39,46 +40,54 @@ void freePoint(void *P) {
  * B: destination
  */
 int onRight(const Point *origin, const Point *destination, const Point *P) {
-    if( (X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) < 0)
+    if (((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin))) < 0) {
         return 1;
-    return 0;
+
+    } else {
+        return 0;
+    }
 }
 
 int onLeft(const Point *origin, const Point *destination, const Point *P) {
-    if( (X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) > 0)
+    if ((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) > 0) {
         return 1;
-    return 0;
+
+    } else {
+        return 0;
+    }
 }
 
 int collinear(const Point *origin, const Point *destination, const Point *P) {
-    if( (X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) == 0)
+    if ((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) == 0) {
         return 1;
-    return 0;
+
+    } else {
+        return 0;
+    }
 }
 
 int isIncluded(const Point *origin, const Point *destination, const Point *P) {
-    //verifier si P est colinéaire
-    if(collinear(origin, destination, P)){
-        //si colinéaire alors vérifier que l'abscisse de P est inférieur à l'abscisse de destination et superieur à l'abscisse de l'origine
-        if((X(P) < X(destination)) && (X(P) > X(origin))){
-            //si c'est vrai alors faire pareil pour l'ordonnée
-            if((Y(P) < Y(destination)) && (Y(P) > Y(origin))){
-                //si tout est vrai alors on retourne 1
+    // verifier si P est colinéaire
+    if (collinear(origin, destination, P)) {
+        // si colinéaire alors vérifier que l'abscisse de P est inférieur à l'abscisse de destination et superieur à l'abscisse de l'origine
+        if ((X(P) < X(destination)) && (X(P) > X(origin))) {
+            // si c'est vrai alors faire pareil pour l'ordonnée
+            if ((Y(P) < Y(destination)) && (Y(P) > Y(origin))) {
+                // si tout est vrai alors on retourne 1
                 return 1;
             }
-            return 0;
         }
-        return 0;
     }
+
     return 0;
 }
 
 DEdge *newDEdge(Point *origin, Point *destination) {
-
     DEdge *DE;
 
     DE = calloc(1, sizeof(DEdge));
     assert(DE);
+
     DE->origin = origin;
     DE->destination = destination;
 

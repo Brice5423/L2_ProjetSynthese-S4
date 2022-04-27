@@ -37,8 +37,8 @@ int main(int argc, char *argv[]) {
 
     printf("\nIl y a %d argument et argv[0] : %s\n\n", argc, argv[0]);
 
-    printf("\tLance CBTHeapSort :\n");
-    CBTHeapSort(A, N, &intSmallerThan, &viewInt, &free);
+    printf("\tLance SelectionSort :\n");
+    SelectionSort(A, N, &intSmallerThan);
     printf("Affiche la table :\n[ ");
     for (int i = 0; i < N; i++) {
         viewInt(A[i]);
