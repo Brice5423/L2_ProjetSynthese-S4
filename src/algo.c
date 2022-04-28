@@ -77,7 +77,7 @@ static void writeSolution(const char *filename, List *L) {
  * @brief Transforme la liste des arcs \p dedges décrivant les arêtes
  * du polygone de l'enveloppe convexe à une liste des poins ordonnés
  * dans le sens horaire.
- * 
+ *
  * @param[in] edges la liste des arcs de l'enveloppe convexe
  * @return List* la liste des points de l'enveloppe convexe dans le sens
  * horaire
@@ -219,9 +219,9 @@ static int smallerPoint(const void *a, const void *b) {
 
 /**
  * @brief Compare le points \p a et \p b.
- * 
- * @param[in] a 
- * @param[in] b 
+ *
+ * @param[in] a
+ * @param[in] b
  * @return int si l'abscisse de \p a est plus grande que l'abscisse de \p b
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
@@ -241,7 +241,6 @@ static int biggerPoint(const void *a, const void *b) {
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
-    //TODO ConvexHull
     assert(infilename);
     assert(outfilename);
     assert(sortby == 1 || sortby == 2 || sortby == 3);
@@ -319,17 +318,15 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
 
     H = listConcatenate(HSup, HInf);
 
-    printf("\t-> viewList H :\n");
-    viewList(H);
-
     writeSolution(outfilename, H);
-    printf("\n\n\t\tje t'aime Matthieu !!!!!!!!\n\n");
 }
 
 void RapidConvexHull(const char *infilename, const char *outfilename) {
     // TODO RapidConvexHull
     assert(infilename);
     assert(outfilename);
+
+
 
 
 }

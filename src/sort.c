@@ -7,7 +7,6 @@ void ArrayHeapSort(void **A, int N,
                    int (*preceed)(const void *, const void *),
                    void (*viewHeapData)(const void *),
                    void (*freeHeapData)(void *)) {
-    // TODO ArrayHeapSort : à tester
     assert(A);
     assert(preceed);
     assert(viewHeapData);
@@ -30,7 +29,6 @@ void CBTHeapSort(void **A, int N,
                  int (*preceed)(const void *, const void *),
                  void (*viewHeapData)(const void *),
                  void (*freeHeapData)(void *)) {
-    // TODO CBTHeapSort
     assert(A);
     assert(preceed);
     assert(viewHeapData);

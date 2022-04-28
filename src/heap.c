@@ -35,8 +35,8 @@ void setAHNodeAt(ArrayHeap *AH, int position, void *newData) {
  * le fils de la plus grande priorité si nécessaire.\n\n
  *
  * Procédure récursive.
- * 
- * @param[in] AH 
+ *
+ * @param[in] AH
  * @param[in] pos L'indice de la valeur en mouvement vers le bas.
  */
 static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
@@ -242,10 +242,10 @@ CBTree *getCBTree(const CBTHeap *H) {
  * à corriger qui se trouve dans la position \p pos
  * (de la même façon que dans insertAfterLastTNode).\n
  * En remontant, on corrige en échangeant avec le père, si besoin.
- * 
- * @param[in] node 
- * @param[in] position 
- * @param[in] preceed 
+ *
+ * @param[in] node
+ * @param[in] position
+ * @param[in] preceed
  */
 static void updateCBTHeapUpwards(TNode *node, int pos, int (*preceed)(const void *, const void *)) {
     assert(node);
@@ -330,9 +330,9 @@ void CBTHeapInsert(CBTHeap *H, void *data) {
  * Procédure récursive.\n\n
  *
  * NB: Le sous-arbre avec racine \p node ne peut pas être vide.
- * 
- * @param[in] node 
- * @param[in] preceed 
+ *
+ * @param[in] node
+ * @param[in] preceed
  */
 static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, const void *)) {
     assert(node);
