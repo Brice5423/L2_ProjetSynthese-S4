@@ -253,7 +253,6 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
     List *HInf;
     Point **tab;
 
-    LNode *node;
     Point *PS;
     Point *PR;
     Point *PQ;
@@ -276,17 +275,15 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
     /* ----- ----- Liste de points de l’enveloppe supérieure ----- ----- */
 
     for (i = 0; i < 2; i++) {
-        node = newLNode(tab[i]);
-        listInsertLast(HSup, getLNodeData(node));
+        listInsertLast(HSup, tab[i]);
     }
 
     for (i = 2; i < N; i++) {
-        node = newLNode(tab[i]);
-        listInsertLast(HSup, getLNodeData(node));
+        listInsertLast(HSup, tab[i]);
 
-        PS = getLNodeData(Predecessor(Predecessor(Tail(HSup))));
+        PQ = getLNodeData(Predecessor(Predecessor(Tail(HSup))));
         PR = getLNodeData(Predecessor(Tail(HSup)));
-        PQ = getLNodeData(Tail(HSup));
+        PS = getLNodeData(Tail(HSup));
 
         while ((getListSize(HSup) > 2) && onLeft(PQ, PR, PS)) {
             listRemoveNode(HSup, Predecessor(Tail(HSup)));
@@ -296,17 +293,15 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
     /* ----- ----- Liste de points de l’enveloppe inférieure ----- ----- */
 
     for (i = (N - 1); i > (N - 3); i--) {
-        node = newLNode(tab[i]);
-        listInsertLast(HInf, getLNodeData(node));
+        listInsertLast(HInf, tab[i]);
     }
 
     for (i = (N - 3); i >= 0; i--) {
-        node = newLNode(tab[i]);
-        listInsertLast(HInf, getLNodeData(node));
+        listInsertLast(HInf, tab[i]);
 
-        PS = getLNodeData(Predecessor(Predecessor(Tail(HInf))));
+        PQ = getLNodeData(Predecessor(Predecessor(Tail(HInf))));
         PR = getLNodeData(Predecessor(Tail(HInf)));
-        PQ = getLNodeData(Tail(HInf));
+        PS = getLNodeData(Tail(HInf));
 
         while ((getListSize(HInf) > 2) && onLeft(PQ, PR, PS)) {
             listRemoveNode(HInf, Predecessor(Tail(HInf)));
