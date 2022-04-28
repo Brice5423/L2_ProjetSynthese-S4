@@ -214,6 +214,7 @@ static int biggerPoint(const void *a, const void *b) {
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
+    //TODO
     assert(sortby == 1 || sortby == 2 || sortby == 3);
 }
 
