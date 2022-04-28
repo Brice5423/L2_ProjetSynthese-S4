@@ -21,26 +21,29 @@
  * @return Point** le tableau avec les points du fichier \p filename.
  */
 
-static Point ** readInstance(const char *filename, int *N) {
+static Point **readInstance(const char *filename, int *N) {
+    printf("début readInstance\n");
+    assert(filename);
+
     FILE *fp;
+    Point **buffer;
+    long long int x;
+    long long int y;
 
     fp = fopen(filename, "r");
-    if(!fp)
-        printf("marche pas");
+    assert(fp);
 
-    fscanf(fp, "%d", &N);
-    Point **buffer = (Point **) calloc(N, sizeof(Point *));
+    fscanf(fp, "%d", N);
+    buffer = (Point **) calloc(*N, sizeof(Point *));
+    assert(buffer);
 
-    long long int x, y;
-
-    for(int i = 0; i < N; i++){
+    for (int i = 0; i < *N; i++) {
         fscanf(fp, "%lld %lld", &x, &y);
-        buffer[i] = newPoint(x,y);
+        buffer[i] = newPoint(x, y);
     }
 
     fclose(fp);
     return buffer;
-
 }
 
 /**
@@ -134,38 +137,66 @@ int nonEqualsPoint(const void *a, const void *b){
 }
 
 void SlowConvexHull(const char *infilename, const char *outfilename) {
-    printf("avant création");
-    List *E = calloc(1, sizeof(List*));
-
-
     int N;
-    printf("avant read");
+    int ok;
+    List *E;
     Point **tab;
+
+    ok = 0;
+
+    printf("\t-> Debut newList\n");
+    E = newList(viewPoint, freePoint);
+    printf("\t-> Debut readInstance\n");
     tab = readInstance(infilename, &N);
 
-    int ok;
+    printf("\t-> Avant 1er for : N = %d \n", N);
+    for (int i = 0; i < N; i++) {
+        printf("\t-> Debut 1er for (i = %i)\n", i);
+        Point *A;
 
-    for(int i = 0; i < N; i++){
-        Point *A = newPoint(tab[i]->x, tab[i]->y);
-        for(int j = 0; j < N; j++){
-            Point *B = newPoint(tab[j]->x, tab[j]->y);
+        A = tab[i];
+
+        for (int j = 0; j < N; j++) {
+            printf("\t\t-> Debut 2ème for (j = %d)\n", j);
+            Point *B;
+
+            B = tab[j];
             ok = 1;
-            for(int k = 0; k < N; k++){
-                Point *P = newPoint(tab[k]->x, tab[k]->y);
-                if((nonEqualsPoint(P, A) == 1) && (nonEqualsPoint(P, B) == 1)){
-                    if((onLeft(A, B, P) || (isIncluded(A, B, P)))){
-                        ok = 0;
+
+            if (A != B) {
+                for (int k = 0; k < N; k++) {
+                    printf("\t\t\t-> Debut 3ème for (k = %d)\n", k);
+                    Point *P;
+
+                    P = tab[k];
+                    if ((nonEqualsPoint(P, A) == 1) && (nonEqualsPoint(P, B) == 1)) {
+                        printf("\t\t\t\t-> Debut 1er if (nonEqualsPoint)\n");
+                        if ((onLeft(A, B, P) || (isIncluded(A, B, P)))) {
+                            printf("\t\t\t\t-> Debut 2ème if (onLeft & isIncluded)\n");
+                            ok = 0;
+                        }
+                        printf("\t\t\t\t-> Fin 1er if (nonEqualsPoint)\n");
                     }
                 }
-            }
-            if(ok == 1){
-                LNode *node;
-                node = newLNode(newDEdge(A, B));
-                listInsertLast(E, getLNodeData(node));
+
+
+                printf("\t\t-> Debut Test ok : if (ok == 1)\n");
+                if (ok == 1) {
+                    printf("\t\t\t-> Debut if (ok == 1)\n");
+                    LNode *node;
+
+                    node = newLNode(newDEdge(A, B));
+                    listInsertLast(E, getLNodeData(node));
+                    printf("\t\t\t-> Fin if (ok == 1)\n");
+                }
+                printf("\t\t-> Fin Test ok : if (ok == 1)\n");
             }
         }
     }
+
+    printf("\t-> Debut writeSolution\n");
     writeSolution(outfilename, DedgesToClockwisePoints(E));
+    printf("\t-> Fin fonction\n");
 }
 
 /**
