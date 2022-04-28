@@ -31,6 +31,7 @@ void viewPoint(const void *P) {
 
 void freePoint(void *P) {
     free(P);
+    P = NULL;
 }
 
 /* < 0 : à droite
@@ -113,4 +114,5 @@ void freeDEdge(void *DE) {
     free(getDestination(DE));
     free(getOrigin(DE));
     free(DE);
+    DE = NULL;
 }

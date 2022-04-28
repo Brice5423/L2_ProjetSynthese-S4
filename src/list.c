@@ -299,14 +299,17 @@ List *listConcatenate(List *L1, List *L2) {
         setSuccessor(Tail(L1), Head(L2));
         setPredecessor(Head(L2), Tail(L1));
         free(L2);
+        L2 = NULL;
         return L1;
 
     } else if (listIsEmpty(L2)) {
         free(L2);
+        L2 = NULL;
         return L1;
 
     } else {
         free(L1);
+        L1 = NULL;
         return L2;
     }
 }

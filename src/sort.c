@@ -23,6 +23,7 @@ void ArrayHeapSort(void **A, int N,
     }
 
     free(AH);
+    AH = NULL;
 }
 
 void CBTHeapSort(void **A, int N,
