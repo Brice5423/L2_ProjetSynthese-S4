@@ -78,28 +78,31 @@ static void writeSolution(const char *filename, List *L) {
  * @return List* la liste des points de l'enveloppe convexe dans le sens
  * horaire
  */
-List *DedgesToClockwisePoints(List *dedges) {
-    //TODO : tester DedgesToClockwisePoints
+static List *DedgesToClockwisePoints(List *dedges) {
     assert(dedges != NULL);
 
     LNode *node;
     node = Head(dedges);
     List *lstPoint;
-    lstPoint = calloc(1, sizeof(List));
+    lstPoint = newList(viewPoint, freePoint);
 
-    Point *des;
-    while(node != NULL){
-        LNode *next;
-        next = Successor(node);
-        if(getDestination(getLNodeData(node)) != getOrigin(getLNodeData(next))){ //nonEqualsTo(getDestination(node), getOrigin(next))
-            listRemoveNode(dedges, node);
-            listInsertLast(dedges, getLNodeData(node));
+    listInsertFirst(lstPoint, getOrigin(getLNodeData(node)));
+
+    while(Successor(node) != NULL){
+        Point *A = getDestination(getLNodeData(node));
+        Point *B = getOrigin(getLNodeData(Successor(node)));
+        if(A != B){
+            void *data = listRemoveNode(dedges, Successor(node));
+            listInsertLast(dedges, data);
         }
         else{
-            des = getDestination(getLNodeData(node));
-            listInsertLast(lstPoint, getLNodeData(des));
+            listInsertFirst(lstPoint, B);
+            node = Successor(node);
         }
-        node = next;
+    }
+    Point *P = getDestination(getLNodeData(node));
+    if(P != getLNodeData(Head(lstPoint))){
+        listInsertLast(lstPoint, P);
     }
     return lstPoint;
 }
@@ -130,25 +133,25 @@ int nonEqualsPoint(const void *a, const void *b){
         return 0;
 }
 
-/*void SlowConvexHull(const char *infilename, const char *outfilename) {
+void SlowConvexHull(const char *infilename, const char *outfilename) {
     printf("avant création");
     List *E = calloc(1, sizeof(List*));
 
 
     int N;
     printf("avant read");
-    Point **tab = (Point **) calloc(1, sizeof(Point **);
+    Point **tab;
     tab = readInstance(infilename, &N);
 
     int ok;
 
     for(int i = 0; i < N; i++){
-        Point *A = tab[i];
+        Point *A = newPoint(tab[i]->x, tab[i]->y);
         for(int j = 0; j < N; j++){
-            Point *B = tab[j];
+            Point *B = newPoint(tab[j]->x, tab[j]->y);
             ok = 1;
             for(int k = 0; k < N; k++){
-                Point *P = tab[k];
+                Point *P = newPoint(tab[k]->x, tab[k]->y);
                 if((nonEqualsPoint(P, A) == 1) && (nonEqualsPoint(P, B) == 1)){
                     if((onLeft(A, B, P) || (isIncluded(A, B, P)))){
                         ok = 0;
@@ -163,7 +166,7 @@ int nonEqualsPoint(const void *a, const void *b){
         }
     }
     writeSolution(outfilename, DedgesToClockwisePoints(E));
-}*/
+}
 
 /**
  * @brief Compare le points \p a et \p b.
@@ -211,7 +214,7 @@ static int biggerPoint(const void *a, const void *b) {
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
-    // TODO
+    assert(sortby == 1 || sortby == 2 || sortby == 3);
 }
 
 void RapidConvexHull(const char *infilename, const char *outfilename) {
