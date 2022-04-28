@@ -22,7 +22,6 @@
  */
 
 static Point **readInstance(const char *filename, int *N) {
-    printf("début readInstance\n");
     assert(filename);
 
     FILE *fp;
@@ -54,17 +53,19 @@ static Point **readInstance(const char *filename, int *N) {
  * @param[in] L la liste des points à écrire dans le fichier \p filename.
  */
 static void writeSolution(const char *filename, List *L) {
-    printf("avant file\n");
+    assert(filename);
+    assert(L);
+
+    int i;
     FILE *fp;
-    fp = fopen(filename, "w");
-    if(!fp)
-        ShowMessage("fopen write", 1);
-
-    printf("avant node\n");
     LNode *node;
-    node = Head(L);
 
-    for(int i = 0; i < getListSize(L); i++){
+    fp = fopen(filename, "w");
+    assert(fp);
+    node = Head(L);
+    assert(node);
+
+    for (i = 0; i < getListSize(L); i++) { // getListSize(L) - 1
         fprintf(fp, "%lld %lld \n", X(getLNodeData(node)), Y(getLNodeData(node)));
         node = Successor(node);
     }
@@ -82,31 +83,43 @@ static void writeSolution(const char *filename, List *L) {
  * horaire
  */
 static List *DedgesToClockwisePoints(List *dedges) {
-    assert(dedges != NULL);
+    assert(dedges);
 
     LNode *node;
-    node = Head(dedges);
     List *lstPoint;
-    lstPoint = newList(viewPoint, freePoint);
+    Point *P;
 
+    node = Head(dedges);
+    lstPoint = newList(&viewPoint, &freePoint);
+
+    //listInsertFirst(lstPoint, getOrigin(getLNodeData(node)));
     listInsertFirst(lstPoint, getOrigin(getLNodeData(node)));
 
-    while(Successor(node) != NULL){
-        Point *A = getDestination(getLNodeData(node));
-        Point *B = getOrigin(getLNodeData(Successor(node)));
-        if(A != B){
-            void *data = listRemoveNode(dedges, Successor(node));
+    while (Successor(node)) {
+        Point *A;
+        Point *B;
+
+        A = getDestination(getLNodeData(node));
+        B = getOrigin(getLNodeData(Successor(node)));
+
+        if (A != B) {
+            void *data;
+
+            data = listRemoveNode(dedges, Successor(node));
             listInsertLast(dedges, data);
-        }
-        else{
+
+        } else {
             listInsertFirst(lstPoint, B);
             node = Successor(node);
         }
     }
-    Point *P = getDestination(getLNodeData(node));
-    if(P != getLNodeData(Head(lstPoint))){
+
+    P = getDestination(getLNodeData(node));
+
+    if (P != getLNodeData(Head(lstPoint))) {
         listInsertLast(lstPoint, P);
     }
+
     return lstPoint;
 }
 
@@ -120,20 +133,18 @@ static List *DedgesToClockwisePoints(List *dedges) {
  * est différente de l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
 
-int nonEqualsPoint(const void *a, const void *b){
+int nonEqualsPoint(const void *a, const void *b) {
     //TODO : tester nonEqualsPoint
-    if(X(a) != X(b)){
+    if (X(a) != X(b)) {
         return 1;
-    }
-    else if(X(a) == X(b)){
-        if(Y(a) != Y(b)){
+
+    } else {
+        if (Y(a) != Y(b)) {
             return 1;
         }
-        else
-            return 0;
     }
-    else
-        return 0;
+
+    return 0;
 }
 
 void SlowConvexHull(const char *infilename, const char *outfilename) {
@@ -144,20 +155,15 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
 
     ok = 0;
 
-    printf("\t-> Debut newList\n");
-    E = newList(viewPoint, freePoint);
-    printf("\t-> Debut readInstance\n");
+    E = newList(&viewPoint, &freePoint);
     tab = readInstance(infilename, &N);
 
-    printf("\t-> Avant 1er for : N = %d \n", N);
     for (int i = 0; i < N; i++) {
-        printf("\t-> Debut 1er for (i = %i)\n", i);
         Point *A;
 
         A = tab[i];
 
         for (int j = 0; j < N; j++) {
-            printf("\t\t-> Debut 2ème for (j = %d)\n", j);
             Point *B;
 
             B = tab[j];
@@ -165,38 +171,27 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
 
             if (A != B) {
                 for (int k = 0; k < N; k++) {
-                    printf("\t\t\t-> Debut 3ème for (k = %d)\n", k);
                     Point *P;
 
                     P = tab[k];
                     if ((nonEqualsPoint(P, A) == 1) && (nonEqualsPoint(P, B) == 1)) {
-                        printf("\t\t\t\t-> Debut 1er if (nonEqualsPoint)\n");
                         if ((onLeft(A, B, P) || (isIncluded(A, B, P)))) {
-                            printf("\t\t\t\t-> Debut 2ème if (onLeft & isIncluded)\n");
                             ok = 0;
                         }
-                        printf("\t\t\t\t-> Fin 1er if (nonEqualsPoint)\n");
                     }
                 }
 
-
-                printf("\t\t-> Debut Test ok : if (ok == 1)\n");
                 if (ok == 1) {
-                    printf("\t\t\t-> Debut if (ok == 1)\n");
                     LNode *node;
 
                     node = newLNode(newDEdge(A, B));
                     listInsertLast(E, getLNodeData(node));
-                    printf("\t\t\t-> Fin if (ok == 1)\n");
                 }
-                printf("\t\t-> Fin Test ok : if (ok == 1)\n");
             }
         }
     }
 
-    printf("\t-> Debut writeSolution\n");
     writeSolution(outfilename, DedgesToClockwisePoints(E));
-    printf("\t-> Fin fonction\n");
 }
 
 /**
@@ -210,15 +205,16 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  */
 static int smallerPoint(const void *a, const void *b) {
     //TODO tester smallerPoint
-    if(X(a) < X(b))return 1;
-    else if (X(a) == X(b)) {
-        if (Y(a) < Y(b))
+    if (X(a) < X(b)) {
+        return 1;
+
+    } else if (X(a) == X(b)) {
+        if (Y(a) < Y(b)) {
             return 1;
-        else
-            return 0;
+        }
     }
-    else
-        return 0;
+
+    return 0;
 }
 
 /**
@@ -232,23 +228,108 @@ static int smallerPoint(const void *a, const void *b) {
  */
 static int biggerPoint(const void *a, const void *b) {
     //TODO tester biggerPoint
-    if(X(a) > X(b))
+    if (X(a) > X(b)) {
         return 1;
-    else if (X(a) == X(b)) {
-        if (Y(a) > Y(b))
+
+    } else if (X(a) == X(b)) {
+        if (Y(a) > Y(b)) {
             return 1;
-        else
-            return 0;
+        }
     }
-    else
-        return 0;
+
+    return 0;
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
-    //TODO
+    //TODO ConvexHull
+    assert(infilename);
+    assert(outfilename);
     assert(sortby == 1 || sortby == 2 || sortby == 3);
+
+    int i;
+    int N;
+
+    List *H;
+    List *HSup;
+    List *HInf;
+    Point **tab;
+
+    LNode *node;
+    Point *PS;
+    Point *PR;
+    Point *PQ;
+
+    tab = readInstance(infilename, &N);
+    H = newList(&viewPoint, &freePoint);
+    HSup = newList(&viewPoint, &freePoint);
+    HInf = newList(&viewPoint, &freePoint);
+
+    if (sortby == 1) {
+        ArrayHeapSort(((void **) tab), N, &biggerPoint, &viewPoint, &freePoint);
+
+    } else if (sortby == 2) {
+        CBTHeapSort(((void **) tab), N, &smallerPoint, &viewPoint, &freePoint);
+
+    } else {
+        SelectionSort(((void **) tab), N, &smallerPoint);
+    }
+
+    /* ----- ----- Liste de points de l’enveloppe supérieure ----- ----- */
+
+    for (i = 0; i < 2; i++) {
+        node = newLNode(tab[i]);
+        listInsertLast(HSup, getLNodeData(node));
+    }
+
+    for (i = 2; i < N; i++) {
+        node = newLNode(tab[i]);
+        listInsertLast(HSup, getLNodeData(node));
+
+        PS = getLNodeData(Predecessor(Predecessor(Tail(HSup))));
+        PR = getLNodeData(Predecessor(Tail(HSup)));
+        PQ = getLNodeData(Tail(HSup));
+
+        while ((getListSize(HSup) > 2) && onLeft(PQ, PR, PS)) {
+            listRemoveNode(HSup, Predecessor(Tail(HSup)));
+        }
+    }
+
+    /* ----- ----- Liste de points de l’enveloppe inférieure ----- ----- */
+
+    for (i = (N - 1); i > (N - 3); i--) {
+        node = newLNode(tab[i]);
+        listInsertLast(HInf, getLNodeData(node));
+    }
+
+    for (i = (N - 3); i >= 0; i--) {
+        node = newLNode(tab[i]);
+        listInsertLast(HInf, getLNodeData(node));
+
+        PS = getLNodeData(Predecessor(Predecessor(Tail(HInf))));
+        PR = getLNodeData(Predecessor(Tail(HInf)));
+        PQ = getLNodeData(Tail(HInf));
+
+        while ((getListSize(HInf) > 2) && onLeft(PQ, PR, PS)) {
+            listRemoveNode(HInf, Predecessor(Tail(HInf)));
+        }
+    }
+
+    listRemoveLast(HSup);
+    listRemoveLast(HInf);
+
+    H = listConcatenate(HSup, HInf);
+
+    printf("\t-> viewList H :\n");
+    viewList(H);
+
+    writeSolution(outfilename, H);
+    printf("\n\n\t\tje t'aime Matthieu !!!!!!!!\n\n");
 }
 
 void RapidConvexHull(const char *infilename, const char *outfilename) {
-    // TODO
+    // TODO RapidConvexHull
+    assert(infilename);
+    assert(outfilename);
+
+
 }
