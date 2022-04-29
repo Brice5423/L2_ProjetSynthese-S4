@@ -15,6 +15,7 @@ USAGE
             s : SlowConvexHull
             c : ConvexHull
             r : RapidConvexHull
+            a : all
         sort :
             1 : CBTHeapSort
             2 : ArrayHeapSort
@@ -29,6 +30,7 @@ Pour utiliser :
 - **SlowConvexHull** : le mot clé correspondant est `s`
 - **ConvexHull**: le mot clé correspondant est `c`
 - **RapidConvexHull** : le mot clé correspondant est `r`
+- **TOUS** : exécuter tous les algorithmes.
 
 ### 1.2. Fichier d'entrée et de sortie
 Suivie de l'algorithme, utiliser entré les fichiers d'entrée et de sortie sous ce format :  
@@ -58,6 +60,8 @@ Voici plusieurs exemples d'utilisation pour les différents algorithmes
 `./convexhull c infilename outfilename 3`
 ### 2.3 RapidConvexHull
 `./convexhull r infilename outfilename`
+### 2.4 TOUS
+`./convexhull a infilename outfilename`
 
 
 
