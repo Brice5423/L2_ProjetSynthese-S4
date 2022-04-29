@@ -183,6 +183,7 @@ void freeArrayHeap(ArrayHeap *AH, int deletedata) {
     AH->freeHeapData = NULL;
 
     free(AH);
+    AH = NULL;
 }
 
 void *ArrayHeapExtractMin(ArrayHeap *AH) {
@@ -359,13 +360,13 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
         if (fdExiste) {
             if (preceed(dataFg, dataNode) && preceed(dataFg, dataFd)) {
                 // dans le cas où le fils gauche à la priorité sur le fils droit et le père
-                CBTreeSwapData(nodeFg, node);
                 updateCBTHeapDownwards(nodeFg, preceed);
+                CBTreeSwapData(nodeFg, node);
 
             } else if (preceed(dataFd, dataNode)) {
                 // dans le cas où le fils droit à la priorité sur le fils gauche et le père
-                CBTreeSwapData(nodeFd, node);
                 updateCBTHeapDownwards(nodeFd, preceed);
+                CBTreeSwapData(nodeFd, node);
             }
 
         } else {
@@ -424,4 +425,7 @@ void freeCBTHeap(CBTHeap *H, int deletenode) {
     H->freeHeapData = NULL;
 
     free(H);
+    H = NULL;
+
+
 }
