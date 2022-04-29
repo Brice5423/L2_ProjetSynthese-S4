@@ -109,32 +109,24 @@ void setTail(List *L, LNode *newTail) {
 
 void freeList(List *L, int deleteData) {
     assert(deleteData == 0 || deleteData == 1);
-    assert(L != NULL);
+    assert(L);
 
     LNode *node;
     LNode *next;
 
     node = Head(L);
 
-    if (deleteData == 1) {
-        while (node) {
-            next = Successor(node);
+    while (node) {
+        next = Successor(node);
+        if (deleteData == 1) {
             L->freeData(getLNodeData(node));
-            free(node);
-            node = next;
         }
-
-        free(L);
-
-    } else if (deleteData == 0) {
-        while (node) {
-            next = Successor(node);
-            free(node);
-            node = next;
-        }
-
-        free(L);
+        free(node);
+        node = next;
     }
+
+    free(L);
+    L = NULL;
 }
 
 void viewList(const List *L) {
@@ -268,49 +260,47 @@ void *listRemoveNode(List *L, LNode *node) {
 
     if (listIsEmpty(L)) {
         ShowMessage("La liste est vide", 0);
+    }
+
+    void *dataTemp;
+
+    dataTemp = getLNodeData(node);
+
+    if (node == Head(L)) {
+        listRemoveFirst(L);
+
+    } else if (node == Tail(L)) {
+        listRemoveLast(L);
 
     } else {
-        void *dataTemp;
+        setSuccessor(Predecessor(node), Successor(node));
+        setPredecessor(Successor(node), Predecessor(node));
 
-        dataTemp = getLNodeData(node);
-
-        if (node == Head(L)) {
-            listRemoveFirst(L);
-
-        } else if (node == Tail(L)) {
-            listRemoveLast(L);
-
-        } else {
-            setSuccessor(Predecessor(node), Successor(node));
-            setPredecessor(Successor(node), Predecessor(node));
-
-            free(node);
-            decreaseListSize(L);
-        }
-
-        return dataTemp;
+        free(node);
+        decreaseListSize(L);
     }
+
+    return dataTemp;
 }
 
 List *listConcatenate(List *L1, List *L2) {
     assert(L1);
     assert(L2);
 
-    if (!listIsEmpty(L1)) {
-        setSuccessor(Tail(L1), Head(L2));
-        setPredecessor(Head(L2), Tail(L1));
-        free(L2);
-        L2 = NULL;
-        return L1;
+    if (listIsEmpty(L1)) {
+        freeList(L1, 0);
+        return L2;
 
     } else if (listIsEmpty(L2)) {
-        free(L2);
-        L2 = NULL;
+        freeList(L2, 0);
         return L1;
 
     } else {
-        free(L1);
-        L1 = NULL;
-        return L2;
+        setSuccessor(Tail(L1), Head(L2));
+        setPredecessor(Head(L2), Tail(L1));
+        setListSize(L1, getListSize(L1) + getListSize(L2));
+        //Pas de freeList
+        free(L2);
+        return L1;
     }
 }
