@@ -8,10 +8,6 @@
 #include "tree.h"
 #include "util.h"
 
-// TODO
-int smallerPoint(const void *a, const void *b);
-int biggerPoint(const void *a, const void *b);
-
 /***************************************************
  * ARRAY HEAP
  ***************************************************/
