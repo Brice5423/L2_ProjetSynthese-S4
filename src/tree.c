@@ -140,7 +140,9 @@ static void freeTNode(TNode *node, void (*freeData)(void *)) {
     if (freeData) {
         (*freeData)(getTNodeData(node));
     }
+
     free(node);
+    node = NULL;
 }
 
 /**
@@ -166,6 +168,7 @@ void freeCBTree(CBTree *T, int deleteData) {
     T->freeData = NULL;
 
     free(T);
+    T = NULL;
 }
 
 /**
