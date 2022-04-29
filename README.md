@@ -51,11 +51,11 @@ Voici plusieurs exemples d'utilisation pour les différents algorithmes
 `./convexhull s infilename outfilename`
 ### 2.2 ConvexHull
 #### 2.2.1. CBTHeapSort
-`./convexhull s infilename outfilename 1`
+`./convexhull c infilename outfilename 1`
 #### 2.2.2. ArrayHeapSort
-`./convexhull s infilename outfilename 2`
+`./convexhull c infilename outfilename 2`
 #### 2.2.3. SelectionSort
-`./convexhull s infilename outfilename 3`
+`./convexhull c infilename outfilename 3`
 ### 2.3 RapidConvexHull
 `./convexhull r infilename outfilename`
 
