@@ -52,7 +52,6 @@ void CBTHeapSort(void **A, int N,
 }
 
 void SelectionSort(void **A, int N, int (*preceed)(const void *, const void *)) {
-    // TODO SelectionSort : à tester
     int i;
     int j;
     int posMin;
