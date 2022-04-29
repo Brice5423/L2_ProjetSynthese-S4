@@ -15,7 +15,6 @@ Point *newPoint(long long int x, long long int y) {
     P->y = y;
 
     return P;
-
 }
 
 long long int X(const Point *P) {
@@ -116,5 +115,4 @@ void freeDEdge(void *DE) {
     free(getOrigin(DE));
     free(DE);
     DE = NULL;
-
 }
