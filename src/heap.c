@@ -104,8 +104,9 @@ static void updateArrayHeapDownwards(ArrayHeap *AH, int pos) {
 }
 
 /**
- * On appel updateArrayHeapDownwards de telle sorte qu'il puisse ce lancer partout.\n
- * Il est possible que cette manière réduit des récurrence.
+ * On appel updateArrayHeapDownwards de telle sorte qu'il puisse ce lancer partout pour que \p AH soit un tas complet.\n
+ * On appel updateArrayHeapDownwards à tout les node se trouvent à la hauteur \p hauteur.\n
+ * \p hauteur est la dernier hauteur qui contient des node avec fils;
  *
  * @param[in] AH
  * @param[in] nbElem
@@ -117,7 +118,7 @@ static void organiseTableauEnTas(ArrayHeap *AH) {
     int i;
 
     hauteur = floor((log2(getAHActualSize(AH))));
-    nbElemHauteur = pow(2, hauteur - 1);
+    nbElemHauteur = (int) pow(2, hauteur - 1);
     nbElemHauteurMoinsUnARacine = nbElemHauteur - 1;
 
     for (i = 0; i < nbElemHauteur; i++) {
@@ -360,13 +361,13 @@ static void updateCBTHeapDownwards(TNode *node, int (*preceed)(const void *, con
         if (fdExiste) {
             if (preceed(dataFg, dataNode) && preceed(dataFg, dataFd)) {
                 // dans le cas où le fils gauche à la priorité sur le fils droit et le père
-                updateCBTHeapDownwards(nodeFg, preceed);
                 CBTreeSwapData(nodeFg, node);
+                updateCBTHeapDownwards(nodeFg, preceed);
 
             } else if (preceed(dataFd, dataNode)) {
                 // dans le cas où le fils droit à la priorité sur le fils gauche et le père
-                updateCBTHeapDownwards(nodeFd, preceed);
                 CBTreeSwapData(nodeFd, node);
+                updateCBTHeapDownwards(nodeFd, preceed);
             }
 
         } else {
@@ -426,6 +427,4 @@ void freeCBTHeap(CBTHeap *H, int deletenode) {
 
     free(H);
     H = NULL;
-
-
 }
