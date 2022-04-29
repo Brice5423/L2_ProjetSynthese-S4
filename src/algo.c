@@ -203,7 +203,7 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus petite que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-/*TODO static*/ int smallerPoint(const void *a, const void *b) {
+static int smallerPoint(const void *a, const void *b) {
     if (X(((Point *) a)) < X(((Point *) b))) {
         return 1;
 
@@ -225,7 +225,7 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-/*TODO static*/ int biggerPoint(const void *a, const void *b) {
+static int biggerPoint(const void *a, const void *b) {
     if (X(((Point *) a)) > X(((Point *) b))) {
         return 1;
 
