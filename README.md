@@ -4,25 +4,82 @@ Projet fait par :
 - [Brice ORLIANGE](mailto:briceorl54580@gmail.com), du groupe TP4
 - [Matthieu FRITSCH](mailto:mattfritsch98380@gmail.com), du groupe TP4
 
---------------------------------------
-# 1. Consigne d'exécution
-Voici les consignes d'exécution de ce projet
+________________________________________________________________________________________________________________________
 
-## 1.2. Arguments
-Voici une explication de chaque argument à utiliser pour lancer le projet
-### 1.2.1. Algorithme
+# Consigne d'exécution
+Voici les consignes d'exécution de ce projet.
+
+## 1. Arguments
+Voici une explication de chaque argument à utiliser pour lancer le projet.
+
+### 1.1. Algorithme
 Pour utiliser :
-- [SlowConvexHull] : le mot clé correspondant est ```slow```
-- [ConvexHull] : le mot clé correspondant est ```convex```
-- [RapidConvexHull] : le mot clé correspondant est ```rapid```
-### 1.2.2. Fichier d'entrée et de sortie
-Suivie de l'algorithme utiliser entrer les fichiers d'entrée et de sortie sous ce format :
-               ```infilename   outfilename``` 
-### 1.2.3. Selection du tri (pour ConvexHull)
+- [SlowConvexHull] : le mot clé correspondant est `slow`
+- [ConvexHull] : le mot clé correspondant est `convex`
+- [RapidConvexHull] : le mot clé correspondant est `rapid`
 
-## 1.3. Exemple
+### 1.2. Fichier d'entrée et de sortie
+Suivie de l'algorithme utiliser entrer les fichiers d'entrée et de sortie sous ce format :  
+```
+infilename outfilename
+``` 
 
---------------------------------------
+### 1.3. Selection du tri (pour ConvexHull)
+
+
+## 2. Exemple
+
+
+________________________________________________________________________________________________________________________
+
+#  DEBUT DU RAPPORT DE PROJET
+##  Introduction
+A travers ce rapport de projet de synthèse, 
+nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
+
+Tout d'abord nous allons vous présenter quels outils nous avons utilisés pour développer cette première partie, 
+notre outil de communication et notre outil de partage de code.
+
+Puis, nous allons vous présenter quelques fonctions que nous avons décidées au projet 
+afin de nous faciliter la tâche pour certaine tâches.
+
+Nous allons également vous présentez les difficultés que nous avons pu rencontrer au cours de la réalisation du projet.
+
+Enfin, nous vous proposerons quelques améliorations qui selon nous pourrait améliorer la réalisation de ce projet.
+
+Vous pourrez également retrouver la répartition des tâches au sein de notre groupe et nos avis personnels 
+pour chacun des points que nous allons traiter au cours du rapport. 
+
+##  Outils utilisés
+
+Liste des outils utilisés au cours du projet.
+
+- **CLion** : Développement de la partie en C du projet
+- **GitHub** : Outil pour partager notre code entre nous
+- **Discord** : Outil pour communiquer ensemble tout au long du projet
+
+##  Fonctions importantes 
+Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
+Voici la présentation de ces fonctions :
+
+##  Difficultés rencontrées 
+Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
+Voici une liste de quelques difficultés rencontrées avec leur explication.
+
+##  Améliorations possibles
+
+
+##  Répartition des tâches 
+
+##  Conclusion
+
+#  Compléxité du programme et temps d'éxécution
+
+##  Compléxité
+
+##  Temps d'éxécution 
+
+________________________________________________________________________________________________________________________
 
 # 2. Utilisation des commits
 Chaque étape correspond à comment on écrie un commit.
@@ -77,57 +134,3 @@ On recommence directement par indiquer l'importance puis son action pour montrer
 🟧 + fichier1 (fonction1) 🟩 - fichier1 (commantaire)
 ```
 > Le commit  indique que le `fichier1` à ajouté une fonction et qu'il a supprimé un commentaire.
-
---------------------------------------
-
-
-
-
-
-
-
-
-
-----------------------------------------
-#  DEBUT DU RAPPORT DE PROJET
-##  Introduction
-A travers ce rapport de projet de synthèse, nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
-
-Tout d'abord nous allons vous présenter quels outils nous avons utilisés pour développer cette première partie, notre outil de communication et notre outil de partage de code.
-
-Puis, nous allons vous présenter quelques fonctions que nous avons décidées au projet afin de nous faciliter la tâche pour certaine tâches.
-
-Nous allons également vous présentez les difficultés que nous avons pu rencontrer au cours de la réalisation du projet.
-
-Enfin, nous vous proposerons quelques améliorations qui selon nous pourrait améliorer la réalisation de ce projet.
-
-Vous pourrez également retrouver la répartition des tâches au sein de notre groupe et nos avis personnels pour chacun des points que nous allons traiter au cours du rapport. 
-
-##  Outils utilisés
-
-Liste des outils utilisés au cours du projet.
-
-- **CLion** : Développement de la partie en C du projet
-- **GitHub** : Outil pour partager notre code entre nous
-- **Discord** : Outil pour communiquer ensemble tout au long du projet
-
-##  Fonctions importantes 
-Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
-Voici la présentation de ces fonctions :
-
-##  Difficultés rencontrées 
-Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
-Voici une liste de quelques difficultés rencontrées avec leur explication.
-
-##  Améliorations possibles
-
-
-##  Répartition des tâches 
-
-##  Conclusion
-
-#  Compléxité du programme et temps d'éxécution
-
-##  Compléxité
-
-##  Temps d'éxécution 

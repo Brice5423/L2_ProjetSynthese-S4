@@ -50,7 +50,7 @@ int onRight(const Point *origin, const Point *destination, const Point *P) {
 }
 
 int onLeft(const Point *origin, const Point *destination, const Point *P) {
-    if ((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) > 0) {
+    if (((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin))) > 0) {
         return 1;
 
     } else {
@@ -59,7 +59,7 @@ int onLeft(const Point *origin, const Point *destination, const Point *P) {
 }
 
 int collinear(const Point *origin, const Point *destination, const Point *P) {
-    if ((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin)) == 0) {
+    if (((X(destination) - X(origin)) * (Y(P) - Y(origin)) - (Y(destination) - Y(origin)) * (X(P) - X(origin))) == 0) {
         return 1;
 
     } else {
