@@ -5,11 +5,29 @@ Projet fait par :
 - [Matthieu FRITSCH](mailto:mattfritsch98380@gmail.com), du groupe TP4
 
 --------------------------------------
+# 1. Consigne d'exécution
+Voici les consignes d'exécution de ce projet
 
-# 1. Utilisation des commits
+## 1.2. Arguments
+Voici une explication de chaque argument à utiliser pour lancer le projet
+### 1.2.1. Algorithme
+Pour utiliser :
+- [SlowConvexHull] : le mot clé correspondant est ```slow```
+- [ConvexHull] : le mot clé correspondant est ```convex```
+- [RapidConvexHull] : le mot clé correspondant est ```rapid```
+### 1.2.2. Fichier d'entrée et de sortie
+Suivie de l'algorithme utiliser entrer les fichiers d'entrée et de sortie sous ce format :
+               ```infilename   outfilename``` 
+### 1.2.3. Selection du tri (pour ConvexHull)
+
+## 1.3. Exemple
+
+--------------------------------------
+
+# 2. Utilisation des commits
 Chaque étape correspond à comment on écrie un commit.
 
-## 1.1. Importance des commits
+## 2.1. Importance des commits
 
 - 🟥 : Très important _(si notre vie était en jeu, très rare)_
 - 🟧 : Important _(fonction entière, code plus volumineux)_
@@ -18,13 +36,13 @@ Chaque étape correspond à comment on écrie un commit.
 
 > Les emojis 🟩, 🟨, 🟧, 🟥 sont obtenus avec la touche `windows` + `;`.
 
-## 1.2. Action des commits
+## 2.2. Action des commits
 
 - **+** : ajout
 - **~** : modification
 - **-** : suppression
 
-## 1.3. Fichier/dossier cible & Détaille
+## 2.3. Fichier/dossier cible & Détaille
 
 Pour savoir ce qu'on a fait après avoir indiqué l'importance du commit _(🟩, 🟨, 🟧, 🟥_ et quelle action _(+, ~, -)_,
 on indique dans quels fichiers ça était appliqué.  
@@ -39,17 +57,17 @@ S'il y a plusieurs fichier qui ont les mêmes détaille, on met un `+` entre cha
 ```
 > Le commit indique que le `fichier1` et le `fichier2` ont eu une modification dans leurs commentaires et un formatage.
 
-## 1.4. Importances et actions en commun
+## 2.4. Importances et actions en commun
 
 On met un `&` entre chaque fichier/dossier cible avec son détaille _(s'il y a)_ et on indique à nouveau la cible avec son détaille si besoin.
 
 **Exemple :**
 ```
-🟩 + fichier1 (commantaire) & fichier2 (format)
+🟩 + fichier1 (commentaire) & fichier2 (format)
 ```
 > Le commit indique que le `fichier1` à eu une modification dans ces commentaires et que le `fichier2` à fait un formatage.
 
-## 1.5. Importances et/ou actions différents
+## 2.5. Importances et/ou actions différents
 
 Après avoir donnée l'importance et l'action avec leurs cibles et détailles.  
 On recommence directement par indiquer l'importance puis son action pour montrer qu'on n'a pu la même importance et/ou action dans les cibles qui suivent.
@@ -62,8 +80,17 @@ On recommence directement par indiquer l'importance puis son action pour montrer
 
 --------------------------------------
 
-# 2. Rapport de projet
-## 2.1 Introduction
+
+
+
+
+
+
+
+
+----------------------------------------
+#  DEBUT DU RAPPORT DE PROJET
+##  Introduction
 A travers ce rapport de projet de synthèse, nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
 
 Tout d'abord nous allons vous présenter quels outils nous avons utilisés pour développer cette première partie, notre outil de communication et notre outil de partage de code.
@@ -76,7 +103,7 @@ Enfin, nous vous proposerons quelques améliorations qui selon nous pourrait am�
 
 Vous pourrez également retrouver la répartition des tâches au sein de notre groupe et nos avis personnels pour chacun des points que nous allons traiter au cours du rapport. 
 
-## 2.2 Outils utilisés
+##  Outils utilisés
 
 Liste des outils utilisés au cours du projet.
 
@@ -84,23 +111,23 @@ Liste des outils utilisés au cours du projet.
 - **GitHub** : Outil pour partager notre code entre nous
 - **Discord** : Outil pour communiquer ensemble tout au long du projet
 
-## 2.3 Fonctions importantes 
+##  Fonctions importantes 
 Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
 Voici la présentation de ces fonctions :
 
-## 2.4 Difficultés rencontrées 
+##  Difficultés rencontrées 
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
 Voici une liste de quelques difficultés rencontrées avec leur explication.
 
-## 2.5 Améliorations possibles
+##  Améliorations possibles
 
 
-## 2.6 Répartition des tâches 
+##  Répartition des tâches 
 
-## 2.7 Conclusion
+##  Conclusion
 
-# 3. Compléxité du programme et temps d'éxécution
+#  Compléxité du programme et temps d'éxécution
 
-## 3.1 Compléxité
+##  Compléxité
 
-## 3.2 Temps d'éxécution 
+##  Temps d'éxécution 
