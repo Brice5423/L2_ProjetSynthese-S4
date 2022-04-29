@@ -133,7 +133,6 @@ static List *DedgesToClockwisePoints(List *dedges) {
  */
 
 int nonEqualsPoint(const void *a, const void *b) {
-    //TODO : tester nonEqualsPoint
     if (X(a) != X(b)) {
         return 1;
 
@@ -191,6 +190,8 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
     }
 
     writeSolution(outfilename, DedgesToClockwisePoints(E));
+
+    freeList(E, 1);
 }
 
 /**
@@ -203,7 +204,6 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  * est plus petite que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
 static int smallerPoint(const void *a, const void *b) {
-    //TODO tester smallerPoint
     if (X(a) < X(b)) {
         return 1;
 
@@ -226,7 +226,6 @@ static int smallerPoint(const void *a, const void *b) {
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
 static int biggerPoint(const void *a, const void *b) {
-    //TODO tester biggerPoint
     if (X(a) > X(b)) {
         return 1;
 
@@ -315,6 +314,8 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
     H = listConcatenate(HSup, HInf);
 
     writeSolution(outfilename, H);
+
+    freeList(H, 1);
 }
 
 void RapidConvexHull(const char *infilename, const char *outfilename) {
@@ -370,4 +371,6 @@ void RapidConvexHull(const char *infilename, const char *outfilename) {
     listRemoveLast(H);
 
     writeSolution(outfilename, H);
+
+    freeList(H, 1);
 }
