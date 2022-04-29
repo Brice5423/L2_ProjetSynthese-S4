@@ -6,15 +6,16 @@
 
 
 Point *newPoint(long long int x, long long int y) {
-    Point *Point;
+    Point *P;
 
-    Point = calloc(1, sizeof(Point));
-    assert(Point);
+    P = (Point *) calloc(1, sizeof(Point));
+    assert(P);
 
-    Point->x = x;
-    Point->y = y;
+    P->x = x;
+    P->y = y;
 
-    return Point;
+    return P;
+
 }
 
 long long int X(const Point *P) {
@@ -86,7 +87,7 @@ int isIncluded(const Point *origin, const Point *destination, const Point *P) {
 DEdge *newDEdge(Point *origin, Point *destination) {
     DEdge *DE;
 
-    DE = calloc(1, sizeof(DEdge));
+    DE = (DEdge *) calloc(1, sizeof(DEdge));
     assert(DE);
 
     DE->origin = origin;
