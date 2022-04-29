@@ -92,7 +92,6 @@ static List *DedgesToClockwisePoints(List *dedges) {
     node = Head(dedges);
     lstPoint = newList(&viewPoint, &freePoint);
 
-    //listInsertFirst(lstPoint, getOrigin(getLNodeData(node)));
     listInsertFirst(lstPoint, getOrigin(getLNodeData(node)));
 
     while (Successor(node)) {
@@ -241,7 +240,6 @@ static int biggerPoint(const void *a, const void *b) {
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
-    //TODO tester ConvexHull 
     assert(infilename);
     assert(outfilename);
     assert(sortby == 1 || sortby == 2 || sortby == 3);
@@ -304,7 +302,7 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
         PR = getLNodeData(Predecessor(Tail(HInf)));
         PS = getLNodeData(Tail(HInf));
 
-        while ((getListSize(HInf) > 2) && onLeft(PQ, PR, PS)) {
+        while ((getListSize(HInf) > 2) && !onRight(PQ, PR, PS)) {
             listRemoveNode(HInf, Predecessor(Tail(HInf)));
         }
     }
@@ -318,7 +316,79 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
 }
 
 void RapidConvexHull(const char *infilename, const char *outfilename) {
-    // TODO RapidConvexHull le faire
     assert(infilename);
     assert(outfilename);
+
+    int i;
+    int N;
+
+    List *H;
+    Point **tab;
+
+    Point *min;
+
+    Point *P;
+    Point *A;
+    Point *B;
+
+    printf("\tCréation List\n");
+    H = newList(&viewPoint, &freePoint);
+    printf("\tReadInstance\n");
+    tab = readInstance(infilename, &N);
+
+    printf("\tPremier for...\n");
+    min = tab[0];
+    for(i = 1; i < N; i++){
+        printf("\t\tBoucle %d\n", i);
+        if(biggerPoint(min, tab[i])){
+            printf("\t\t\tif dans for 1\n");
+            min = tab[i];
+        }
+    }
+    printf("\tFin for 1\n");
+
+    printf("\tlistInsertLast de min\n");
+    listInsertLast(H, min);
+
+    viewList(H);
+
+    printf("\t\nAvant while\n");
+    do{
+        printf("\t\tDans le while\n");
+        printf("\t\tlistRemoveLast de H\n");
+
+        printf("\tlistInsertLast de tab[0]");
+        listInsertLast(H, tab[0]);
+
+
+        printf("\tBoucle for 2...\n");
+        for(i = 0; i < N; i++){
+            printf("\t\tBoucle %d\n", i);
+            P = tab[i];
+            A = getLNodeData(Predecessor(Tail(H)));
+            B = getLNodeData(Tail(H));
+
+            viewPoint(P);
+            viewList(H);
+
+            if (nonEqualsPoint(P, A) && nonEqualsPoint(P,B)){
+                printf("\t\t\tPremier if dans for 2\n");
+                if((!onRight(A,B,P) || isIncluded(A,B,P))){
+                    printf("\t\t\t\tSecond if dans for 2\n");
+
+                    printf("\t\t\t\tListRemoveLast de H\n");
+                    listRemoveLast(H);
+
+                    printf("\t\t\t\tListInsertLast de P\n");
+                    listInsertLast(H, P);
+                }
+            }
+        }
+        printf("\tFin for 2\n");
+    }while(nonEqualsPoint(getLNodeData(Head(H)), getLNodeData(Tail(H))));
+
+    listRemoveLast(H);
+
+    printf("\twriteSolution\n");
+    writeSolution(outfilename, H);
 }
