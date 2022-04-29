@@ -12,7 +12,7 @@ Voici les consignes d'exécution de ce projet.
 USAGE
     ./convexhull algo infilename outfilename sort
         algo :
-            s : SlowonvexHull
+            s : SlowConvexHull
             c : ConvexHull
             r : RapidConvexHull
         sort :
