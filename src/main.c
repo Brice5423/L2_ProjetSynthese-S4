@@ -43,8 +43,13 @@ int main(int argc, char *argv[]) {
         }
 
     } else {
+        /* Ce qui est en commentaire ci-dessous sont les cas qui pose problème.
+         * On ne sait pas s'ils ont une fin, mais ce qui est sur,
+         * c'est que l'utilisation de la RAM fait que d'augmenter !!!
+         * */
+
         RapidConvexHull("data/data1", "batterieTest/convex/rapidConvex_Data1");
-        RapidConvexHull("data/data2", "batterieTest/convex/rapidConvex_Data2");
+        //RapidConvexHull("data/data2", "batterieTest/convex/rapidConvex_Data2");
         RapidConvexHull("data/data3", "batterieTest/convex/rapidConvex_Data3");
         RapidConvexHull("data/data4", "batterieTest/convex/rapidConvex_Data4");
 
@@ -65,9 +70,9 @@ int main(int argc, char *argv[]) {
         ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy3", 3);
 
         SlowConvexHull("data/data1", "batterieTest/convex/slowConvex_Data1");
-        SlowConvexHull("data/data2", "batterieTest/convex/slowConvex_Data2");
-        SlowConvexHull("data/data3", "batterieTest/convex/slowConvex_Data3");
-        SlowConvexHull("data/data4", "batterieTest/convex/slowConvex_Data4");
+        //SlowConvexHull("data/data2", "batterieTest/convex/slowConvex_Data2");
+        //SlowConvexHull("data/data3", "batterieTest/convex/slowConvex_Data3");
+        //SlowConvexHull("data/data4", "batterieTest/convex/slowConvex_Data4");
     }
 
 

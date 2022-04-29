@@ -6,6 +6,18 @@ Projet fait par :
 
 ________________________________________________________________________________________________________________________
 
+# ⚠️ Indication pour le prof ‼️️⚠️
+
+On a un problème incompréhensible, on ne connait pas la cause. On le signale, car il peut être **dangereux pour la RAM**.  
+Pour certains jeux de point **l'exécution ne se termine pas** et **l'utilisation de la RAM fait que d'augmenter**.
+Les jeux en questions sont :
+ - `RapidConvexHull` avec la `data2`.
+ - `SlowConvexHull` avec la `data2`, la `data3` et la `data4`
+
+> On voulait juste signalé cette erreur "minime" pour éviter tout préjudice de votre coté. 😁 😀
+
+________________________________________________________________________________________________________________________
+
 # Consigne d'exécution
 Voici les consignes d'exécution de ce projet.  
 
@@ -19,13 +31,13 @@ make; ./convexhull algo infilename outfilename sort
 Voici une explication de chaque argument à utiliser pour lancer le projet.
 
 ### 2.1. Choix de l'algorithme `algo`
-- `s` : correspond à **SlowConvexHull**.
-- `c` : correspond à **ConvexHull**, on a besoin du `sort` :
-  - `1` : CBTHeapSort
-  - `2` : ArrayHeapSort
-  - `3` : SelectionSort
-- `r` : correspond à **RapidConvexHull**.
-- `a` : correspond à **All**. _(execute tous les algorithmes avec les 4 fichiers data donnés)_
+ - `s` : correspond à **SlowConvexHull**.
+   - `c` : correspond à **ConvexHull**, on a besoin du `sort` :
+   - `1` : CBTHeapSort
+   - `2` : ArrayHeapSort
+   - `3` : SelectionSort
+ - `r` : correspond à **RapidConvexHull**.
+ - `a` : correspond à **All**. _(execute tous les algorithmes avec les 4 fichiers data donnés)_
 
 ### 2.2. Fichier d'entrée et de sortie
 Suivie de l'algorithme, utiliser entré les fichiers d'entrée et de sortie sous ce format :  
@@ -70,16 +82,16 @@ pour chacun des points que nous allons traiter au cours du rapport.
 
 ## 2. Outils utilisés
 Liste des outils utilisés au cours du projet :
-- **CLion** : Développement de la partie en C du projet
-  - **Code With Me** : Outil collaboratif de JetBrain.  
-  _(Mélange du style CLion pour le code & Google Doc pour le partage)_
-- **GitHub** : Outil pour partager notre code entre nous.
-- **Discord** : Outil pour communiquer ensemble tout au long du projet.
+ - **CLion** : Développement de la partie en C du projet
+   - **Code With Me** : Outil collaboratif de JetBrain.  
+   _(Mélange du style CLion pour le code & Google Doc pour le partage)_
+ - **GitHub** : Outil pour partager notre code entre nous.
+ - **Discord** : Outil pour communiquer ensemble tout au long du projet.
 
 ## 3. Fonctions importantes
 Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
 Voici la présentation de ces fonctions :
-- `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`. Il y a une doc liée avec la fonction.
+ - `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`. Il y a une doc liée avec la fonction.
 
 ## 4. Difficultés rencontrées
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
@@ -128,18 +140,18 @@ Chaque étape correspond à comment on écrie un commit.
 
 ## 1. Importance des commits
 
-- 🟥 : Très important _(si notre vie était en jeu, très rare)_
-- 🟧 : Important _(fonction entière, code plus volumineux)_
-- 🟨 : Normale _(fonction partielle, code peu volumineux)_
-- 🟩 : Peu important _(commentaire, formatage, renommage, norme de codage, etc.)_
+ - 🟥 : Très important _(si notre vie était en jeu, très rare)_
+ - 🟧 : Important _(fonction entière, code plus volumineux)_
+ - 🟨 : Normale _(fonction partielle, code peu volumineux)_
+ - 🟩 : Peu important _(commentaire, formatage, renommage, norme de codage, etc.)_
 
 > Les emojis 🟩, 🟨, 🟧, 🟥 sont obtenus avec la touche `windows` + `;`.
 
 ## 2. Action des commits
 
-- **+** : ajout
-- **~** : modification
-- **-** : suppression
+ - **+** : ajout
+ - **~** : modification
+ - **-** : suppression
 
 ## 3. Fichier/dossier cible & Détaille
 
