@@ -94,7 +94,7 @@ typedef struct List {
 } List;
 
 /**
- * @brief Construit et initialise une liste vide.
+ * @brief Construit et initialise une liste vide.\n
  * 
  * Les deux pointeurs de fonction passés en paramètre indiquent
  * de façon implicite le type de la donnée de la liste créée.

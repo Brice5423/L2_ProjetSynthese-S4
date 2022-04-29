@@ -7,8 +7,8 @@
  */
 
 /**
- * @brief Structure qui correspond à un point contenant:
- * (+) l'abscisse, et
+ * @brief Structure qui correspond à un point contenant :\n
+ * (+) l'abscisse, et\n
  * (+) l'ordonnée.
  */
 typedef struct {
@@ -102,8 +102,8 @@ int collinear(const Point *origin, const Point *destination, const Point *P);
 int isIncluded(const Point *origin, const Point *destination, const Point *P);
 
 /**
- * @brief Structure qui correspond à une arête orientée (arc) contenant:
- * (+) le point d'origine, et
+ * @brief Structure qui correspond à une arête orientée (arc) contenant :\n
+ * (+) le point d'origine, et\n
  * (+) le point de destination.
  */
 typedef struct DirectedEdge {
