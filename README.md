@@ -8,26 +8,57 @@ ________________________________________________________________________________
 
 # Consigne d'exécution
 Voici les consignes d'exécution de ce projet.
+```
+USAGE
+    ./convexhull algo infilename outfilename sort
+        algo :
+            s : SlowonvexHull
+            c : ConvexHull
+            r : RapidConvexHull
+        sort :
+            1 : CBTHeapSort
+            2 : ArrayHeapSort
+            3 : SelectionSort
+```
 
 ## 1. Arguments
 Voici une explication de chaque argument à utiliser pour lancer le projet.
 
 ### 1.1. Algorithme
 Pour utiliser :
-- [SlowConvexHull] : le mot clé correspondant est `slow`
-- [ConvexHull] : le mot clé correspondant est `convex`
-- [RapidConvexHull] : le mot clé correspondant est `rapid`
+- **SlowConvexHull** : le mot clé correspondant est `s`
+- **ConvexHull**: le mot clé correspondant est `c`
+- **RapidConvexHull** : le mot clé correspondant est `r`
 
 ### 1.2. Fichier d'entrée et de sortie
-Suivie de l'algorithme utiliser entrer les fichiers d'entrée et de sortie sous ce format :  
+Suivie de l'algorithme, utiliser entré les fichiers d'entrée et de sortie sous ce format :  
 ```
 infilename outfilename
 ``` 
 
 ### 1.3. Selection du tri (pour ConvexHull)
 
+- **CBTHeapSort** : le numéro sera `1`
+- **ArrayHeapSort** : le numéro sera `2`
+- **SelectionSort** : le numéro sera `3`
+
+### 1.4 Make
+Avant d'exécuter le programme ne pas oublier de faire un `make` pour compiler le projet.
 
 ## 2. Exemple
+Voici plusieurs exemples d'utilisation pour les différents algorithmes
+### 2.1. SlowConvexHull
+`./convexhull s infilename outfilename`
+### 2.2 ConvexHull
+#### 2.2.1. CBTHeapSort
+`./convexhull s infilename outfilename 1`
+#### 2.2.2. ArrayHeapSort
+`./convexhull s infilename outfilename 2`
+#### 2.2.3. SelectionSort
+`./convexhull s infilename outfilename 3`
+### 2.3 RapidConvexHull
+`./convexhull r infilename outfilename`
+
 
 
 ________________________________________________________________________________________________________________________
