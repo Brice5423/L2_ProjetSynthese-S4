@@ -106,7 +106,15 @@ int main(int argc, char *argv[]) {
 
     printf("\n\tLibération de la mémoire :\n");
     freeArrayHeap(AH, 1);
-    free(A);
+    //free(A);
+
+    // On doit le faire car c'est des variables qu'on retirer de l'ArrayHeap
+    free(a);
+    free(b);
+    free(c);
+    free(d);
+    free(e);
+    free(f);
 
     return EXIT_SUCCESS;
 }
