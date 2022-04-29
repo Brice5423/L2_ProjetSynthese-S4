@@ -289,18 +289,23 @@ List *listConcatenate(List *L1, List *L2) {
 
     if (listIsEmpty(L1)) {
         freeList(L1, 0);
+
         return L2;
 
     } else if (listIsEmpty(L2)) {
         freeList(L2, 0);
+
         return L1;
 
     } else {
         setSuccessor(Tail(L1), Head(L2));
         setPredecessor(Head(L2), Tail(L1));
         setListSize(L1, getListSize(L1) + getListSize(L2));
-        //Pas de freeList
+
+        // Libération : Pas de freeList sinon on supprime les nodes;
         free(L2);
+        L2 = NULL;
+
         return L1;
     }
 }

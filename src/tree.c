@@ -108,7 +108,9 @@ void setRoot(CBTree *T, TNode *newRoot) {
             (*T->freeData)(getTNodeData(root));
             setLeft(root, NULL);
             setRight(root, NULL);
+
             free(root);
+            root = NULL;
         }
     }
 
@@ -376,7 +378,9 @@ static TNode *removeLastTNode(TNode *node, int position, void **data) {
 
     if (position == 0) {
         *data = getTNodeData(node);
+
         free(node);
+        node = NULL;
 
         return NULL;
 
@@ -458,16 +462,16 @@ static TNode *getLastTNode(TNode *node, int position) {
 
         if (k <= t) {
             // A gauche de la node
-            return getLastTNode(Left(node), (nbNode - pow(2, h - 2) - 1));
+            return getLastTNode(Left(node), ((int) (nbNode - pow(2, h - 2) - 1)));
         } else {
             // A droite de la node
-            return getLastTNode(Right(node), (nbNode - pow(2, h - 1) - 1));
+            return getLastTNode(Right(node), ((int) (nbNode - pow(2, h - 1) - 1)));
         }
     }
 }
 
 /**
- * NB : Utilisez la procédure récursive getLastTNode afin de lancer la recherche.
+ * NB : Utilisez la procédure récursive getLastTNode à fin de lancer la recherche.
  */
 TNode *CBTreeGetLast(CBTree *T) {
     assert(T);
@@ -478,6 +482,7 @@ TNode *CBTreeGetLast(CBTree *T) {
 
     if (tailleArbre) {
         return getLastTNode(Root(T), (getCBTreeSize(T) - 1));
+
     } else {
         return NULL;
     }
