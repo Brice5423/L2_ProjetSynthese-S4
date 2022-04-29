@@ -61,6 +61,12 @@ int main(int argc, char *argv[]) {
     free(d);
     free(e);
     free(f);
+    free(g);
+    free(h);
+    free(i);
+    free(j);
+    free(k);
+    free(l);
 
     return EXIT_SUCCESS;
 }

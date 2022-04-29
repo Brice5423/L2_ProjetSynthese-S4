@@ -10,7 +10,7 @@
 #include "../include/algo.h"
 
 int main(int argc, char *argv[]) {
-    int N = 6;
+    int N = 12;
     void **A = (void **) calloc(N, sizeof(int *));
     assert(A);
 
@@ -20,20 +20,38 @@ int main(int argc, char *argv[]) {
     int *d = (int *) calloc(1, sizeof(int));
     int *e = (int *) calloc(1, sizeof(int));
     int *f = (int *) calloc(1, sizeof(int));
+    int *g = (int *) calloc(1, sizeof(int));
+    int *h = (int *) calloc(1, sizeof(int));
+    int *j = (int *) calloc(1, sizeof(int));
+    int *k = (int *) calloc(1, sizeof(int));
+    int *l = (int *) calloc(1, sizeof(int));
+    int *m = (int *) calloc(1, sizeof(int));
 
     *a = 0;
     *b = 1;
-    *c = 2;
+    *c = 8;
     *d = 3;
-    *e = 4;
+    *e = 11;
     *f = 5;
+    *g = 2;
+    *h = 10;
+    *j = 6;
+    *k = 4;
+    *l = 7;
+    *m = 9;
 
-    A[0] = c; // = 2
-    A[1] = a; // = 0
-    A[2] = e; // = 4
-    A[3] = b; // = 1
-    A[4] = f; // = 5
-    A[5] = d; // = 3
+    A[0] = a;
+    A[1] = b;
+    A[2] = c;
+    A[3] = d;
+    A[4] = e;
+    A[5] = f;
+    A[6] = g;
+    A[7] = h;
+    A[8] = j;
+    A[9] = k;
+    A[10] = l;
+    A[11] = m;
 
     printf("\nIl y a %d argument et argv[0] : %s\n\n", argc, argv[0]);
 
@@ -56,6 +74,12 @@ int main(int argc, char *argv[]) {
     free(d);
     free(e);
     free(f);
+    free(g);
+    free(h);
+    free(j);
+    free(k);
+    free(l);
+    free(m);
 
     return EXIT_SUCCESS;
 }
