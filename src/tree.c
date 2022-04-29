@@ -3,7 +3,7 @@
 /********************************************************************
  * TNode
  ********************************************************************/
-
+//TODO : commenter
 TNode *newTNode(void *data) {
     assert(data);
 
@@ -120,9 +120,9 @@ void setRoot(CBTree *T, TNode *newRoot) {
  * Dans le cas où le pointeur de fonction \p freeData n'est pas NULL,
  * la mémoire de la donnée du nœud actuel est aussi libérée.\n
  * NB : procédure récursive.
- * 
- * @param[in] node 
- * @param[in] freeData 
+ *
+ * @param[in] node
+ * @param[in] freeData
  */
 static void freeTNode(TNode *node, void (*freeData)(void *)) {
     assert(node);
@@ -173,9 +173,9 @@ void freeCBTree(CBTree *T, int deleteData) {
  * en réalisant un parcours préfixé.\n
  * Les données de chaque nœud sont afficher en utilisant le
  * pointer de fonction \p viewData.
- * 
- * @param[in] node 
- * @param[in] viewData 
+ *
+ * @param[in] node
+ * @param[in] viewData
  */
 static void preorder(TNode *node, void (*viewData)(const void *)) {
     assert(node);
@@ -199,9 +199,9 @@ static void preorder(TNode *node, void (*viewData)(const void *)) {
  * en réalisant un parcours infixé.\n
  * Les données de chaque nœud sont afficher en utilisant le
  * pointer de fonction \p viewData.
- * 
- * @param[in] node 
- * @param[in] viewData 
+ *
+ * @param[in] node
+ * @param[in] viewData
  */
 static void inorder(TNode *node, void (*viewData)(const void *)) {
     assert(node);
@@ -225,9 +225,9 @@ static void inorder(TNode *node, void (*viewData)(const void *)) {
  * en réalisant un parcours postfixé.\n
  * Les données de chaque nœud sont afficher en utilisant le
  * pointer de fonction \p viewData.
- * 
- * @param[in] node 
- * @param[in] viewData 
+ *
+ * @param[in] node
+ * @param[in] viewData
  */
 static void postorder(TNode *node, void (*viewData)(const void *)) {
     assert(node);
@@ -277,7 +277,7 @@ void viewCBTree(const CBTree *T, int order) {
  * La position (par rapport à la racine \p node) où le nouveau nœud
  * va être insérer est indiquée par le paramètre \p position.\n
  * (voir la figure ci-dessous pour la définition de la position)\n
- *  
+ *
  *          0
  *       /     \
  *      1       2
@@ -285,7 +285,7 @@ void viewCBTree(const CBTree *T, int order) {
  *    3   4   5   6
  *   / \
  *  7  ...
- * 
+ *
  * @param[in] node La racine de l'arbre actuel.
  * @param[in] position La position du nouveau élément par rapport à la racine \p node.
  * @param[in] data La donnée à insérer.
@@ -349,7 +349,7 @@ void CBTreeInsert(CBTree *T, void *data) {
  * est indiquée par le paramètre \p position
  * (voir la figure ci-dessous pour la définition de la position).
  * La mémoire du dernier nœud est libérée mais pas la mémoire de sa donnée.
- *  
+ *
  *          0
  *       /     \
  *      1       2
@@ -423,7 +423,7 @@ void *CBTreeRemove(CBTree *T) {
  * La position (par rapport à la racine \p node) de ce dernier nœud
  * est indiquée par le paramètre \p position\n
  * (voir la figure ci-dessous pour la définition de la position).\n
- *  
+ *
  *          0
  *       /     \
  *      1       2
@@ -431,7 +431,7 @@ void *CBTreeRemove(CBTree *T) {
  *    3   4   5   6
  *   / \
  *  7  ...
- * 
+ *
  * @param node La racine de l'arbre actuel.
  * @param position La position du dernier nœud par rapport à la racine \p node.
  * @return TNode* Le dernier nœud de l'arbre.

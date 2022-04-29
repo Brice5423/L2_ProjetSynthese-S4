@@ -241,6 +241,7 @@ static int biggerPoint(const void *a, const void *b) {
 }
 
 void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
+    //TODO tester ConvexHull
     assert(infilename);
     assert(outfilename);
     assert(sortby == 1 || sortby == 2 || sortby == 3);
@@ -320,8 +321,4 @@ void RapidConvexHull(const char *infilename, const char *outfilename) {
     // TODO RapidConvexHull
     assert(infilename);
     assert(outfilename);
-
-
-
-
 }

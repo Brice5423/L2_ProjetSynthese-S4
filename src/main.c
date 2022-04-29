@@ -28,5 +28,7 @@ int main(int argc, char *argv[]) {
     ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy2", 2);
     ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy3", 3);
 
+
+
     return EXIT_SUCCESS;
 }
