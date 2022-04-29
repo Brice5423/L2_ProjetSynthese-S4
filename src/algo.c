@@ -203,12 +203,12 @@ void SlowConvexHull(const char *infilename, const char *outfilename) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus petite que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-static int smallerPoint(const void *a, const void *b) {
-    if (X(a) < X(b)) {
+/*TODO static*/ int smallerPoint(const void *a, const void *b) {
+    if (X(((Point *) a)) < X(((Point *) b))) {
         return 1;
 
-    } else if (X(a) == X(b)) {
-        if (Y(a) < Y(b)) {
+    } else if (X(((Point *) a)) == X(((Point *) b))) {
+        if (Y(((Point *) a)) < Y(((Point *) b))) {
             return 1;
         }
     }
@@ -225,12 +225,12 @@ static int smallerPoint(const void *a, const void *b) {
  * renvoie 1, sinon renvoie 0. Dans le cas d'égalité, si l'ordonnée de \p a
  * est plus grande que l'ordonnée de \p b renvoie 1, sinon renvoie 0.
  */
-static int biggerPoint(const void *a, const void *b) {
-    if (X(a) > X(b)) {
+/*TODO static*/ int biggerPoint(const void *a, const void *b) {
+    if (X(((Point *) a)) > X(((Point *) b))) {
         return 1;
 
-    } else if (X(a) == X(b)) {
-        if (Y(a) > Y(b)) {
+    } else if (X(((Point *) a)) == X(((Point *) b))) {
+        if (Y(((Point *) a)) > Y(((Point *) b))) {
             return 1;
         }
     }
@@ -261,10 +261,10 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
     HInf = newList(&viewPoint, &freePoint);
 
     if (sortby == 1) {
-        ArrayHeapSort(((void **) tab), N, &biggerPoint, &viewPoint, &freePoint);
+        CBTHeapSort(((void **) tab), N, &smallerPoint, &viewPoint, &freePoint);
 
     } else if (sortby == 2) {
-        CBTHeapSort(((void **) tab), N, &smallerPoint, &viewPoint, &freePoint);
+        ArrayHeapSort(((void **) tab), N, &biggerPoint, &viewPoint, &freePoint);
 
     } else {
         SelectionSort(((void **) tab), N, &smallerPoint);
@@ -272,9 +272,8 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
 
     /* ----- ----- Liste de points de l’enveloppe supérieure ----- ----- */
 
-    for (i = 0; i < 2; i++) {
-        listInsertLast(HSup, tab[i]);
-    }
+    listInsertLast(HSup, tab[0]);
+    listInsertLast(HSup, tab[1]);
 
     for (i = 2; i < N; i++) {
         listInsertLast(HSup, tab[i]);
@@ -290,9 +289,8 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
 
     /* ----- ----- Liste de points de l’enveloppe inférieure ----- ----- */
 
-    for (i = (N - 1); i > (N - 3); i--) {
-        listInsertLast(HInf, tab[i]);
-    }
+    listInsertLast(HInf, tab[(N - 1)]);
+    listInsertLast(HInf, tab[(N - 2)]);
 
     for (i = (N - 3); i >= 0; i--) {
         listInsertLast(HInf, tab[i]);
@@ -301,7 +299,7 @@ void ConvexHull(const char *infilename, const char *outfilename, int sortby) {
         PR = getLNodeData(Predecessor(Tail(HInf)));
         PS = getLNodeData(Tail(HInf));
 
-        while ((getListSize(HInf) > 2) && !onRight(PQ, PR, PS)) {
+        while ((getListSize(HInf) > 2) && onLeft(PQ, PR, PS)) {
             listRemoveNode(HInf, Predecessor(Tail(HInf)));
         }
     }
@@ -345,8 +343,6 @@ void RapidConvexHull(const char *infilename, const char *outfilename) {
 
     listInsertLast(H, min);
 
-    viewList(H);
-
     do {
         listInsertLast(H, tab[0]);
 
@@ -354,9 +350,6 @@ void RapidConvexHull(const char *infilename, const char *outfilename) {
             P = tab[i];
             A = getLNodeData(Predecessor(Tail(H)));
             B = getLNodeData(Tail(H));
-
-            viewPoint(P);
-            viewList(H);
 
             if (nonEqualsPoint(P, A) && nonEqualsPoint(P, B)) {
                 if ((!onRight(A, B, P) || isIncluded(A, B, P))) {

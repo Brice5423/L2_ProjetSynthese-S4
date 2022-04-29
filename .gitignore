@@ -1,4 +1,5 @@
 .idea/
 obj/
 convexhull
+./batterieTest/convex
 src/main.c
