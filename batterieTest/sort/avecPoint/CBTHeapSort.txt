@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "../include/util.h"
+#include "../include/list.h"
+#include "../include/tree.h"
+#include "../include/heap.h"
+#include "../include/sort.h"
+#include "../include/geometry.h"
+#include "../include/algo.h"
+
+int main(int argc, char *argv[]) {
+    int N = 12;
+    void **A = (void **) calloc(N, sizeof(int *));
+    assert(A);
+
+    Point *a = newPoint(0, 5);
+    Point *b = newPoint(4, 7);
+    Point *c = newPoint(5, 10);
+    Point *d = newPoint(3, 6);
+    Point *e = newPoint(7, 6);
+    Point *f = newPoint(4, 3);
+    Point *g = newPoint(10, 5);
+    Point *h = newPoint(6, 7);
+    Point *i = newPoint(7, 4);
+    Point *j = newPoint(6, 3);
+    Point *k = newPoint(3, 4);
+    Point *l = newPoint(5, 0);
+
+    A[0] = j;
+    A[1] = d;
+    A[2] = i;
+    A[3] = b;
+    A[4] = e;
+    A[5] = h;
+    A[6] = f;
+    A[7] = g;
+    A[8] = c;
+    A[9] = a;
+    A[10] = l;
+    A[11] = k;
+
+    printf("\nIl y a %d argument et argv[0] : %s\n\n", argc, argv[0]);
+
+    printf("\tLance CBTHeapSort :\n");
+    CBTHeapSort(A, N, &smallerPoint, &viewPoint, &free);
+    printf("Affiche la table :\n[ ");
+    for (int i = 0; i < N; i++) {
+        viewPoint(A[i]);
+        if ((i + 1) < N) {
+            printf("; ");
+        }
+    }
+    printf(" ]\n");
+
+    free(A);
+
+    free(a);
+    free(b);
+    free(c);
+    free(d);
+    free(e);
+    free(f);
+
+    return EXIT_SUCCESS;
+}
