@@ -67,7 +67,7 @@ Voici plusieurs exemples d'utilisation pour les différents algorithmes
 ________________________________________________________________________________________________________________________
 
 # RAPPORT DE PROJET
-
+> Ce rapport est la version pour le README du projet !
 
 ## 1. Introduction
 A travers ce rapport de projet de synthèse, nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
@@ -126,17 +126,56 @@ Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes 
 
 ## 5. Complexité & temps d'exécution
 
-### 5.1. Complexité des 3 tries _(Convex)_
+### 5.1. Complexité du ConvexHull
 Calcule de la complexité du ConvexHull en fonction des 3 tris _(sélection, tas tableau et tas arbre)_.
 
-##### Complexité   
- - **tri par sélection** :
- - **tri par tas _(tableau)_** :
- - **trie par tas _(arbre)_** :
+#### 5.1.1. Complexité du ConvexHull sans tri
+On commence par calculé la complexité de la fonction `ConvexHull`  dans le pire des cas sans prendre en compte du tri.  
+
+La complexité du `ConvexHull`, est de **N**.
+
+**Explication** :  
+Sa complexité est de **N**, car il y a la présence _(direct ou par appel de fonction)_ de plusieurs boucles "simples" de complexité de **N** chacune.  
+On ne trouve rien d'autre qui a une complexité supérieur à N dans le rest de la fonction `ConvexHull`.
+
+**Détail rapide des calculs** :  
+````c
+C(readInstance) + 2 * (C(for) + C(while)) + C(writeSolution) + C(freeList)
+= N + C(tri) + 2 * ((N - 2) + (N - (N - 4))) + 2N + 2N // (N - 2) + (N - 4) C'est un extreme ++
+= N + C(tri) + 2 * N + 2N + 2N
+= 7N + C(tri) // On oublie le C(tri)
+= N
+````
+
+#### 5.1.2. Complexité des tris
+Voici la complexité de chaque tri de manière indépendante.
+
+- **trie par arbre en tas** : N  
+  Car il y a deux boucles `for` qui s'exécute **N fois** à la suite qui donne **2N** en complexité.
+- **tri par tableau en tas** : N  
+  Car il y a une présence d'une boucle qui s'exécute **N fois**.
+- **tri par sélection** : N  
+  Car il y a une boucle `for` à **N - i répétition** dans une boucle à **N répétition**.
+  `i` est la nième itération du premier `for`.  
+  Donc la complexité de la double boucle est de `N + (N - 1) + (N - 2) + (N - 3) + ...`
+
+> Si on regarde avec un peu plus de détail, on remarque que le tri le plus optimal est le **tri par tableau en tas**.  
+> La version la plus gourmande est avec le tri par sélection.
+
+#### 5.1.3. Complexité du ConvexHull avec tri
+Voici la complexité de chaque `ConvexHull` avec leur tri inclus.
+
+- **trie par arbre en tas** : N  
+  Car `C(ConvexHull sans tri) + C(tri) = N + N = N`.
+- **tri par tableau en tas** : N  
+  Car `C(ConvexHull sans tri) + C(tri) = N + N = N`.
+- **tri par sélection** : N  
+  Car `C(ConvexHull sans tri) + C(tri) = N + N = N`.
+
 
 ### 5.2. Temps d'exécution des 3 tries _(Convex)_
 
-#### 5.2.1 CBTHeapSort
+#### 5.2.1. CBTHeapSort
 - **data1** : 0.001234 sec
 - **data2** : 0.001220 sec
 - **data3** : 0.001096 sec
@@ -154,30 +193,40 @@ Calcule de la complexité du ConvexHull en fonction des 3 tris _(sélection, tas
 - **data3** : 0.001200 sec
 - **data4** : 0.001127 sec
 
-#### 5.2.4. Moyenne
-Pour avoir une idée de quel des 3 tries est le plus performent,
+#### 5.2.4. Moyenne du temps
+Pour avoir une idée de quel des 3 tries est le plus performent dans notre programme,
 on va faire la moyenne de chaque résultat en fonction de chaque type de tri.  
 
 Les moyennes sont :
- - **CBTHeapSort** : 0.001173 sec
- - **ArrayHeapSort** : 0.001140 sec
- - **SelectionSort** : 0.001110 sec
+- **ArrayHeapSort** : 0.001140 sec
+- **CBTHeapSort** : 0.001173 sec
+- **SelectionSort** : 0.001110 sec
 
-> Le tri le plus efficace est le tri par `SelectionSort` _(0.001110 sec)_ 
-> suivie par le tri `ArrayHeapSort` _(0.001140 sec)_ 
-> et avec le plus lent le tri par `CBTHeapSort` _(0.001173 sec)_.
+> Le tri le plus efficace d'après notre exécution de notre code est le tri par `SelectionSort` _(0.001110 sec)_.
+> Cela est contradictoire avec la complexité calculée avant.  
+> L'erreur est du au problème qu'on a dans notre code. 
+> Pour rappel, notre code ne renvoie pas les bons résultats, donc pas fiable à 100%.
 
-### 5.3. Complexité des 3 trie
+#### 5.2.5. Graphe
+
+# !!! Mettre en place un graphe et expliqué pq avoir pris ça !!!
+
+### 5.3. Complexité des 3 ConvexHull
 Dans le cas du ConvexHull, on prend le tie le plus efficace des 3 tries proposés.  
-Donc on prend le tri par `SelectionSort`.
+Donc on prend le tri par `ArrayHeapSort`.
 
 ##### Complexité
-- **RapidConvexHull** :
-- **ConvexHull** :
-- **SlowConvexHull** :
+- **RapidConvexHull** : N²  
+  Car il y a une boucle `for` dans une boucle `do while`. 
+  Le `for` fait N fois, le `do while` fait aussi N fois dans le pire des cas, on a donc `N * N`.
+- **ConvexHull** : N
+- **SlowConvexHull** : N^3  
+  Car il y a une boucle `for` dans une boucle `for` qui est dans une boucle `for`.  
+  Chaque boucle `for` dont N boucles, qui donne `N * N * N`.
+  
 
-### 5.4. Temps d'exécution des 3 tries
-Dans le cas du ConvexHull, on prend le tri par `SelectionSort`.
+### 5.4. Temps d'exécution des 3 ConvexHull
+Dans le cas du ConvexHull, on prend le tri par `ArrayHeapSort`.
 
 #### 5.4.1. RapidConvexHull
 - **data1** : 0.000787 sec
@@ -186,16 +235,20 @@ Dans le cas du ConvexHull, on prend le tri par `SelectionSort`.
 - **data4** : 0.001237 sec
 
 #### 5.4.2. ConvexHull
-- **data1** : 0.001234 sec
-- **data2** : 0.000882 sec
-- **data3** : 0.001200 sec
-- **data4** : 0.001127 sec
+- **data1** : 0.001275 sec
+- **data2** : 0.000681 sec
+- **data3** : 0.001346 sec
+- **data4** : 0.001261 sec
 
-#### 5.2.3. SlowConvexHull
+#### 5.4.3. SlowConvexHull
 - **data1** : 0.001416 sec
 - **data2** : _INFINI_
 - **data3** : _INFINI_
 - **data4** : _INFINI_
+
+#### 5.4.4. Graphe
+
+# !!! Mettre en place un graphe et expliqué pq avoir pris ça !!!
 
 
 ## 6. Difficultés rencontrées
