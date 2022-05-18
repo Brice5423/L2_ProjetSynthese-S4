@@ -88,10 +88,12 @@ Liste des outils utilisés au cours du projet :
  - **GitHub** : Outil pour partager notre code entre nous.
  - **Discord** : Outil pour communiquer ensemble tout au long du projet.
 
-## 3. Fonctions importantes
+## 3. Fonctions importantes ajoutées
 Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
 Voici la présentation de ces fonctions :
- - `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`. Il y a une doc liée avec la fonction.
+ - `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`.  
+Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes se trouvant dans la couche `h - 1`.
+`h` est le nombre de couches de l'arbre.
 
 ## 4. Difficultés rencontrées
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
