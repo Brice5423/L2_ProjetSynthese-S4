@@ -9,6 +9,8 @@
 #include "../include/geometry.h"
 #include "../include/algo.h"
 
+#include <time.h>
+
 int main(int argc, char *argv[]) {
     const char algo = argv[1][0];
 
@@ -47,32 +49,131 @@ int main(int argc, char *argv[]) {
          * On ne sait pas s'ils ont une fin, mais ce qui est sur,
          * c'est que l'utilisation de la RAM fait que d'augmenter !!!
          * */
+        clock_t start;
+        clock_t end;
 
+
+        printf("\t\t----- RapidConvexHull -----\n");
+
+        start = clock();
         RapidConvexHull("data/data1", "batterieTest/convex/rapidConvex_Data1");
+        end = clock();
+        printf("Time used data1 : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         //RapidConvexHull("data/data2", "batterieTest/convex/rapidConvex_Data2");
+        end = clock();
+        printf("Time used data2 : \t%lf sec \t( INFINI )\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         RapidConvexHull("data/data3", "batterieTest/convex/rapidConvex_Data3");
+        end = clock();
+        printf("Time used data3 : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         RapidConvexHull("data/data4", "batterieTest/convex/rapidConvex_Data4");
+        end = clock();
+        printf("Time used data4 : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
+
+
+        printf("\n\t\t----- ConvexHull -----\n");
+
+
+        printf("\n\tData 1 :\n");
+
+        start = clock();
         ConvexHull("data/data1", "batterieTest/convex/convex_Data1_SortBy1", 1);
+        end = clock();
+        printf("Time used CBTHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data1", "batterieTest/convex/convex_Data1_SortBy2", 2);
+        end = clock();
+        printf("Time used ArrayHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data1", "batterieTest/convex/convex_Data1_SortBy3", 3);
+        end = clock();
+        printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
+
+        printf("\n\tData 2 :\n");
+
+        start = clock();
         ConvexHull("data/data2", "batterieTest/convex/convex_Data2_SortBy1", 1);
+        end = clock();
+        printf("Time used CBTHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data2", "batterieTest/convex/convex_Data2_SortBy2", 2);
+        end = clock();
+        printf("Time used ArrayHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data2", "batterieTest/convex/convex_Data2_SortBy3", 3);
+        end = clock();
+        printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
+
+        printf("\n\tData 3 :\n");
+
+        start = clock();
         ConvexHull("data/data3", "batterieTest/convex/convex_Data3_SortBy1", 1);
+        end = clock();
+        printf("Time used CBTHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data3", "batterieTest/convex/convex_Data3_SortBy2", 2);
+        end = clock();
+        printf("Time used ArrayHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         ConvexHull("data/data3", "batterieTest/convex/convex_Data3_SortBy3", 3);
+        end = clock();
+        printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
+
+        printf("\n\tData 4 :\n");
+
+        start = clock();
         ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy1", 1);
-        ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy2", 2);
-        ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy3", 3);
+        end = clock();
+        printf("Time used CBTHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
+        start = clock();
+        ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy2", 2);
+        end = clock();
+        printf("Time used ArrayHeapSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
+        ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy3", 3);
+        end = clock();
+        printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+
+
+        printf("\n\t\t----- SlowConvexHull -----\n");
+
+        start = clock();
         SlowConvexHull("data/data1", "batterieTest/convex/slowConvex_Data1");
+        end = clock();
+        printf("Time used data1 : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         //SlowConvexHull("data/data2", "batterieTest/convex/slowConvex_Data2");
+        end = clock();
+        printf("Time used data2 : \t%lf sec \t( INFINI )\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         //SlowConvexHull("data/data3", "batterieTest/convex/slowConvex_Data3");
+        end = clock();
+        printf("Time used data3 : \t%lf sec \t( INFINI )\n", (((double) (end - start)) / CLOCKS_PER_SEC));
+
+        start = clock();
         //SlowConvexHull("data/data4", "batterieTest/convex/slowConvex_Data4");
+        end = clock();
+        printf("Time used data4 : \t%lf sec \t( INFINI )\n", (((double) (end - start)) / CLOCKS_PER_SEC));
     }
 
 

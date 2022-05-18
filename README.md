@@ -128,48 +128,71 @@ Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes 
 
 ### 5.1. Complexité des 3 tries _(Convex)_
 Calcule de la complexité du ConvexHull en fonction des 3 tris _(sélection, tas tableau et tas arbre)_.
+
 ##### Complexité   
  - **tri par sélection** :
  - **tri par tas _(tableau)_** :
  - **trie par tas _(arbre)_** :
 
 ### 5.2. Temps d'exécution des 3 tries _(Convex)_
-##### 5.2.1 CBTHeapSort
-- **data1** : 
-- **data2** : 
-- **data3** : 
-- **data4** : 
-##### 5.2.2. ArrayHeapSort
-- **data1** :
-- **data2** :
-- **data3** :
-- **data4** :
-##### 5.2.3.SelectionSort
-- **data1** :
-- **data2** :
-- **data3** :
-- **data4** :
+
+#### 5.2.1 CBTHeapSort
+- **data1** : 0.001234 sec
+- **data2** : 0.001220 sec
+- **data3** : 0.001096 sec
+- **data4** : 0.001142 sec
+
+#### 5.2.2. ArrayHeapSort
+- **data1** : 0.001275 sec
+- **data2** : 0.000681 sec
+- **data3** : 0.001346 sec
+- **data4** : 0.001261 sec
+
+#### 5.2.3. SelectionSort
+- **data1** : 0.001234 sec
+- **data2** : 0.000882 sec
+- **data3** : 0.001200 sec
+- **data4** : 0.001127 sec
+
+#### 5.2.4. Moyenne
+Pour avoir une idée de quel des 3 tries est le plus performent,
+on va faire la moyenne de chaque résultat en fonction de chaque type de tri.  
+
+Les moyennes sont :
+ - **CBTHeapSort** : 0.001173 sec
+ - **ArrayHeapSort** : 0.001140 sec
+ - **SelectionSort** : 0.001110 sec
+
+> Le tri le plus efficace est le tri par `SelectionSort` _(0.001110 sec)_ 
+> suivie par le tri `ArrayHeapSort` _(0.001140 sec)_ 
+> et avec le plus lent le tri par `CBTHeapSort` _(0.001173 sec)_.
 
 ### 5.3. Complexité des 3 trie
-Dans le cas du ConvexHull, on prend le tie le plus efficace des 3 tries proposés.
+Dans le cas du ConvexHull, on prend le tie le plus efficace des 3 tries proposés.  
+Donc on prend le tri par `SelectionSort`.
+
 ##### Complexité
 - **RapidConvexHull** :
 - **ConvexHull** :
 - **SlowConvexHull** :
 
 ### 5.4. Temps d'exécution des 3 tries
+Dans le cas du ConvexHull, on prend le tri par `SelectionSort`.
+
 #### 5.4.1. RapidConvexHull
-- **data1** :
+- **data1** : 0.000787 sec
 - **data2** : _INFINI_
-- **data3** :
-- **data4** :
-- #### 5.4.1. ConvexHull
-- **data1** :
-- **data2** : 
-- **data3** :
-- **data4** :
+- **data3** : 0.000837 sec
+- **data4** : 0.001237 sec
+
+#### 5.4.2. ConvexHull
+- **data1** : 0.001234 sec
+- **data2** : 0.000882 sec
+- **data3** : 0.001200 sec
+- **data4** : 0.001127 sec
+
 #### 5.2.3. SlowConvexHull
-- **data1** :
+- **data1** : 0.001416 sec
 - **data2** : _INFINI_
 - **data3** : _INFINI_
 - **data4** : _INFINI_
@@ -178,10 +201,7 @@ Dans le cas du ConvexHull, on prend le tie le plus efficace des 3 tries proposé
 ## 6. Difficultés rencontrées
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
 Voici une liste de quelques difficultés rencontrées avec leur explication.
- - 1
- - 2
- - 3
- - 4
+_(Voir à la fin du projet)_
 
 
 ## 7. Améliorations possibles
