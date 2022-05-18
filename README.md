@@ -124,18 +124,64 @@ Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes 
 `h` est le nombre de couches de l'arbre.
 
 
-## 5. Complexité & temps
-Pour cette partie, on n'a pas pu mesurer le temps d'exécution de certain cas site au par avant.
+## 5. Complexité & temps d'exécution
 
-### 5.1. Complexité du programme
+### 5.1. Complexité des 3 tries _(Convex)_
+Calcule de la complexité du ConvexHull en fonction des 3 tris _(sélection, tas tableau et tas arbre)_.
+##### Complexité   
+ - **tri par sélection** :
+ - **tri par tas _(tableau)_** :
+ - **trie par tas _(arbre)_** :
 
-### 5.2. Temps d'exécution
+### 5.2. Temps d'exécution des 3 tries _(Convex)_
+##### 5.2.1 CBTHeapSort
+- **data1** : 
+- **data2** : 
+- **data3** : 
+- **data4** : 
+##### 5.2.2. ArrayHeapSort
+- **data1** :
+- **data2** :
+- **data3** :
+- **data4** :
+##### 5.2.3.SelectionSort
+- **data1** :
+- **data2** :
+- **data3** :
+- **data4** :
+
+### 5.3. Complexité des 3 trie
+Dans le cas du ConvexHull, on prend le tie le plus efficace des 3 tries proposés.
+##### Complexité
+- **RapidConvexHull** :
+- **ConvexHull** :
+- **SlowConvexHull** :
+
+### 5.4. Temps d'exécution des 3 tries
+#### 5.4.1. RapidConvexHull
+- **data1** :
+- **data2** : _INFINI_
+- **data3** :
+- **data4** :
+- #### 5.4.1. ConvexHull
+- **data1** :
+- **data2** : 
+- **data3** :
+- **data4** :
+#### 5.2.3. SlowConvexHull
+- **data1** :
+- **data2** : _INFINI_
+- **data3** : _INFINI_
+- **data4** : _INFINI_
 
 
 ## 6. Difficultés rencontrées
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
 Voici une liste de quelques difficultés rencontrées avec leur explication.
-###### ALL / TOUT / Ensemble de l'univers du projet ^^
+ - 1
+ - 2
+ - 3
+ - 4
 
 
 ## 7. Améliorations possibles
