@@ -91,50 +91,54 @@ Liste des outils utilisés au cours du projet :
  - **Discord** : Outil pour communiquer ensemble tout au long du projet.
 
 
-## 3. Fonctions importantes ajoutées
-Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
-Voici la présentation de ces fonctions :
- - `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`.  
-Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes se trouvant dans la couche `h - 1`.
-`h` est le nombre de couches de l'arbre.
+## 3. Répartition des tâches
 
-
-## 4. Difficultés rencontrées
-Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
-Voici une liste de quelques difficultés rencontrées avec leur explication.
-###### ALL / TOUT / Ensemble de l'univers du projet ^^
-
-
-## 5. Améliorations possibles
-_(Voir à la fin du projet)_
-
-
-## 6. Répartition des tâches 
-
-### 6.1 Pour la partie en C
+### 3.1 Partie 1 : Code C
 La répartition des tâches pour faire chaque fichier _(fonctions)_ du projet :
- - Brice :
-   - tree.c 
+- Brice :
+   - tree.c
    - heap.c
    - sort.c
- - Matthieu :
+- Matthieu :
    - list.c
    - geometry.c
    - algo.c _(Brice est venu aider pour les dernières fonctions `convex`)_
 
 Brice à formater tous les fichiers pour l'uniformité du code. _(Brice aime bien quand c'est ranger)_
 
-### 6.2 Pour la partie en interface
-_(Voir à la fin du projet)_
+### 3.2 Partie 2 : Interface & Compléxité
+La répartition des tâches sont :
+- Brice :
+   - Complexité
+   - Temps d'exécution
+- Matthieu :
+   - Interface
+   - ...  <--------------------------------------------------------------
 
 
-## 7. Compléxité & temps
-_(Voir à la fin du projet, pas à faire pour le moment)_
+## 4. Fonctions importantes ajoutées
+Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
+Voici la présentation de ces fonctions :
+ - `static void organiseTableauEnTas(ArrayHeap *AH)` dans le `heap.c`, ajouté par Brice.  
+Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes se trouvant dans la couche `h - 1`.
+`h` est le nombre de couches de l'arbre.
 
-### 7.1. Compléxité du programme
-_(Voir à la fin du projet)_
 
-### 7.2. Temps d'exécution 
+## 5. Complexité & temps
+Pour cette partie, on n'a pas pu mesurer le temps d'exécution de certain cas site au par avant.
+
+### 5.1. Complexité du programme
+
+### 5.2. Temps d'exécution
+
+
+## 6. Difficultés rencontrées
+Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
+Voici une liste de quelques difficultés rencontrées avec leur explication.
+###### ALL / TOUT / Ensemble de l'univers du projet ^^
+
+
+## 7. Améliorations possibles
 _(Voir à la fin du projet)_
 
 
