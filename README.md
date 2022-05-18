@@ -66,7 +66,8 @@ Voici plusieurs exemples d'utilisation pour les différents algorithmes
 
 ________________________________________________________________________________________________________________________
 
-#  RAPPORT DE PROJET
+# RAPPORT DE PROJET
+
 
 ## 1. Introduction
 A travers ce rapport de projet de synthèse, nous allons vous montrer par quel moyen nous avons réalisé cette première partie en C.
@@ -80,6 +81,7 @@ Enfin, nous vous proposerons quelques améliorations qui selon nous pourrait am�
 Vous pourrez également retrouver la répartition des tâches au sein de notre groupe et nos avis personnels 
 pour chacun des points que nous allons traiter au cours du rapport. 
 
+
 ## 2. Outils utilisés
 Liste des outils utilisés au cours du projet :
  - **CLion** : Développement de la partie en C du projet
@@ -88,6 +90,7 @@ Liste des outils utilisés au cours du projet :
  - **GitHub** : Outil pour partager notre code entre nous.
  - **Discord** : Outil pour communiquer ensemble tout au long du projet.
 
+
 ## 3. Fonctions importantes ajoutées
 Nous avons implémenté quelques fonctions en plus qui nous ont été utiles pour le développement du projet
 Voici la présentation de ces fonctions :
@@ -95,13 +98,16 @@ Voici la présentation de ces fonctions :
 Cette fonction appel la fonction `updateArrayHeapDownwards` dans tout les nodes se trouvant dans la couche `h - 1`.
 `h` est le nombre de couches de l'arbre.
 
+
 ## 4. Difficultés rencontrées
 Tout au long du développement nous avon seu plus ou moins de mal à réaliser certaines tâches.
 Voici une liste de quelques difficultés rencontrées avec leur explication.
 ###### ALL / TOUT / Ensemble de l'univers du projet ^^
 
+
 ## 5. Améliorations possibles
 _(Voir à la fin du projet)_
+
 
 ## 6. Répartition des tâches 
 
@@ -121,7 +127,8 @@ Brice à formater tous les fichiers pour l'uniformité du code. _(Brice aime bie
 ### 6.2 Pour la partie en interface
 _(Voir à la fin du projet)_
 
-## 7.  Compléxité & temps
+
+## 7. Compléxité & temps
 _(Voir à la fin du projet, pas à faire pour le moment)_
 
 ### 7.1. Compléxité du programme
@@ -130,7 +137,8 @@ _(Voir à la fin du projet)_
 ### 7.2. Temps d'exécution 
 _(Voir à la fin du projet)_
 
-# Conclusion
+
+## 8. Conclusion
 _(Voir à la fin du projet)_
 
 ________________________________________________________________________________________________________________________
