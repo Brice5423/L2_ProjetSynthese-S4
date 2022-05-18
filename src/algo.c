@@ -358,7 +358,6 @@ void RapidConvexHull(const char *infilename, const char *outfilename) {
                 }
             }
         }
-
     } while (nonEqualsPoint(getLNodeData(Head(H)), getLNodeData(Tail(H))));
 
     listRemoveLast(H);
