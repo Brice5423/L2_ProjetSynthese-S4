@@ -136,7 +136,7 @@ ________________________________________________________________________________
 # Utilisation des commits
 Chaque étape correspond à comment on écrie un commit.
 > Au cours de ce projet, nous avons essayé de respecter notre nomenclature présentée ci-dessous.  
-> _Notre nomenclature à évoluer au fil du projet, en fonction de nos besoins._
+> _(Notre nomenclature à évoluer au fil du projet, en fonction de nos besoins.)_
 
 ## 1. Importance des commits
 
@@ -160,11 +160,11 @@ on indique dans quels fichiers ça était appliqué.
 Si l'action ce porte dans l'ensemble des éléments d'un dossier, nous l'indiquerons par des `[nom_dossier]`.
 
 On _(peut)_ ajoute entre `(...)`, les détails de l'action fait sur les fichiers concerner.  
-S'il y a plusieurs fichier qui ont les mêmes détaille, on met un `+` entre chaque nom de fichier.
+S'il y a plusieurs fichiers qui ont les mêmes détaille, on met un `,` entre chaque nom de fichier (ou dossier).
 
 **Exemple :**
 ```
-🟩 ~ fichier1 + fichier2 (commentaire & format) 
+🟩 ~ fichier1, fichier2 (commentaire & format) 
 ```
 > Le commit indique que le `fichier1` et le `fichier2` ont eu une modification dans leurs commentaires et un formatage.
 
