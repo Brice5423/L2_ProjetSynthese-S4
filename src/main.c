@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
         printf("\n\t\t----- ConvexHull -----\n");
 
 
-        printf("\n\tData 1 :\n");
+        printf("\tData 1 :\n");
 
         start = clock();
         ConvexHull("data/data1", "batterieTest/convex/convex_Data1_SortBy1", 1);
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
         printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
 
-        printf("\n\tData 2 :\n");
+        printf("\tData 2 :\n");
 
         start = clock();
         ConvexHull("data/data2", "batterieTest/convex/convex_Data2_SortBy1", 1);
@@ -84,7 +84,7 @@ int main(int argc, char *argv[]) {
         printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
 
-        printf("\n\tData 3 :\n");
+        printf("\tData 3 :\n");
 
         start = clock();
         ConvexHull("data/data3", "batterieTest/convex/convex_Data3_SortBy1", 1);
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
         printf("Time used SelectionSort : \t%lf sec\n", (((double) (end - start)) / CLOCKS_PER_SEC));
 
 
-        printf("\n\tData 4 :\n");
+        printf("\tData 4 :\n");
 
         start = clock();
         ConvexHull("data/data4", "batterieTest/convex/convex_Data4_SortBy1", 1);
